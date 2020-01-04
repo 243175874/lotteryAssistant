@@ -1,0 +1,4 @@
+input::-webkit-input-placeholder {
+    /* WebKit browsers */
+    font-size: 13px;
+}

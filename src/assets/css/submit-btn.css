@@ -1,0 +1,14 @@
+.submit-btn {
+    width: 55%;
+    height: 40px;
+    background: url('../../assets/img/user/bg_btn_login.png') no-repeat;
+    background-size: 100% 100%;
+    margin: 0 auto;
+    color: white;
+    margin-top: 20px;
+}
+
+.submit-btn-box::before {
+    content: "";
+    display: table;
+}

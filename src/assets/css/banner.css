@@ -1,0 +1,5 @@
+.space-carousel {
+    touch-action: pan-y;
+    overflow: hidden;
+    margin-top: 1%;
+}

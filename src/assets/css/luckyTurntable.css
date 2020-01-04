@@ -1,0 +1,12 @@
+    .turntable-enter.turntable-enter-active {
+        -webkit-animation: xuanzhuan 3s ease-in-out;
+    }
+    
+    @-webkit-keyframes xuanzhuan {
+        from {
+            -webkit-transform: rotate(0deg);
+        }
+        to {
+            -webkit-transform: rotate(1080deg);
+        }
+    }

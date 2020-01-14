@@ -15,7 +15,7 @@ module.exports = {
     //entry: './src/index.js',
     entry: {
         app: path.join(__dirname, './src/index.jsx'),
-        //vendors: ['jquery']//要把抽离的第三方包的名称，放到这个数组中
+        //vendors: ['react', 'redux'] //要把抽离的第三方包的名称，放到这个数组中
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -96,10 +96,15 @@ module.exports = {
                     publicPath: '../'
                 }),
             },
-            //{ test: /\.css$/, use: ['style-loader', 'css-loader'] }, //配置处理css文件的第三方loader规则
-            //{ test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader'] }, //配置处理less文件的第三方loader规则
-            //{ test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] }, //配置处理sass文件的第三方loader规则
-            { test: /\.(jpg|png|gif|bmp|jpeg)$/, use: ['url-loader?limit=1000&name=img/[hash:8]-[name].[ext]'] },
+            //{ test: /\.(jpg|png|gif|bmp|jpeg)$/, use: ['url-loader?limit=8192&name=img/[hash:8]-[name].[ext]'] },
+            {
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                loader: 'url-loader',
+                options: {
+                    limit: false,
+                    name: "img/[hash:8]-[name].[ext]"
+                }
+            },
             //处理图片路径的loader规则
             //limit给定的值，是限制图片转为base64编码，限制值单位是byte,如果我们引用的图片，大于或等于给定的limit值，则图片不会被转为
             //base64格式的字符串，如果图片小于给定的值，则会被转为base64的字符串

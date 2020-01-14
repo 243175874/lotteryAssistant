@@ -54,7 +54,7 @@ export default class PostMessage extends Component {
                     <div className="flex-center"
                         onClick={() => { this.getSendMessage(this.props.sixTypeId, this.state.title, this.state.content) }}
                         style={{
-                            width: "75%", height: "39px", background: "url(../../../../../assets/img/mark_six/bg_post_release.png)",
+                            width: "75%", height: "39px", background: `url(${require('../../../assets/img/mark_six/bg_post_release.png')})`,
                             backgroundSize: "100% 100%", marginTop: "20px", color: "white"
                         }}>
                         发布帖子

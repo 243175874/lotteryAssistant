@@ -52,12 +52,12 @@ export default class MarkSixlotteryDetail extends Component {
 
     render() {
         const contentStyle = {
-            width: "88%", height: "500px", margin: "0 auto", background: "url(../../../assets/img/mark_six/lottery-detail-bg2.png)",
+            width: "88%", height: "500px", margin: "0 auto", background: `url(${require('../../../assets/img/mark_six/lottery-detail-bg2.png')})`,
             backgroundSize: "100% 100%"
         };
         let detail = this.props.location.query;
         return (
-            <div className="wh100" style={{ background: 'url(../../../assets/img/mark_six/lottery-detail-bg.png)' }}>
+            <div className="wh100" style={{ background: `url(${require('../../../assets/img/mark_six/lottery-detail-bg.png')})` }}>
                 <NavBar
                     className="navbar_bg"
                     leftContent={[

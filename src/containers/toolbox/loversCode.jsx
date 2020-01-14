@@ -1,6 +1,7 @@
 
 import React, { Component } from "react";
-import { NavBar, Icon, DatePicker, Toast } from 'antd-mobile';
+import { NavBar, Icon, DatePicker, Toast, ActivityIndicator } from 'antd-mobile';
+import { post } from '../../fetch/post.js';
 import LotteryBall from '../../components/common/lotteryBall'
 import Introduction from '../../components/common/introduction'
 import CommonJS from '../../assets/js/common'
@@ -16,6 +17,7 @@ export default class SourceBookList extends Component {
         super(props);
         this.state = {
             sex: "男",
+            loading: true,
             myBirthday: "",
             loversBirthday: "",
             lotteryList: []
@@ -23,18 +25,46 @@ export default class SourceBookList extends Component {
     }
 
     componentWillMount() {
+        this.getLoversDate();
+    }
 
+
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return;
+        }
+    }
+
+    //获取服务器恋人特码数据
+    getLoversDate() {
+        post("/v1/api/hunt/get_rand?type=1").then(data => {
+            this.setState({ loading: false });
+            if (data.code == 200 && data.data.content != "") {
+                let lotteryList = data.data.content.split(',').map(item => Number(item));
+                this.setState({ lotteryList });
+            }
+        });
+    }
+
+    //向服务器存储恋人特码数据
+    setLoversDate(content) {
+        post("/v1/api/hunt/save_rand", { type: 1, content }).then(data => {
+            if (data.code == 200) {
+                //给号码单数前加0
+                let codeList = content.map(item => item.length == 1 ? "0" + item : item);
+                this.setState({ lotteryList: codeList });
+            }
+        });
     }
 
     //获取6个随机得号码
     getRandomList() {
         let list = [];
         for (let i = 0; i < 6; i++) {
-            list.push(CommonJS.getRandom(1, 49));
+            list.push(CommonJS.getRandom(1, 49).toString());
         }
         return list;
     }
-
 
     //匹配号码
     matchingCode() {
@@ -43,7 +73,9 @@ export default class SourceBookList extends Component {
             return;
         }
         let codeList = this.getRandomList();
-        this.setState({ lotteryList: codeList });
+        //调用接口把结果存入数据库
+        this.setLoversDate(codeList);
+
     }
 
     renderLotteryListView() {
@@ -58,6 +90,7 @@ export default class SourceBookList extends Component {
     render() {
         return (
             <div className="wh100 bgwhite">
+                <ActivityIndicator toast text="加载中..." animating={this.state.loading} />
                 <NavBar
                     className="navbar_bg"
                     leftContent={[
@@ -71,21 +104,21 @@ export default class SourceBookList extends Component {
                     display: this.state.lotteryList.length == 0 ? "block" : "none"
                 }} >
                     <div style={{ margin: "0 auto", width: "170px", height: "30px", marginTop: "20px" }}>
-                        <img className="wh100" src="../../assets/img/toolbox/icon_lovers_lottery_n.png" />
+                        <img className="wh100" src={require("../../assets/img/toolbox/icon_lovers_lottery_n.png")} />
                     </div>
                     <div style={{ margin: "0 auto", width: "170px", height: "30px", marginTop: "20px", fontSize: "12px" }}>来测试一下你们的恋人特码吧</div>
 
                     <div className="flex" style={{ margin: "0 auto", marginTop: "20px", width: "260px", height: "15px", fontSize: '12px', color: '#666666' }}>
                         <div style={{ width: "100px" }}>请选择您的性别：</div>
                         <div className="flex" style={{ marginLeft: "10px", width: "50px" }} onClick={() => { this.setState({ sex: "男" }) }}>
-                            {this.state.sex == '男' ? <img style={{ width: "15px", marginRight: "15px" }} src='../../assets/img/toolbox/icon_choose_lovers_n.png' /> :
-                                <img style={{ width: "15px", marginRight: "15px" }} src='../../assets/img/toolbox/icon_uncheck_lovers_n.png' />
+                            {this.state.sex == '男' ? <img style={{ width: "15px", marginRight: "15px" }} src={require('../../assets/img/toolbox/icon_choose_lovers_n.png')} /> :
+                                <img style={{ width: "15px", marginRight: "15px" }} src={require('../../assets/img/toolbox/icon_uncheck_lovers_n.png')} />
                             }
                             <span>男</span>
                         </div>
                         <div className="flex" style={{ marginLeft: "20px", width: "50px" }} onClick={() => { this.setState({ sex: "女" }) }}>
-                            {this.state.sex == '女' ? <img style={{ width: "15px", marginRight: "15px" }} src='../../assets/img/toolbox/icon_choose_lovers_n.png' /> :
-                                <img style={{ width: "15px", marginRight: "15px" }} src='../../assets/img/toolbox/icon_uncheck_lovers_n.png' />
+                            {this.state.sex == '女' ? <img style={{ width: "15px", marginRight: "15px" }} src={require('../../assets/img/toolbox/icon_choose_lovers_n.png')} /> :
+                                <img style={{ width: "15px", marginRight: "15px" }} src={require('../../assets/img/toolbox/icon_uncheck_lovers_n.png')} />
                             }
                             <span>女</span>
                         </div>
@@ -120,12 +153,10 @@ export default class SourceBookList extends Component {
                     <div
                         onClick={() => { this.matchingCode() }}
                         className="flex-center" style={{
-                            width: '180px', height: "38px", background: "url(../../assets/img/toolbox/btn_matching_n.png)",
+                            width: '180px', height: "38px", background: `url(${require('../../assets/img/toolbox/btn_matching_n.png')})`,
                             backgroundSize: "100% 100%", color: "white", margin: "0 auto", marginTop: "30px",
                         }}>匹配一下</div>
                 </div>
-
-
 
                 <div className="flex" style={{ width: "260px", height: "40px", margin: "0 auto", marginTop: "50px", display: this.state.lotteryList.length > 0 ? "flex" : "none" }}>
                     {this.renderLotteryListView()}

@@ -24,7 +24,7 @@ export default class LuckyLottery extends Component {
                         </div> :
                         <div key={index} className="h100  flex-center" style={{ width: "24%" }}>
                             <div className="h100 flex-center" style={{ width: '40%', marginLeft: '2%' }}>
-                                <img className="w50" src="../../assets/img/lotteryResult/icon_add.png" />
+                                <img className="w50" src={require("../../assets/img/lotteryResult/icon_add.png")} />
                             </div>
                             <div className="h100 flex-center pr" style={{ width: '42%', marginLeft: '2%' }}>
                                 <LotteryBall width={'30px'} height={'30px'} number={item}></LotteryBall>
@@ -56,7 +56,7 @@ export default class LuckyLottery extends Component {
                         <Icon key="0" onClick={() => this.props.history.goBack()} type="left" />
                     ]}
                 >幸运摇奖</NavBar>
-                <img className="w100" src="../../assets/img/toolbox/img_lucky_flags_n.png" alt="" />
+                <img className="w100" src={require('../../assets/img/toolbox/img_lucky_flags_n.png')} alt="" />
 
                 <div className="pr" style={{
                     width: "240px", height: "240px", margin: "0 auto", marginTop: "40px"
@@ -65,11 +65,11 @@ export default class LuckyLottery extends Component {
                         onClick={() => { this.setState({ start: true }); this.getRandomList() }}
                         style={{
                             width: "50px", height: "50px", top: "50%", left: "50%", zIndex: "10", marginLeft: "-25px", marginTop: "-25px",
-                            background: 'url(../../assets/img/toolbox/img_lucky_darw_btn.png)', backgroundSize: "100% 100%"
+                            background: `url(${require('../../assets/img/toolbox/img_lucky_darw_btn.png')})`, backgroundSize: "100% 100%"
                         }}></div>
                     <CSSTransition in={this.state.start} timeout={3000} classNames="turntable">
                         <div className="wh100" style={{
-                            background: 'url(../../assets/img/toolbox/img_lucky_darw_1.png)',
+                            background: `url(${require('../../assets/img/toolbox/img_lucky_darw_1.png')})`,
                             backgroundSize: "100% 100%"
                         }}>
                         </div>
@@ -78,7 +78,7 @@ export default class LuckyLottery extends Component {
 
                 <div className="flex-center" style={{
                     width: "320px", height: "130px", margin: "0 auto", marginTop: "30px",
-                    background: 'url(../../../../assets/img/toolbox/img_machines_lucky_w_n.png)', backgroundSize: "100% 100%"
+                    background: `url(${require('../../assets/img/toolbox/img_machines_lucky_w_n.png')})`, backgroundSize: "100% 100%"
                 }}>
 
                     {this.renderBallListView()}

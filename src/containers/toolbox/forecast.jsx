@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { NavBar, Icon, ActivityIndicator } from 'antd-mobile';
+import { post } from '../../fetch/post.js';
 import Introduction from '../../components/common/introduction'
 import CommonJS from '../../assets/js/common'
 const Animals = ["鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗", "猪"];
@@ -11,8 +12,61 @@ export default class Forecast extends Component {
             showNumbers: false,
             animalList: [],
             numberList: [],
-            loading: false,
+            loading: true,
         };
+    }
+
+
+    componentWillMount() {
+        this.getAnimalData();
+        this.getNumberData();
+    }
+
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return;
+        }
+    }
+
+
+    //获取生肖服务器数据
+    getAnimalData() {
+        post("/v1/api/hunt/get_rand?type=5").then(data => {
+            this.setState({ loading: false });
+            if (data.code == 200 && data.data.content != "") {
+                let animalList = data.data.content.split(' ');
+                this.setState({ animalList, showAnimals: true });
+            }
+        });
+    }
+
+    //获取尾数服务器数据
+    getNumberData() {
+        post("/v1/api/hunt/get_rand?type=6").then(data => {
+            this.setState({ loading: false });
+            if (data.code == 200 && data.data.content != "") {
+                let numberList = data.data.content.split(' ');
+                this.setState({ numberList, showNumbers: true });
+            }
+        });
+    }
+
+
+    //向服务器存储生肖数据
+    setAnimalData(content) {
+        post("/v1/api/hunt/save_rand", { type: 5, content }).then(data => {
+            if (data.code == 200) {
+            }
+        });
+    }
+
+
+    //向服务器存储尾数数据
+    setNumberData(content) {
+        post("/v1/api/hunt/save_rand", { type: 6, content }).then(data => {
+            if (data.code == 200) {
+            }
+        });
     }
 
     //随机获取生肖
@@ -28,7 +82,7 @@ export default class Forecast extends Component {
         return list;
     }
 
-
+    //随机获取尾数
     getNumberList() {
         let list = [];
         while (list.length < 3) {
@@ -40,20 +94,27 @@ export default class Forecast extends Component {
         return list;
     }
 
+    //点击求生肖触发获取结果
     getAnimalResult() {
         this.setState({ loading: true });
         setTimeout(() => {
             let animalList = this.getAnimalList();
             this.setState({ animalList: animalList, showAnimals: true, loading: false });
+            //向服务器存储测算结果
+            this.setAnimalData(animalList.toString().replace(new RegExp(",", "gm"), ' '));
         }, 2000);
 
     }
 
+    //点击求尾数触发获取结果
     getNumberResult() {
         this.setState({ loading: true });
         setTimeout(() => {
             let numberList = this.getNumberList();
             this.setState({ numberList: numberList, showNumbers: true, loading: false });
+            //向服务器存储测算结果
+            //参数中吧所有的逗号替换成空格
+            this.setNumberData(numberList.toString().replace(new RegExp(",", "gm"), ' '));
         }, 2000);
     }
 
@@ -78,7 +139,7 @@ export default class Forecast extends Component {
                         <div className="flex-center"
                             onClick={() => { this.getAnimalResult() }} style={{
                                 width: "100px", height: "35px", color: "white",
-                                background: "url(../../../../assets/img/toolbox/btn_star_n.png)", backgroundSize: "100% 100%"
+                                background: `url(${require('../../assets/img/toolbox/btn_star_n.png')})`, backgroundSize: "100% 100%"
                             }}>
                             {!this.state.showAnimals ? (<div className="wh100 flex-center">开始</div>) : (<div className="wh100 flex-center">{this.renderForecastResultView(this.state.animalList)}</div>)}
                         </div>
@@ -90,7 +151,7 @@ export default class Forecast extends Component {
                             onClick={() => { this.getNumberResult() }}
                             style={{
                                 width: "100px", height: "35px", color: "white",
-                                background: "url(../../../../assets/img/toolbox/btn_star_n.png)", backgroundSize: "100% 100%"
+                                background: `url(${require('../../assets/img/toolbox/btn_star_n.png')})`, backgroundSize: "100% 100%"
                             }}>
                             {!this.state.showNumbers ? (<div className="wh100 flex-center">开始</div>) : (<div className="wh100 flex-center">{this.renderForecastResultView(this.state.numberList)}</div>)}
                         </div>
@@ -99,10 +160,10 @@ export default class Forecast extends Component {
 
                 <div className="w100 flex" style={{ height: "280px", marginTop: "20px" }}>
                     <div className="w50 h100 flex-center">
-                        <img className="w70" src="../../assets/img/toolbox/img_zgs_tjcs_n.png" />
+                        <img className="w70" src={require('../../assets/img/toolbox/img_zgs_tjcs_n.png')} />
                     </div>
                     <div className="w50 h100 flex-center">
-                        <img className="w100" src="../../assets/img/toolbox/img_zgl_tjcs_n.png" />
+                        <img className="w100" src={require("../../assets/img/toolbox/img_zgl_tjcs_n.png")} />
                     </div>
                 </div>
             </div>

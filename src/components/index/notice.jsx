@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { NoticeBar } from 'antd-mobile';
-export default class Index extends Component {
+export default class Notice extends Component {
     constructor(props) {
         super(props);
         this.state = {

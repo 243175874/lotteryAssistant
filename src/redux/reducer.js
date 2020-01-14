@@ -1,4 +1,15 @@
-import { SetSelectedTab, SetCurrentLotteryName, SetCurrentLotteryId, SetCurrentLotteryPageIndex, SetCurrentPeriods, SetSixTitle, SetSixTypeId, SetSixUserId, SetIsShowSendMessagePage } from './actionType'
+import {
+    SetSelectedTab,
+    SetCurrentLotteryName,
+    SetCurrentLotteryId,
+    SetCurrentLotteryType,
+    SetCurrentLotteryPageIndex,
+    SetCurrentPeriods,
+    SetSixTitle,
+    SetSixTypeId,
+    SetSixUserId,
+    SetIsShowSendMessagePage
+} from './actionType'
 import { combineReducers } from 'redux'
 //当前菜单索引
 const selectedTab = (state = 'index', action) => {
@@ -24,6 +35,16 @@ const currentLotteryName = (state = '', action) => {
 const currentLotteryId = (state = '', action) => {
     switch (action.type) {
         case SetCurrentLotteryId:
+            return action.value;
+        default:
+            return state
+    }
+}
+
+//当前进入彩种 种类
+const currentLotteryType = (state = '', action) => {
+    switch (action.type) {
+        case SetCurrentLotteryType:
             return action.value;
         default:
             return state
@@ -96,6 +117,7 @@ export const finalReducer = combineReducers({
     selectedTab,
     currentLotteryName,
     currentLotteryId,
+    currentLotteryType,
     currentLotteryPageIndex,
     currentPeriods,
     sixTitle,

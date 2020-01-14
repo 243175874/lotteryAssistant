@@ -37,7 +37,7 @@ export default class MarkSixLotteryHistoryList extends Component {
                     <div className="clearfix" style={{ width: "100%", padding: "5%", borderTop: "1px solid #EDEDED", fontSize: "13px" }}>
                         <header className="w100 flex" style={{ height: "20px" }}>
                             <div style={{ width: "16px", padding: "4px 0" }}>
-                                <img style={{ width: "12px" }} src="../../assets/img/common/header-icon.png" />
+                                <img style={{ width: "12px" }} src={require("../../assets/img/common/header-icon.png")} />
                             </div>
                             <div className="flex align-item-center" style={{ color: "#334C66" }}>{item.dateline}第{item.period}期推荐</div>
                         </header>

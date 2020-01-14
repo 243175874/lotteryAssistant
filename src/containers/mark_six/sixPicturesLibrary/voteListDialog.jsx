@@ -65,7 +65,7 @@ export default class VoteListDialog extends Component {
                     }}>
                         <div className="h100 flex-center" style={{ width: "240px" }}>{props.title}</div>
                         <div onClick={() => { this.close() }} style={{ width: "25px", height: "25px" }}>
-                            <img className="w100" src="../../../assets/img/mark_six/icon_close.png" />
+                            <img className="w100" src={require("../../../assets/img/mark_six/icon_close.png")} />
                         </div>
 
                     </div>
@@ -75,7 +75,7 @@ export default class VoteListDialog extends Component {
                     <div className="w100 bgwhite flex-center" style={{ height: "35px" }}>
                         <div className="flex-center" onClick={() => { this.getVote() }} style={{
                             width: "100px", height: "35px", color: "white",
-                            background: "url(../../../assets/img/mark_six/btn_vote_start.png)", backgroundSize: "100% 100%"
+                            background: `url(${require('../../../assets/img/mark_six/btn_vote_start.png')})`, backgroundSize: "100% 100%"
                         }}>
                             投票
                         </div>

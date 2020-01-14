@@ -1,5 +1,5 @@
 import React from 'react';
-import { browserHistory } from 'react-router'
+import { browserHistory, Redirect } from 'react-router'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 import store from '../redux/store.js'
@@ -19,6 +19,7 @@ import About_us from '../containers/more/about_us'
 import Statement from '../containers/more/statement'
 import Suggest from '../containers/more/suggest'
 import Message from '../containers/personal/message'
+import OtherProduction from '../containers/home/otherProduction'
 //六合专区
 import MarkSixLotteryVideo from '../containers/mark_six/markSixLotteryVideo/markSixLotteryVideo'
 import MarkSixLotteryHistory from '../containers/mark_six/markSixLotteryHistory/markSixLotteryHistory'
@@ -57,7 +58,7 @@ import LuckyLottery from '../containers/toolbox/luckyLottery'
 import ShengxiaoTurntable from '../containers/toolbox/shengxiaoTurntable'
 import Forecast from '../containers/toolbox/forecast'
 import SelectCodeAssistant from '../containers/toolbox/selectCodeAssistant'
-import Calendar from '../containers/toolbox/calendar'
+import Calendar from '../containers/toolbox/CalendarDate'
 
 //彩票专区
 import LotteryCenter from '../containers/lottery/lotteryCenter'
@@ -90,6 +91,7 @@ const Root = () => (
                 <Router path="/statement" component={Statement} ></Router>
                 <Router path="/suggest" component={Suggest} ></Router>
                 <Router path="/message" component={Message} ></Router>
+                <Router path="/otherProduction" component={OtherProduction} ></Router>
 
                 {/* 六合专区 */}
                 <Router path="/markSixLotteryVideo" component={MarkSixLotteryVideo} ></Router>
@@ -132,6 +134,7 @@ const Root = () => (
                 <Router path="/calendar" component={Calendar} ></Router>
                 {/* 彩票专区 */}
                 <Router path="/lotteryCenter" component={LotteryCenter} ></Router>
+                <Redirect from="/*" to="/" />
             </Switch>
         </Provider>
     </BrowserRouter>

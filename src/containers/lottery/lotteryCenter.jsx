@@ -18,12 +18,11 @@ import WelfareLottery from './lotteryTypePage/welfareLottery'
 //加拿大28,PC蛋蛋
 import Canada28 from './lotteryTypePage/canada28'
 
-
 import { connect } from 'react-redux'
-import { setCurrentLotteryName, setCurrentLotteryId } from '../../redux/action'
+import { setCurrentLotteryName, setCurrentLotteryId, setCurrentLotteryType } from '../../redux/action'
 @connect(
-    state => ({ currentLotteryName: state.currentLotteryName, currentLotteryId: state.currentLotteryId }),
-    { setCurrentLotteryName, setCurrentLotteryId }
+    state => ({ currentLotteryName: state.currentLotteryName, currentLotteryId: state.currentLotteryId, currentLotteryType: state.currentLotteryType }),
+    { setCurrentLotteryName, setCurrentLotteryId, setCurrentLotteryType }
 )
 export default class LotteryIndex extends Component {
     constructor(props) {
@@ -51,7 +50,25 @@ export default class LotteryIndex extends Component {
         //存入redux
         this.props.setCurrentLotteryName(name);
         this.props.setCurrentLotteryId(id);
+        //根据彩种名称寻找彩种类型
+        let type = this.getLotteryTypeByName(name);
+        //把彩种类型存入redux
+        this.props.setCurrentLotteryType(type);
         this.setState({ isShowTitleTable: false });
+    }
+
+    //根据彩种名称寻找彩种类型
+    getLotteryTypeByName(name) {
+        let list = JSON.parse(sessionStorage.getItem("lotteryMenuList"));
+        let type = "";
+        for (let index = 0; index < list.length; index++) {
+            for (let j = 0; j < list[index].son.length; j++) {
+                if (list[index].son[j].name == name) {
+                    type = list[index].name;
+                }
+            }
+        }
+        return type;
     }
 
     //显示或者关闭彩种列表
@@ -67,7 +84,7 @@ export default class LotteryIndex extends Component {
                     style={{
                         width: "28%", height: "30px", marginLeft: "5%", marginTop: "10px", fontSize: "13px",
                         background: item.name == this.props.currentLotteryName ?
-                            "url(../../../assets/img/mark_six/bg_orange_statistical.png)" : "#F5F5F5",
+                            `url(${require('../../assets/img/mark_six/bg_orange_statistical.png')})` : "#F5F5F5",
                         backgroundSize: item.name == this.props.currentLotteryName ? "100% 100%" : "0",
                     }}
                     key={index}>
@@ -80,26 +97,25 @@ export default class LotteryIndex extends Component {
     //渲染当前彩种页面
     renderContentView() {
         let lotteryName = this.props.currentLotteryName;
-        if (lotteryName == "北京赛车" || lotteryName == "幸运飞艇") {
-            return (<BeiJingRacing name={lotteryName}></BeiJingRacing>)
-        } if (lotteryName == "重庆时时彩") {
+        let lotteryType = this.props.currentLotteryType;
+        if (lotteryName == "重庆时时彩") {
             return (<ChongQingOftenLottery name={lotteryName}></ChongQingOftenLottery>)
-        } if (lotteryName == "新疆时时彩" || lotteryName == "天津时时彩") {
+        } else if (lotteryType == "PK拾类") {
+            return (<BeiJingRacing name={lotteryName}></BeiJingRacing>)
+        } else if (lotteryType == "时时彩") {
             return (<OftenLottery name={lotteryName}></OftenLottery>)
-        } if (lotteryName == "江苏快三" || lotteryName == "广西快三" || lotteryName == "安徽快三" ||
-            lotteryName == "北京快三" || lotteryName == "湖北快三" || lotteryName == "河北快三") {
+        } else if (lotteryType == "快三类型") {
             return (<QuicklyThree name={lotteryName}></QuicklyThree>)
-        } if (lotteryName == "湖南快乐十分" || lotteryName == "幸运农场" ||
-            lotteryName == "广东快乐十分" || lotteryName == "天津快乐十分") {
+        } else if (lotteryType == "十分彩") {
             return (<HappyTenPoints name={lotteryName}></HappyTenPoints>)
-        } if (lotteryName == "江西11选5" || lotteryName == "广东11选5" || lotteryName == "11运夺金") {
+        } else if (lotteryType == "11选5") {
             return (<ElevenFive name={lotteryName}></ElevenFive>)
-        } if (lotteryName == "福彩3D" || lotteryName == "排列3") {
+        } else if (lotteryType == "福彩") {
             return (<WelfareLottery name={lotteryName}></WelfareLottery>)
-        } if (lotteryName == "加拿大28" || lotteryName == "PC蛋蛋") {
+        } else if (lotteryType == "28类") {
             return (<Canada28 name={lotteryName}></Canada28>)
         } else {
-            return (<div>功能开发中……</div>)
+            return (<div></div>)
         }
     }
 
@@ -109,12 +125,10 @@ export default class LotteryIndex extends Component {
             position: "fixed", top: "9%", left: "0", zIndex: "100", background: 'rgba(0, 0, 0, 0.3)'
         };
         return (
-
-
             <div className="wh100 bgWhite">
                 <div className="w100 navbar_bg flex">
                     <div onClick={() => { this.props.history.goBack() }} className="h100 flex align-item-center" style={{ width: "25%" }}>
-                        <img style={{ width: "8%", marginLeft: "20px" }} src="../../assets/img/user/icon_goback.png" />
+                        <img style={{ width: "8%", marginLeft: "20px" }} src={require("../../assets/img/user/icon_goback.png")} />
                     </div>
                     <div className="h100" className="w50 flex-center"
                         onClick={() => { this.showTitleTable() }}
@@ -123,9 +137,9 @@ export default class LotteryIndex extends Component {
                             {this.props.currentLotteryName}
                             {this.state.isShowTitleTable ?
                                 (<img style={{ width: "12px", marginLeft: "10px", transform: "rotate(180deg)" }}
-                                    src="../../../assets/img/mark_six/icon_tab_unfold.png" />) :
+                                    src={require("../../assets/img/mark_six/icon_tab_unfold.png")} />) :
                                 (<img style={{ width: "12px", marginLeft: "10px" }}
-                                    src="../../../assets/img/mark_six/icon_tab_unfold.png" />)}
+                                    src={require("../../assets/img/mark_six/icon_tab_unfold.png")} />)}
                         </div>
                     </div>
                     <div className="h100" style={{ width: "25%" }}></div>

@@ -125,7 +125,6 @@ export default class LotteryQueryAssistant extends Component {
         }
     }
 
-
     //根据年份查询
     // getRecordListByYear(year) {
     //     let data = this.recordOriginalList.filter(item => {
@@ -231,7 +230,7 @@ export default class LotteryQueryAssistant extends Component {
                     height: "30px", fontSize: "12px", background: index % 2 == 0 ? "white" : "#F6F7FB",
                     borderBottom: array.length - 1 == index ? "1px solid #D6D6D6" : "0"
                 }}>
-                    <div className="h100 text-center" style={{ width: "90px" }}>{item.date}年/{item.action}期</div>
+                    <div className="h100 flex-center" style={{ width: "90px" }}>{item.date}年/{item.action}期</div>
                     <ul className="h100 flex" style={{ width: "calc(100% - 90px)" }}>
                         {this.renderRecordItemView(item, index)}
                     </ul>
@@ -248,15 +247,14 @@ export default class LotteryQueryAssistant extends Component {
         const dialogStyle = {
             position: "fixed", width: "289px", height: "385px",
             top: "20%", left: "50%", marginLeft: "-145px",
-            background: "url(../../../assets/img/mark_six/question.png)",
+            background: `url(${require('../../../assets/img/mark_six/question.png')})`,
             backgroundSize: "100% 100%"
         };
 
         const dialogBtnStyle = {
-            width: "250px", height: "42px", background: "url(../../../assets/img/mark_six/question-btn.png)",
+            width: "250px", height: "42px", background:`url(${require('../../../assets/img/mark_six/question-btn.png')})`,
             backgroundSize: "100% 100%", margin: "0 auto", marginTop: "330px", color: "white"
         };
-
 
         //按钮通用样式
         let baseBtnStyle = { boxSizing: "border-box", width: "13.5%", height: "75%", fontSize: "11px", borderRadius: "15px", color: "#999999", border: "1px solid #999999" }
@@ -288,7 +286,7 @@ export default class LotteryQueryAssistant extends Component {
                     ]}
                     rightContent={[
                         <div onClick={() => { this.setState({ isShowDialog: true }) }} style={{ width: "20px" }} key="1">
-                            <img className="w100" src="../../../assets/img/common/icon_tip_query.png" />
+                            <img className="w100" src={require("../../../assets/img/common/icon_tip_query.png")} />
                         </div>
                     ]}
                 >查询助手</NavBar>
@@ -298,8 +296,8 @@ export default class LotteryQueryAssistant extends Component {
                         style={{ width: "40%", paddingLeft: "4%", fontSize: "13px", color: "#ff7344" }}
                         onClick={() => { this.isShowAllList() }}>
                         <div style={{ width: "18px", height: "18px" }}>
-                            <img className="w100" style={{ display: !this.state.isChoose ? "block" : "none" }} src="../../../assets/img/mark_six/icon_uncheck_lovers.png" />
-                            <img className="w100" style={{ display: this.state.isChoose ? "block" : "none" }} src="../../../assets/img/mark_six/icon_choose_lovers.png" />
+                            <img className="w100" style={{ display: !this.state.isChoose ? "block" : "none" }} src={require("../../../assets/img/mark_six/icon_uncheck_lovers.png")} />
+                            <img className="w100" style={{ display: this.state.isChoose ? "block" : "none" }} src={require("../../../assets/img/mark_six/icon_choose_lovers.png")} />
                         </div>
                         <div style={{ marginLeft: "5%" }}>仅显示出现的期数</div>
                     </div>

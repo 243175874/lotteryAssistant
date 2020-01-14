@@ -30,7 +30,7 @@ class MarkSixLotteryVideo extends Component {
     render() {
         const headerBg = {
             height: "200px",
-            background: "url(../../assets/img/common/bg3.png)",
+            background: `url(${require('../../../assets/img/common/bg3.png')})`,
             backgroundSize: "100% 100%",
             paddingTop: "20px",
             boxSizing: "content-box"
@@ -42,7 +42,7 @@ class MarkSixLotteryVideo extends Component {
             top: "80px",
             left: "50%",
             marginLeft: "-45%",
-            backgroundImage: "url(../../assets/img/promotion/boxBg.png)",
+            backgroundImage: `url(${require('../../../assets/img/promotion/boxBg.png')})`,
             backgroundSize: "100% 100%"
         }
 
@@ -51,21 +51,21 @@ class MarkSixLotteryVideo extends Component {
                 <header className="w100" style={headerBg}>
                     <div className="w100 text-center pr" style={{ height: "36px", lineHeight: "36px", fontSize: "16px", color: "#fff" }}>
                         <div onClick={() => { this.goback() }} className="h100 pa" style={{ width: "50px", top: "4%", left: "4%" }}>
-                            <img style={{ width: "15%", marginTop: "10px" }} src="../../assets/img/user/icon_goback.png" />
+                            <img style={{ width: "15%", marginTop: "10px" }} src={require("../../../assets/img/user/icon_goback.png")} />
                         </div>
                         历史开奖
                     </div>
                     <div className="pa flex" style={lottery}>
                         <div className="w50 h100" onClick={() => { this.go('markSixLotteryRecord') }}>
                             <div className="w100 flex-center" style={{ marginTop: "30px" }}>
-                                <img style={{ width: "15%" }} src="../../../assets/img/lotteryHistory/history-icon.png" />
+                                <img style={{ width: "15%" }} src={require("../../../assets/img/lotteryHistory/history-icon.png")} />
                             </div>
                             <div className="w100 flex-center" style={{ marginTop: "5px", height: "20px", fontSize: "12px" }}>开奖记录</div>
                             <div className="w100 flex-center" style={{ height: "20px", fontSize: "11px", color: "#666666" }}>六合彩开奖历史数据</div>
                         </div>
                         <div className="w50 h100" onClick={() => { this.go('lotteryQueryAssistant') }}>
                             <div className="w100 flex-center" style={{ marginTop: "30px" }}>
-                                <img style={{ width: "15%" }} src="../../../assets/img/lotteryHistory/query-assistant-icon.png" />
+                                <img style={{ width: "15%" }} src={require("../../../assets/img/lotteryHistory/query-assistant-icon.png")} />
                             </div>
                             <div className="w100 flex-center" style={{ marginTop: "5px", height: "20px", fontSize: "12px" }}>查询助手</div>
                             <div className="w100 flex-center" style={{ height: "20px", fontSize: "11px", color: "#666666" }}>选择条件查询历史位置</div>

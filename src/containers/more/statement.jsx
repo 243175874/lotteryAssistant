@@ -18,7 +18,7 @@ class Introduce extends Component {
                     onLeftClick={() => this.props.history.goBack()}>免责声明</NavBar>
                 <div className="w100 clearfix" style={{ paddingTop: "15px" }}>
                     <div className="fl clearfix flex justify-content-center" style={{ width: "20%" }}>
-                        <img style={{ width: "3rem", height: "3rem" }} src="../../assets/img/more/appicon_czs_n.png" />
+                        <img style={{ width: "3rem", height: "3rem" }} src={require("../../assets/img/more/appicon_czs_n.png")} />
                     </div>
                     <div className="flex-center fr" style={{ width: "80%" }}>
                         <div style={{ width: "90%", padding: "3% 10%", background: "#F5F5F5", borderRadius: "10px" }} className="clearfix">

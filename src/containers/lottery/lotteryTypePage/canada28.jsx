@@ -6,7 +6,21 @@ import Recommend from '../../../components/lotteryArea/recommend'
 import History from '../../../components/lotteryArea/canada28/history'
 import BeadAnalyse from '../../../components/lotteryArea/canada28/beadAnalyse'
 import Trend from '../../../components/lotteryArea/canada28/trend'
-const path = "../../assets/img/lottery/menu/";
+
+
+// 免费参考
+import icon_mftj from '../../../assets/img/lottery/menu/icon_mftj.png'
+import icon_mftj_press from '../../../assets/img/lottery/menu/icon_mftj_press.png'
+// 历史开奖
+import icon_lskj from '../../../assets/img/lottery/menu/icon_lskj.png'
+import icon_lskj_press from '../../../assets/img/lottery/menu/icon_lskj_press.png'
+// 路珠分析
+import icon_lzfx from '../../../assets/img/lottery/menu/icon_lzfx.png'
+import icon_lzfx_press from '../../../assets/img/lottery/menu/icon_lzfx_press.png'
+// 冷热分析
+import icon_lrfx from '../../../assets/img/lottery/menu/icon_lrfx.png'
+import icon_lrfx_press from '../../../assets/img/lottery/menu/icon_lrfx_press.png'
+
 
 import { connect } from 'react-redux'
 import { setCurrentLotteryName } from '../../../redux/action'
@@ -20,10 +34,10 @@ export default class Canada28 extends Component {
         super(props);
         this.state = {
             menuList: [
-                { icon: `${path}icon_mftj.png`, icon_press: `${path}icon_mftj_press.png`, name: "免费参考", type: "预测", place: "menu" },
-                { icon: `${path}icon_lskj.png`, icon_press: `${path}icon_lskj_press.png`, name: "历史开奖", type: "综合", place: "menu" },
-                { icon: `${path}icon_lzfx.png`, icon_press: `${path}icon_lzfx_press.png`, name: "路珠分析", type: "综合", place: "menu" },
-                { icon: `${path}icon_hbzs.png`, icon_press: `${path}icon_hbzs_press.png`, name: "横板走势", type: "综合", place: "menu" },
+                { icon: icon_mftj, icon_press: icon_mftj_press, name: "免费参考", type: "预测", place: "menu" },
+                { icon: icon_lskj, icon_press: icon_lskj_press, name: "历史开奖", type: "综合", place: "menu" },
+                { icon: icon_lzfx, icon_press: icon_lzfx_press, name: "路珠分析", type: "综合", place: "menu" },
+                { icon: icon_lrfx, icon_press: icon_lrfx_press, name: "冷热分析", type: "综合", place: "menu" },
             ],
             //当前彩种id
             currentLotteryId: "",

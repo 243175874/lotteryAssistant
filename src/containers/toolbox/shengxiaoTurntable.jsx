@@ -1,83 +1,97 @@
 import React, { Component } from "react";
 import { NavBar, Icon } from 'antd-mobile';
+import { post } from '../../fetch/post.js';
 import Introduction from '../../components/common/introduction'
 import Animal from '../../components/common/animal'
 import CommonJS from '../../assets/js/common'
+import icon_rat_turntable_n from "../../assets/img/toolbox/icon_rat_turntable_n.png"
+import icon_cow_turntable_n from "../../assets/img/toolbox/icon_cow_turntable_n.png"
+import icon_tiger_turntable_n from "../../assets/img/toolbox/icon_tiger_turntable_n.png"
+import icon_rabbit_turntable_n from "../../assets/img/toolbox/icon_rabbit_turntable_n.png"
+import icon_dragon_turntable_n from "../../assets/img/toolbox/icon_dragon_turntable_n.png"
+import icon_snake_turntable_n from "../../assets/img/toolbox/icon_snake_turntable_n.png"
+import icon_horse_turntable_n from "../../assets/img/toolbox/icon_horse_turntable_n.png"
+import icon_sheep_turntable_n from "../../assets/img/toolbox/icon_sheep_turntable_n.png"
+import icon_monkey_turntable_n from "../../assets/img/toolbox/icon_monkey_turntable_n.png"
+import icon_chicken_turntable_n from "../../assets/img/toolbox/icon_chicken_turntable_n.png"
+import icon_dog_turntable_n from "../../assets/img/toolbox/icon_dog_turntable_n.png"
+import icon_pig_turntable_n from "../../assets/img/toolbox/icon_pig_turntable_n.png"
+
 const color = ["红波", "蓝波", "绿波"];
-export default class MysteriousBag extends Component {
+export default class ShengxiaoTurntable extends Component {
     constructor(props) {
         super(props);
         this.state = {
             temporaryStorageAnimal: "",//临时存储生肖背景
             animalList: [
                 {
-                    animal: "鼠", src: "../../assets/img/toolbox/icon_rat_turntable_n.png", style: {
+                    animal: "鼠", src: icon_rat_turntable_n, style: {
                         width: "60px", height: "60px", background: "#4B89DC", borderRadius: "5px", top: "15px", left: "15px"
                     },
                     animalStyle: { width: "28px", height: "32px", top: "20px", left: "22px" }
                 },
                 {
-                    animal: "牛", src: "../../assets/img/toolbox/icon_cow_turntable_n.png", style: {
+                    animal: "牛", src: icon_cow_turntable_n, style: {
                         width: "60px", height: "60px", background: "#E67D00", borderRadius: "5px", top: "15px", left: "90px"
                     },
                     animalStyle: { width: "35px", height: "32px", top: "18px", left: "18px" }
                 },
                 {
-                    animal: "虎", src: "../../assets/img/toolbox/icon_tiger_turntable_n.png", style: {
+                    animal: "虎", src: icon_tiger_turntable_n, style: {
                         width: "60px", height: "60px", background: "#4B89DC", borderRadius: "5px", top: "15px", left: "165px"
                     },
                     animalStyle: { width: "40px", height: "30px", top: "22px", left: "15px" }
                 },
                 {
-                    animal: "兔", src: "../../assets/img/toolbox/icon_rabbit_turntable_n.png", style: {
+                    animal: "兔", src: icon_rabbit_turntable_n, style: {
                         width: "60px", height: "60px", background: "#4B89DC", borderRadius: "5px", top: "15px", left: "240px"
                     },
                     animalStyle: { width: "30px", height: "36px", top: "18px", left: "20px" }
                 },
                 {
-                    animal: "龙", src: "../../assets/img/toolbox/icon_dragon_turntable_n.png", style: {
+                    animal: "龙", src: icon_dragon_turntable_n, style: {
                         width: "60px", height: "60px", background: "#E62856", borderRadius: "5px", top: "90px", left: "240px"
                     },
                     animalStyle: { width: "28px", height: "46px", top: "10px", left: "23px" }
                 },
                 {
-                    animal: "蛇", src: "../../assets/img/toolbox/icon_snake_turntable_n.png", style: {
+                    animal: "蛇", src: icon_snake_turntable_n, style: {
                         width: "60px", height: "60px", background: "#4B89DC", borderRadius: "5px", top: "165px", left: "240px"
                     },
                     animalStyle: { width: "28px", height: "35px", top: "18px", left: "23px" }
                 },
                 {
-                    animal: "马", src: "../../assets/img/toolbox/icon_horse_turntable_n.png", style: {
+                    animal: "马", src: icon_horse_turntable_n, style: {
                         width: "60px", height: "60px", background: "#18980F", borderRadius: "5px", top: "240px", left: "240px"
                     },
                     animalStyle: { width: "40px", height: "32px", top: "20px", left: "12px" }
                 },
                 {
-                    animal: "羊", src: "../../assets/img/toolbox/icon_sheep_turntable_n.png", style: {
+                    animal: "羊", src: icon_sheep_turntable_n, style: {
                         width: "60px", height: "60px", background: "#4B89DC", borderRadius: "5px", top: "240px", left: "165px"
                     },
                     animalStyle: { width: "35px", height: "35px", top: "20px", left: "18px" }
                 },
                 {
-                    animal: "猴", src: "../../assets/img/toolbox/icon_monkey_turntable_n.png", style: {
+                    animal: "猴", src: icon_monkey_turntable_n, style: {
                         width: "60px", height: "60px", background: "#E62856", borderRadius: "5px", top: "240px", left: "90px"
                     },
                     animalStyle: { width: "35px", height: "35px", top: "20px", left: "18px" }
                 },
                 {
-                    animal: "鸡", src: "../../assets/img/toolbox/icon_chicken_turntable_n.png", style: {
+                    animal: "鸡", src: icon_chicken_turntable_n, style: {
                         width: "60px", height: "60px", background: "#E67D00", borderRadius: "5px", top: "240px", left: "15px"
                     },
                     animalStyle: { width: "35px", height: "35px", top: "20px", left: "18px" }
                 },
                 {
-                    animal: "狗", src: "../../assets/img/toolbox/icon_dog_turntable_n.png", style: {
+                    animal: "狗", src: icon_dog_turntable_n, style: {
                         width: "60px", height: "60px", background: "#18980F", borderRadius: "5px", top: "165px", left: "15px"
                     },
                     animalStyle: { width: "35px", height: "35px", top: "20px", left: "16px" }
                 },
                 {
-                    animal: "猪", src: "../../assets/img/toolbox/icon_pig_turntable_n.png", style: {
+                    animal: "猪", src: icon_pig_turntable_n, style: {
                         width: "60px", height: "60px", background: "#4B89DC", borderRadius: "5px", top: "90px", left: "15px"
                     },
                     animalStyle: { width: "40px", height: "23px", top: "26px", left: "12px" }
@@ -101,17 +115,49 @@ export default class MysteriousBag extends Component {
         this.btnDown = false;
     }
 
+    componentWillMount() {
+        this.getData();
+    }
+
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return;
+        }
+    }
+
+    //获取服务器数据
+    getData() {
+        post("/v1/api/hunt/get_rand?type=4").then(data => {
+            this.setState({ loading: false });
+            if (data.code == 200 && data.data.content != "") {
+                let animalResult = data.data.content.split(',').slice(0, 3).map(item => this.state.animalList[Number(item) - 1].animal);
+                let colorResult = data.data.content.split(',').slice(3, 4);
+                this.setState({ animalResult, colorResult });
+            }
+        });
+    }
+
+    //向服务器存储数据
+    setData(content) {
+        post("/v1/api/hunt/save_rand", { type: 4, content }).then(data => {
+            if (data.code == 200) {
+            }
+        });
+    }
+
     //随机获取生肖
     getAnimalList() {
-        let list = [];
-        while (list.length < 3) {
+        let animalResult = [];
+        let indexList = [];
+        while (animalResult.length < 3) {
             let index = CommonJS.getRandom(0, 11);
             let animal = this.state.animalList[index].animal;
-            if (list.indexOf(animal) == -1) {
-                list.push(animal);
+            if (animalResult.indexOf(animal) == -1) {
+                animalResult.push(animal);
+                indexList.push(index + 1);
             }
         }
-        return list;
+        return { animalResult, indexList };
     }
 
     //随机获取波色
@@ -132,9 +178,12 @@ export default class MysteriousBag extends Component {
 
     //获取转动结果
     getTurnResult() {
-        let animalResult = this.getAnimalList();//生肖
+        let { animalResult, indexList } = this.getAnimalList();//生肖
         let colorResult = this.getColorList();//波色
         this.setState({ animalResult: animalResult, colorResult: colorResult });
+        //存储转动结果
+        let result = indexList.toString() + "," + colorResult;
+        this.setData(result);
     }
 
     turnAnimal() {
@@ -144,7 +193,7 @@ export default class MysteriousBag extends Component {
             const element = list[index];
             //临时存储当前生肖背景，以便于到转到下一个时删除
             this.setState({ temporaryStorageAnimal: element.style.background });
-            element.style.background = 'url(../../assets/img/toolbox/bg_zodiac_turntable_r_p.png)';
+            element.style.background = `url(${require('../../assets/img/toolbox/bg_zodiac_turntable_r_p.png')})`;
             element.style['backgroundSize'] = "100% 100%";
             if (index >= 1) {
                 list[index - 1].style.background = this.state.temporaryStorageAnimal;
@@ -164,7 +213,6 @@ export default class MysteriousBag extends Component {
                     list[11].style.background = this.state.temporaryStorageAnimal;
                     this.getTurnResult();
                 }
-
             }
         }, 100);
     }
@@ -212,7 +260,7 @@ export default class MysteriousBag extends Component {
                         className="pa flex-center" style={{
                             display: this.state.animalResult.length != 3 ? "-webkit-flex " : "none",
                             width: "70px", height: "30px", top: "50%", left: "50%", marginLeft: "-30px", marginTop: "-10px",
-                            background: "url(../../assets/img/toolbox/btn_star_n.png)", backgroundSize: "100% 100%", color: "white"
+                            background: `url(${require('../../assets/img/toolbox/btn_star_n.png')})`, backgroundSize: "100% 100%", color: "white"
                         }}>开始</div>
                     <div className="pa text-center" style={{
                         width: "80px", height: "35px", top: "50%", left: "50%", display: this.state.animalResult.length == 3 ? "block" : "none",

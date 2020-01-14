@@ -39,7 +39,7 @@ class Message extends Component {
                 <div className="bgWhite" style={{ width: "90%", margin: "0 auto", height: "120px", marginTop: "10px", borderRadius: "5px", padding: "10px" }}>
                     <div className="w100 flex align-item-center" style={{ borderBottom: "1px solid #E1E1E1", height: "30%", paddingBottom: "10px" }}>
                         <div style={{ width: "12px", height: "12px", marginLeft: "10px" }}>
-                            <img className="w100 h100" src="../../assets/img/home/used_icon_feedback.png" />
+                            <img className="w100 h100" src={require("../../assets/img/home/used_icon_feedback.png")} />
                         </div>
                         <div className="h100 flex-center" style={{ marginLeft: "10px" }}>系统消息</div>
                     </div>

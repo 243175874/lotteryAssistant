@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import MarkSix from './markSix'
+import icon_win_more_n from "../../assets/img/lotteryResult/icon_win_more_n.png"
 export default class MarkSixResults extends Component {
     constructor(props) {
         super(props);
@@ -23,13 +24,13 @@ export default class MarkSixResults extends Component {
                 </header>
                 <main className="w100 h50 flex">
                     <div className="icon flex h100 align-item-center" style={{ width: '15%', justifyContent: 'flex-start' }}>
-                        <img style={{ width: '40%', transform: ' rotate(180deg)' }} src="../../assets/img/lotteryResult/icon_win_more_n.png" />
+                        <img style={{ width: '40%', transform: ' rotate(180deg)' }} src={icon_win_more_n} />
                     </div>
                     <div className="w70">
                         <MarkSix haoma={this.props.haoma} haoma_sx={this.props.haoma_sx}></MarkSix>
                     </div>
                     <div style={{ width: '15%', justifyContent: 'flex-end' }} className="flex align-item-center">
-                        <img style={{ width: '40%' }} src="../../assets/img/lotteryResult/icon_win_more_n.png" />
+                        <img style={{ width: '40%' }} src={icon_win_more_n} />
                     </div>
                 </main>
             </div >

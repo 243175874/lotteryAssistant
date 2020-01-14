@@ -1,6 +1,5 @@
 // post.js
-import 'whatwg-fetch'
-import 'es6-promise'
+import { browserHistory } from 'react-router'
 import { api } from './api.js'
 import { Toast } from 'antd-mobile'
 
@@ -32,6 +31,11 @@ export function post(url, paramsObj = {}) {
         }).then(response => {
             if (response.code != 200) {
                 Toast.info(response.msg, 2, null, false);
+                if (response.code == 1002) {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userInfo");
+                    browserHistory.push('/');
+                }
             }
             resolve(response);
         }).catch(error => {

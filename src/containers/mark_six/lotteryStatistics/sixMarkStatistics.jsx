@@ -3,6 +3,9 @@ import { Toast, ActivityIndicator } from 'antd-mobile'
 import { post } from '../../../fetch/post.js';
 import Alert from '../../../components/dialog/alert'
 import Prompt from '../../../components/dialog/prompt'
+import icon_ball_red from "../../../assets/img/lotteryResult/icon_ball_red.png"
+import icon_ball_blue from "../../../assets/img/lotteryResult/icon_ball_blue.png"
+import icon_ball_green from "../../../assets/img/lotteryResult/icon_ball_green.png"
 //数据字典
 const red = ['01', '02', '07', '08', '12', '13', '18', '19', '23', '24', '29', '30', '34', '35', '40', '45', '46'];
 const blue = ['03', '04', '09', '10', '14', '15', '20', '25', '26', '31', '36', '37', '41', '42', '47', '48'];
@@ -191,13 +194,13 @@ export default class SixMarkStatistics extends Component {
         let blueball = blue.find(item => item == num);
         let greenball = green.find(item => item == num);
         if (redball != null) {
-            return (<img style={{ width: '90%' }} src="../../assets/img/lotteryResult/icon_ball_red.png" />);
+            return (<img style={{ width: '90%' }} src={icon_ball_red} />);
         }
         if (blueball != null) {
-            return (<img style={{ width: '90%' }} src="../../assets/img/lotteryResult/icon_ball_blue.png" />);
+            return (<img style={{ width: '90%' }} src={icon_ball_blue} />);
         }
         if (greenball != null) {
-            return (<img style={{ width: '90%' }} src="../../assets/img/lotteryResult/icon_ball_green.png" />);
+            return (<img style={{ width: '90%' }} src={icon_ball_green} />);
         }
     }
 

@@ -89,7 +89,7 @@ export default class PicturesLibrary extends Component {
                     <div className="w100 bgwhite flex-center" style={{ height: "70px" }}>
                         <div className="flex-center" onClick={() => { this.refs.voteDialog.setState({ isShow: true }) }} style={{
                             width: "100px", height: "40px", color: "white",
-                            background: "url(../../../assets/img/mark_six/btn_vote_start.png)", backgroundSize: "100% 100%"
+                            background: `url(${'../../../assets/img/mark_six/btn_vote_start.png'})`, backgroundSize: "100% 100%"
                         }}>
                             投票
                         </div>

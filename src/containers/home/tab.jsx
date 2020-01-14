@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import Lottery from '../../components/index/lottery'
 import Grid from '../../components/index/grid'
+import { Toast } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
 import { post } from '../../fetch/post.js'
 import { connect } from 'react-redux'
-import { setSelectedTab, setCurrentLotteryName, setCurrentLotteryId } from '../../redux/action'
+import { setSelectedTab, setCurrentLotteryName, setCurrentLotteryId, setCurrentLotteryType } from '../../redux/action'
 @connect(
     state => ({ selectedTab: state.selectedTab, currentLotteryName: state.currentLotteryName, currentLotteryId: state.currentLotteryId }),
-    { setSelectedTab, setCurrentLotteryName, setCurrentLotteryId }
+    { setSelectedTab, setCurrentLotteryName, setCurrentLotteryId, setCurrentLotteryType }
 )
 class Tab extends Component {
     constructor(props) {
@@ -18,48 +19,6 @@ class Tab extends Component {
             cp_menu: [],
             app_menu: [],
         };
-    }
-
-    componentWillMount() {
-        //获取彩票菜单
-        this.getSixLotteryData();
-        //获取所有彩种类型
-        this.getAllLotteryType();
-    }
-
-    componentWillUnmount() {
-        this.setState = (state, callback) => {
-            return;
-        }
-    }
-
-    //获取所有彩种类型
-    getAllLotteryType() {
-        post('/api/index/type_list').then(data => {
-            if (data.code == 200) {
-                sessionStorage.setItem("lotteryListType", JSON.stringify(data.data));
-            }
-        });
-    }
-
-    //获取六合彩菜单
-    getSixLotteryData() {
-        post('/v1/api/lottery/index').then(data => {
-            if (data.code == 200) {
-                this.setState({ app_menu: data.data.app_menu, cp_menu: data.data.cp_menu });
-                //把所有彩种拿出放入sessionStorage
-                this.setLotteryToStorage(data.data.cp_menu);
-            }
-        });
-    }
-
-    //把所有彩种拿出放入sessionStorage
-    setLotteryToStorage(menu) {
-        let list = [];
-        menu.forEach(element => {
-            list = list.concat(element.son);
-        });
-        sessionStorage.setItem("lotteryList", JSON.stringify(list));
     }
 
     //set selected property
@@ -75,6 +34,7 @@ class Tab extends Component {
                 lottertArea: str
             });
         }, 600);
+        
         let marginLeft = this.refs.grid.style.marginLeft;
         marginLeft = Number(marginLeft.substr(0, marginLeft.length - 1));
         //console.log(marginLeft);
@@ -85,6 +45,8 @@ class Tab extends Component {
             });
             return;
         }
+
+        //requestAnimationFrame()
         let timer = setInterval(() => {
             if (str == '六合专区') {
                 marginLeft += 2;
@@ -100,14 +62,14 @@ class Tab extends Component {
     }
 
     //进入功能页面
-    enterSixLotteryPage(name) {
-        if (name == "视频开奖") {
+    enterSixLotteryPage(id) {
+        if (id == 1) {
             this.props.history.push('/markSixLotteryVideo');
-        } else if (name == "开奖历史") {
+        } else if (id == 29) {
             this.props.history.push('/markSixLotteryHistory');
-        } else if (name == "查询助手") {
+        } else if (id == 27) {
             this.props.history.push('/lotteryQueryAssistant');
-        } else if (name == "资讯统计") {
+        } else if (id == 30) {
             this.props.history.push('/lotteryStatistics');
         } else if (name == "六合图库") {
             if (localStorage.getItem("token") !== null) {
@@ -133,29 +95,30 @@ class Tab extends Component {
             } else {
                 this.props.setSelectedTab('personal');
             }
-        } else if (name == "工具箱") {
+        } else if (id == 33) {
             this.props.setSelectedTab('discoveringTreasure');
         }
     }
 
-    enterLotteryPage(name, id) {
-
+    enterLotteryPage(type, name, id) {
         //存入redux
         this.props.setCurrentLotteryName(name);
         this.props.setCurrentLotteryId(id);
+        this.props.setCurrentLotteryType(type);
+        //console.log(id);
         this.props.history.push('/lotteryCenter');
     }
 
     lotteryAreaView() {
-        return this.state.cp_menu.map((item, index) => (
-            <Lottery lotteryData={item} key={index} click={this.enterLotteryPage.bind(this)}></Lottery>
+        return this.props.cp_menu.map((item, index) => (
+            <Lottery lotteryData={item} key={index} click={this.enterLotteryPage.bind(this, item.name)}></Lottery>
         ));
     }
 
     sixAreaView() {
-        return this.state.app_menu.map((item, index) => (
-            <Grid src={item.icon} name={item.name} key={index} click={() => { this.enterSixLotteryPage(item.name) }}></Grid>
-        ));
+        return this.props.app_menu.map((item, index) =>
+            (<Grid src={item.icon} name={item.name} key={index} click={() => { this.enterSixLotteryPage(item.id) }}></Grid>)
+        )
     }
 
     render() {
@@ -175,10 +138,10 @@ class Tab extends Component {
                 </header>
                 <div className="w100 clearfix flex-center">
                     <div className="flex-center" style={{ width: '27%', height: '10px' }}>
-                        <img style={{ width: '20%', height: '5px', display: this.state.tabSelected == '六合专区' ? 'block' : 'none' }} src="../../assets/img/home/header-unline.png" />
+                        <img style={{ width: '20%', height: '5px', display: this.state.tabSelected == '六合专区' ? 'block' : 'none' }} src={require("../../assets/img/home/header-unline.png")}/>
                     </div>
                     <div className="flex-center" style={{ width: '27%', height: '10px' }}>
-                        <img style={{ width: '20%', height: '5px', display: this.state.tabSelected != '六合专区' ? 'block' : 'none' }} src="../../assets/img/home/header-unline.png" />
+                        <img style={{ width: '20%', height: '5px', display: this.state.tabSelected != '六合专区' ? 'block' : 'none' }}src={require("../../assets/img/home/header-unline.png")} />
                     </div>
                 </div>
                 <main className="clearfix w100" style={{ overflow: this.state.tabSelected == '六合专区' ? 'hidden' : 'inherit' }}>

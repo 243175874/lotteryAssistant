@@ -1,6 +1,7 @@
 export const SetSelectedTab = 'SetSelectedTab'; //当前菜单索引
 export const SetCurrentLotteryName = 'SetCurrentLotteryName'; //当前彩种名称
 export const SetCurrentLotteryId = 'SetCurrentLotteryId'; //当前彩种ID
+export const SetCurrentLotteryType = 'SetCurrentLotteryType'; //当前彩种种类
 export const SetCurrentLotteryPageIndex = 'SetCurrentLotteryPageIndex'; //当前彩种功能页面
 export const SetCurrentPeriods = 'SetCurrentPeriods'; //当前查询期数
 export const SetSixTitle = 'SetSixTitle'; //六合高手列表页面标题

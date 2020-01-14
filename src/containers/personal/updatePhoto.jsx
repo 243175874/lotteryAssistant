@@ -2,12 +2,17 @@ import React, { Component } from "react";
 import { NavBar, Icon, List } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
 import { post } from '../../fetch/post';
+import { api } from '../../fetch/api';
 import { Toast } from 'antd-mobile'
 class UpdatePhoto extends Component {
 
     state = {
         imgList: [],
         currentHeadImgUrl: ""
+    }
+
+    componentDidMount() {
+        this.getUserDefault();
     }
 
     componentWillUnmount() {
@@ -21,12 +26,14 @@ class UpdatePhoto extends Component {
     */
     getUserDefault() {
         let userInfo = JSON.parse(localStorage.getItem("userInfo"));
-        let headImgUrl = userInfo && userInfo.user && userInfo.user.userhead_url;
-        post('/api/upload/avatar_list').then(data => {
+        let headImgUrl = userInfo && userInfo.userhead;
+        this.setState({ currentHeadImgUrl: headImgUrl });
+        post('/v1/api/user/avatar_list').then(data => {
             let ls = data.data;
             ls.map(item => {
                 item.active = false;
-                if (headImgUrl == item.avatar_url) {
+                if (headImgUrl.substr(headImgUrl.length-10) == item.avatar_url.substr(item.avatar_url.length-10)) {
+              
                     item.active = true;
                 }
             })
@@ -43,9 +50,9 @@ class UpdatePhoto extends Component {
             n.active = false;
         })
         this.state.imgList[index].active = true;
-        this.setState({ imgList: this.state.imgList })
+        this.setState({ imgList: this.state.imgList });
         //保存当前选中得头像得链接。
-        this.setState({ currentHeadImgUrl: url })
+        this.setState({ currentHeadImgUrl: url });
     }
 
     /**
@@ -58,21 +65,18 @@ class UpdatePhoto extends Component {
         let params = {
             userhead: this.state.currentHeadImgUrl
         }
-        post('/api/user/headedit', params).then(data => {
+        post('/v1/api/user/headedit', params).then(data => {
             if (data.code == 200) {
                 Toast.info('修改成功', 3, null, false);
                 //手动更新到LocalStorage
                 let userInfo = JSON.parse(localStorage.getItem("userInfo"));
-                userInfo.user.userhead_url = this.state.currentHeadImgUrl;
+                userInfo.userhead = this.state.currentHeadImgUrl;
                 localStorage.setItem("userInfo", JSON.stringify(userInfo));
                 this.props.history.go(-1);
             }
         });
     }
 
-    componentDidMount() {
-        this.getUserDefault();
-    }
 
     render() {
         return (

@@ -1,10 +1,24 @@
-import { SetSelectedTab, SetCurrentLotteryName, SetCurrentLotteryId, SetCurrentLotteryPageIndex, SetCurrentPeriods, SetSixTitle, SetSixTypeId, SetSixUserId, SetIsShowSendMessagePage } from './actionType'
+import {
+    SetSelectedTab,
+    SetCurrentLotteryName,
+    SetCurrentLotteryId,
+    SetCurrentLotteryType,
+    SetCurrentLotteryPageIndex,
+    SetCurrentPeriods,
+    SetSixTitle,
+    SetSixTypeId,
+    SetSixUserId,
+    SetIsShowSendMessagePage,
+
+} from './actionType'
 //当前菜单索引
 export const setSelectedTab = (value) => ({ type: SetSelectedTab, value: value });
 //当前进入彩种名称
 export const setCurrentLotteryName = (value) => ({ type: SetCurrentLotteryName, value: value });
 //当前进入彩种ID
 export const setCurrentLotteryId = (value) => ({ type: SetCurrentLotteryId, value: value });
+//当前进入彩种种类
+export const setCurrentLotteryType = (value) => ({ type: SetCurrentLotteryType, value: value });
 //当前彩种功能页面
 export const setCurrentLotteryPageIndex = (value) => ({ type: SetCurrentLotteryPageIndex, value: value });
 //当前查询期数

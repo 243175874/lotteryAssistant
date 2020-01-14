@@ -58,11 +58,22 @@ export default class NumberStatistics extends Component {
 
     renderListView() {
         return this.state.list.map((item, index) => {
+            let list = [];
+            item.data.forEach((item) => {
+                if (item.no > 0 && item.no <= 6) {
+                    list.push(item);
+                }
+            });
+
+            list.push(item.data.find(item => item.no == "大"));
+            list.push(item.data.find(item => item.no == "小"));
             return (
                 <div className="w100 flex" style={{ height: "34px", flexDirection: "row", background: index % 2 !== 0 ? '#f5f5f9' : "white" }} key={index}>
                     <div className="flex-center" style={{ flex: "2" }}>{item.number}</div>
-                    {item.data.map((element, i) => {
-                        return (<div className="flex-center" key={i} style={{ flex: "1", display: Number(element.no) == i + 1 ? "black" : "none" }}>{element.num}</div>)
+                    {list.map((element, i) => {
+
+
+                        return (<div className="flex-center" key={i} style={{ flex: "1" }}>{element.num}</div>)
                     })}
                 </div>
             )

@@ -6,10 +6,10 @@ class More extends Component {
         super(props);
         this.state = {
             data: [
-                { src: '../../assets/img/home/more_icon_account_default.png', label: "关于应用", pageRouter: "/about" },
-                { src: '../../assets/img/home/more_icon_liability_default.png', label: "免责声明", pageRouter: "/statement" },
-                { src: '../../assets/img/home/more_icon_feedback_default.png', label: "意见反馈", pageRouter: "/suggest" },
-                { src: '../../assets/img/home/more_icon_contact_default.png', label: "联系我们", pageRouter: "/contact_us" },
+                { src: require('../../assets/img/home/more_icon_account_default.png'), label: "关于应用", pageRouter: "/about" },
+                { src: require('../../assets/img/home/more_icon_liability_default.png'), label: "免责声明", pageRouter: "/statement" },
+                { src: require('../../assets/img/home/more_icon_feedback_default.png'), label: "意见反馈", pageRouter: "/suggest" },
+                { src: require('../../assets/img/home/more_icon_contact_default.png'), label: "联系我们", pageRouter: "/contact_us" },
                 // { src: '../../assets/img/home/more_icon_note_default .png', label: "短信分享", pageRouter: "messageShare" },
                 // { src: '../../assets/img/home/more_icon_software_default.png', label: "软件分享", pageRouter: "softwareShare" },
             ]

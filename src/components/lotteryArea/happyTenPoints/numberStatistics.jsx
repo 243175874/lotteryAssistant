@@ -133,33 +133,6 @@ export default class NumberStatistics extends Component {
                         {this.renderListView()}
                     </div>
                 </div>
-
-                {/* <div className="w100 flex" style={{ height: "34px", flexDirection: "row", background: '#f5f5f9' }}>
-                    <div className="flex-center" style={{ flex: "2" }}>日期</div>
-                    <div className="flex-center" style={{ flex: "1" }}>1</div>
-                    <div className="flex-center" style={{ flex: "1" }}>2</div>
-                    <div className="flex-center" style={{ flex: "1" }}>3</div>
-                    <div className="flex-center" style={{ flex: "1" }}>4</div>
-                    <div className="flex-center" style={{ flex: "1" }}>5</div>
-                    <div className="flex-center" style={{ flex: "1" }}>6</div>
-                    <div className="flex-center" style={{ flex: "1" }}>7</div>
-                    <div className="flex-center" style={{ flex: "1" }}>8</div>
-                    <div className="flex-center" style={{ flex: "1" }}>9</div>
-                    <div className="flex-center" style={{ flex: "1" }}>10</div>
-                    <div className="flex-center" style={{ flex: "1" }}>11</div>
-                    <div className="flex-center" style={{ flex: "1" }}>12</div>
-                    <div className="flex-center" style={{ flex: "1" }}>13</div>
-                    <div className="flex-center" style={{ flex: "1" }}>14</div>
-                    <div className="flex-center" style={{ flex: "1" }}>15</div>
-                    <div className="flex-center" style={{ flex: "1" }}>16</div>
-                    <div className="flex-center" style={{ flex: "1" }}>17</div>
-                    <div className="flex-center" style={{ flex: "1" }}>18</div>
-                    <div className="flex-center" style={{ flex: "1" }}>19</div>
-                    <div className="flex-center" style={{ flex: "1" }}>20</div>
-                </div>
-                <div className="w100" style={{ height: "calc(100% - 70px)", overflow: "auto" }}>
-                    {this.renderListView()}
-                </div> */}
             </div>
         );
     }

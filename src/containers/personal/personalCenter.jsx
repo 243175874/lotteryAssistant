@@ -13,7 +13,8 @@ class PersonalCenter extends Component {
     *  设置用户详细信息
     */
     setUserDetailsInfo = () => {
-        this.setState({ userInfo: JSON.parse(localStorage.getItem("userInfo")).user })
+        console.log(JSON.parse(localStorage.getItem("userInfo")));
+        this.setState({ userInfo: JSON.parse(localStorage.getItem("userInfo")) })
     }
 
     loginOut = async () => {
@@ -46,16 +47,17 @@ class PersonalCenter extends Component {
                         <div onClick={() => this.changePhoto()} className="w100 flex" style={{ height: "70px" }}>
                             <div className="w50 h100 flex align-item-center">头像</div>
                             <div className="w50 h100 flex align-item-center" style={{ justifyContent: "flex-end" }}>
-                                <img style={{ width: "40%", height: 'auto' }} src={this.state.userInfo.userhead_url} />
+                                <img style={{ width: "40%", height: 'auto' }} src={this.state.userInfo.userhead} />
                             </div>
                         </div>
                     </List.Item>
                     <List.Item extra={this.state.userInfo.username}>用户名</List.Item>
-                </List>
-                <List style={{ marginTop: "10px" }}>
-                    <List.Item arrow="horizontal" onClick={() => { this.props.history.push('/modifyPassword') }}>修改密码</List.Item>
+                    <List.Item extra={this.state.userInfo.mobile}>手机号</List.Item>
                 </List>
 
+                {/* <List style={{ marginTop: "10px" }}>
+                    <List.Item arrow="horizontal" onClick={() => { this.props.history.push('/modifyPassword') }}>修改密码</List.Item>
+                </List> */}
                 <div onClick={() => this.loginOut()} className="w100 bgWhite flex-center" style={{ height: "50px", marginTop: "10px" }}>退出登录</div>
             </div>
         );

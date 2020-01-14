@@ -69,11 +69,11 @@ export default class SixMasterHandList extends Component {
 
     renderNumber(index) {
         if (index == 0) {
-            return <img style={{ width: "70%" }} src="../../../assets/img/mark_six/icon_medal_gold_1.png" />
+            return <img style={{ width: "70%" }} src={require("../../../assets/img/mark_six/icon_medal_gold_1.png")} />
         } else if (index == 1) {
-            return <img style={{ width: "70%" }} src="../../../assets/img/mark_six/icon_medal_silve_2.png" />
+            return <img style={{ width: "70%" }} src={require("../../../assets/img/mark_six/icon_medal_silve_2.png")} />
         } else if (index == 2) {
-            return <img style={{ width: "70%" }} src="../../../assets/img/mark_six/icon_medal_bronze_3.png" />
+            return <img style={{ width: "70%" }} src={require("../../../assets/img/mark_six/icon_medal_bronze_3.png")} />
         } else {
             return Number(index) + 1;
         }

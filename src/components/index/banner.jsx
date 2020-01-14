@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { Carousel } from 'antd-mobile';
 import '../../assets/css/banner.css'
+import bannerOriginal from '../../assets/img/home/banner-original.png'
 const _bannerUrl = Symbol('bannerUrl');
 export default class Banner extends Component {
     constructor(props) {
         super(props);
-        this[_bannerUrl] = '../../assets/img/home/banner-original.png';
+        this[_bannerUrl] = bannerOriginal;
         this.state = {
             data: [this[_bannerUrl], this[_bannerUrl], this[_bannerUrl]],
             imgHeight: 100,
@@ -41,7 +42,7 @@ export default class Banner extends Component {
                     <img
                         src={val.pic}
                         style={{ borderRadius: '10px', width: '100%', verticalAlign: 'top' }}
-                        onError={(e) => { e.target.onerror = null; e.target.src = "../../assets/img/home/banner-original.png" }}
+                        onError={(e) => { e.target.onerror = null; e.target.src = bannerOriginal }}
                         onLoad={() => {
                             // fire window resize event to change height
                             window.dispatchEvent(new Event('resize'));

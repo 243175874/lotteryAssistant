@@ -153,7 +153,7 @@ class MarkSixLotteryRecord extends Component {
                         <Icon key="0" onClick={() => this.props.history.goBack()} type="left" />
                     ]}
                     rightContent={[
-                        <div style={{ padding: '10px', paddingRight: '0' }} key="1">搅珠日期</div>
+                        <div onClick={() => this.props.history.push('/calendar')} style={{ padding: '10px', paddingRight: '0' }} key="1">搅珠日期</div>
                     ]}
                 >开奖记录</NavBar>
                 <div className="w100" style={{ height: "91%" }}>

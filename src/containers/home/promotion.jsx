@@ -20,6 +20,7 @@ class Promotion extends Component {
             isLoading: true,
             height: "100%",
             isShowDialog: false,
+            isSHowQrCodeImg: false,
             data: {
                 user: {
                     uid: "",//user id
@@ -39,7 +40,7 @@ class Promotion extends Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         //初始化会员类型选项
         this.setState({ memberTypeSelected: this.state.memberTypeList[0] });
         //获取会员信息
@@ -54,21 +55,19 @@ class Promotion extends Component {
         }
     }
 
-
     //请求会员数据
     getMemberData() {
-        post('/api/user/tuiguang').then(data => {
+        post('/v1/api/user/index').then(data => {
             if (data.code == 200) {
                 this.setState({ data: data.data });
             }
-
         });
     }
 
     //请求会员总列表
     getMemberTotalList() {
         this.setState({ isLoading: true });
-        post('/api/user/my_inviter_list_all', { "page": this.state.page, "limit": 4 }).then(data => {
+        post('/v1/api/user/inviter_all', { "page": this.state.page, "limit": 4 }).then(data => {
             if (data.code == 200) {
                 if (this.state.page == 1) {
                     this.setState({ list: data.data.list });
@@ -84,7 +83,7 @@ class Promotion extends Component {
     //一级会员列表
     getMemberLevelOneList() {
         this.setState({ isLoading: true });
-        post('/api/user/my_inviter_list', { "page": this.state.page, "limit": 4 }).then(data => {
+        post('/v1/api/user/inviter_first', { "page": this.state.page, "limit": 4 }).then(data => {
             if (data.code == 200) {
                 if (this.state.page == 1) {
                     this.setState({ list: data.data.list });
@@ -93,7 +92,6 @@ class Promotion extends Component {
                     this.setState({ list: datas });
                 }
             }
-
             this.setState({ isLoading: false });
         });
     }
@@ -101,7 +99,7 @@ class Promotion extends Component {
     //二级会员列表
     getMemberLevelTwoList() {
         this.setState({ isLoading: true });
-        post('/api/user/my_inviter_list2', { "page": this.state.page, "limit": 4 }).then(data => {
+        post('/v1/api/user/inviter_two', { "page": this.state.page, "limit": 4 }).then(data => {
             if (data.code == 200) {
                 if (this.state.page == 1) {
                     this.setState({ list: data.data.list });
@@ -118,7 +116,7 @@ class Promotion extends Component {
     //积分记录明细
     getMyPointList() {
         this.setState({ isLoading: true });
-        post('/api/user/getmypoint', { "page": this.state.page, "limit": 4 }).then(data => {
+        post('/v1/api/user/getmypoint', { "page": this.state.page, "limit": 4 }).then(data => {
             if (data.code == 200) {
                 if (this.state.page == 1) {
                     this.setState({ list: data.data.list });
@@ -156,7 +154,7 @@ class Promotion extends Component {
                 <div style={{ width: '110px', padding: "10px" }}>
                     <div className="w100 flex align-item-center" style={{ height: "calc(50% - 10px)" }}>
                         <div style={{ color: "#FDC12A" }}>财富指数</div>
-                        <div style={{ marginLeft: "10px" }}><img style={{ width: "16px" }} src="../../assets/img/promotion/list-money-icon.png" /></div>
+                        <div style={{ marginLeft: "10px" }}><img style={{ width: "16px" }} src={require("../../assets/img/promotion/list-money-icon.png")} /></div>
                     </div>
                     <div className="w100 flex align-item-center" style={{ justifyContent: "flex-end", height: "calc(50% - 10px)" }}>
                         <div className="flex-center colorWhite"
@@ -164,7 +162,7 @@ class Promotion extends Component {
                                 marginRight: "8px",
                                 width: "40px",
                                 height: "20px",
-                                backgroundImage: item.is_online == "在线" ? "url(../../assets/img/promotion/online-icon.png)" : "url(../../assets/img/promotion/offline-icon.png)",
+                                backgroundImage: item.is_online == "在线" ? `url(${require('../../assets/img/promotion/online-icon.png')})` : `url(${require('../../assets/img/promotion/offline-icon.png')})`,
                                 backgroundSize: "100% 100%",
                                 fontSize: "10px"
                             }}>
@@ -307,25 +305,24 @@ class Promotion extends Component {
                 <div style={{ marginTop: "15%", marginLeft: "8%" }}>我要分享</div>
                 <div style={{ width: "80%", height: "55%", margin: "0 auto", padding: "2%" }}>
                     <ul className="w100 h100 flex" style={{ fontSize: "10px" }}>
-                        <li onClick={() => { this.copy() }} className="w33 flex flex-column align-item-center">
-                            <img style={{ width: "40%" }} src="../../assets/img/promotion/link_icon.png" />
+                        <li onClick={() => { this.copy() }} className="w50 flex flex-column align-item-center">
+                            <img style={{ width: "30%" }} src={require("../../assets/img/promotion/link_icon.png")} />
                             <p style={{ marginTop: "3%" }}>复制链接</p>
                             <div style={{ position: "fixed", left: "-100%" }} id="invite_url">{this.state.data.invite_url}</div>
                         </li>
-                        <li className="w33 flex flex-column align-item-center">
-                            <img style={{ width: "40%" }} src="../../assets/img/promotion/QRcode_icon.png" />
+                        <li onClick={() => { this.setState({ isSHowQrCodeImg: true }) }} className="w50 flex flex-column align-item-center">
+                            <img style={{ width: "30%" }} src={require("../../assets/img/promotion/QRcode_icon.png")} />
                             <p style={{ marginTop: "3%" }}>二维码推广</p>
                         </li>
-                        <li className="w33 flex flex-column align-item-center">
+                        {/* <li className="w33 flex flex-column align-item-center">
                             <img style={{ width: "40%" }} src="../../assets/img/promotion/wechat_qq_icon.png" />
                             <p style={{ marginTop: "3%" }}>微信，QQ分享</p>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
             </div>
         )
     }
-
 
     render() {
         const dialogBgStyle = {
@@ -336,7 +333,7 @@ class Promotion extends Component {
         const dialogStyle = {
             position: "fixed", width: "306px", height: "395px",
             top: "10%", left: "50%", marginLeft: "-145px",
-            background: "url(../../../assets/img/promotion/img_rules_integral.png)",
+            background: `url(${require('../../assets/img/promotion/img_rules_integral.png')})`,
             backgroundSize: "100% 100%"
         };
 
@@ -347,14 +344,21 @@ class Promotion extends Component {
 
         return (
             <div className="wh100 bgWhite pr">
+                <div className="wh100" style={{ position: "fixed", top: "0", left: "0", zIndex: "200", display: this.state.isSHowQrCodeImg ? "block" : "none" }}>
+                    <img className="wh100" src={require("../../assets/img/promotion/share_bg_qr.png")} />
+                    <img style={{ width: "30px", height: "30px", position: "fixed", top: "20px", right: "20px", zIndex: "201" }}
+                        onClick={() => { this.setState({ isSHowQrCodeImg: false }) }}
+                        src={require("../../assets/img/promotion/icon_close_share_n.png")} />
+                    <img style={{ width: "26%", position: "fixed", top: "45%", left: "50%", marginLeft: "-13%", zIndex: "202" }} src={this.state.data.qrcode} />
+                </div>
                 {/* 积分规则说明弹出框  start*/}
                 <div className="wh100" style={dialogBgStyle}>
                     <div style={dialogStyle}>
                     </div>
-                    <img onClick={() => { this.setState({ isShowDialog: false }) }} style={closeBtnStyle} src="../../assets/img/promotion/icon_close.png" />
+                    <img onClick={() => { this.setState({ isShowDialog: false }) }} style={closeBtnStyle} src={require("../../assets/img/promotion/icon_close.png")} />
                 </div>
                 {/* 积分规则说明弹出框  end*/}
-                <header className="w100" style={{ background: "url(../../assets/img/promotion/headerBg.png)", backgroundSize: "100% 100%", height: "26%" }}></header>
+                <header className="w100" style={{ background: `url(${require('../../assets/img/promotion/headerBg.png')})`, backgroundSize: "100% 100%", height: "26%" }}></header>
                 <NavBar
                     style={{ top: "0" }}
                     className="navbar_bg pa w100"
@@ -362,7 +366,7 @@ class Promotion extends Component {
                     //     <Icon key="0" onClick={() => console.log('onLeftClick')} type="left" />
                     // ]}
                     rightContent={[
-                        <img src="../../assets/img/promotion/clientService.png" key="1" style={{ width: "20px" }} />
+                        <img src={require("../../assets/img/promotion/clientService.png")} key="1" style={{ width: "20px" }} />
                     ]}
                 >分享赚钱</NavBar>
 
@@ -372,7 +376,7 @@ class Promotion extends Component {
                     top: "11.5%",
                     left: "50%",
                     marginLeft: "-45%",
-                    backgroundImage: "url(../../assets/img/promotion/boxBg.png)",
+                    backgroundImage: `url(${require('../../assets/img/promotion/boxBg.png')})`,
                     backgroundSize: "100% 100%"
                 }}>
                     <div className="w100 flex" style={{ height: "18%", marginTop: "5%" }}>
@@ -380,11 +384,11 @@ class Promotion extends Component {
                         <div className="w50 flex" style={{ paddingRight: "9px", justifyContent: "flex-end" }}>
                             <div className="flex" style={{
                                 width: "60%",
-                                backgroundImage: "url(../../assets/img/promotion/bg_integral_how.png)",
+                                backgroundImage: `url(${require('../../assets/img/promotion/bg_integral_how.png')})`,
                                 backgroundSize: "100% 100%"
                             }}>
                                 <div className="h100  flex-center" style={{ width: "18px", marginLeft: "8%" }}>
-                                    <img className="w100" src="../../assets/img/promotion/icon_integral.png" />
+                                    <img className="w100" src={require("../../assets/img/promotion/icon_integral.png")}/>
                                 </div>
                                 <div onClick={() => { this.setState({ isShowDialog: true }) }} className="colorWhite flex-center" style={{ fontSize: "10px", marginLeft: "5px" }}>如何赚积分</div>
                             </div>

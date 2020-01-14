@@ -80,7 +80,7 @@ export default class PeachMeetingList extends Component {
                     </div>
                     <div className="w100">{item.title}</div>
                     <div className="fr flex align-item-center" style={{ width: "80px", height: "20px", justifyContent: "flex-end" }}>
-                        <div style={{ width: "16px", height: "16px" }}><img className="w100 h100" src="../../assets/img/common/icon_praise.png" /></div>
+                        <div style={{ width: "16px", height: "16px" }}><img className="w100 h100" src={require("../../../assets/img/common/icon_praise.png")} /></div>
                         <div className="flex-center" style={{ marginLeft: "10px", height: "18px", color: "#BDBDBD" }}>{item.zan}</div>
                     </div>
                 </div>

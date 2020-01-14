@@ -78,7 +78,7 @@ export default class ChooesDialog extends Component {
                         background: this.state.selected == item ? "#F5F5F5" : "none"
                     }}>
                     <div style={{ marginLeft: "20px" }}>{item}</div>
-                    <img style={{ width: "7px", marginLeft: "80px" }} src="../../../assets/img/common/icon_choose_conditions.png" />
+                    <img style={{ width: "7px", marginLeft: "80px" }} src={require("../../../assets/img/common/icon_choose_conditions.png")} />
                 </li>
             );
         });
@@ -97,7 +97,7 @@ export default class ChooesDialog extends Component {
                     <img style={{
                         width: "12px", marginLeft: "80px",
                         display: this.state.selectedValues.indexOf(item) == -1 ? "none" : "block"
-                    }} src="../../../assets/img/common/icon_choose.png" />
+                    }} src={require("../../../assets/img/common/icon_choose.png")} />
                 </li>
             )
         });

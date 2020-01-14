@@ -45,7 +45,7 @@ export default class LotteryStatistics extends Component {
                     style={{
                         width: "28%", height: "30px", marginLeft: "5%", marginTop: "10px", fontSize: "13px",
                         background: item == this.state.currentPageTitle ?
-                            "url(../../../assets/img/mark_six/bg_orange_statistical.png)" : "#F5F5F5",
+                            `url(${require('../../../assets/img/mark_six/bg_orange_statistical.png')})` : "#F5F5F5",
                         backgroundSize: item == this.state.currentPageTitle ? "100% 100%" : "0",
                     }}
                     key={index}>
@@ -105,7 +105,7 @@ export default class LotteryStatistics extends Component {
             <div className="wh100">
                 <div className="w100 navbar_bg flex">
                     <div onClick={() => { this.props.history.goBack() }} className="h100 flex align-item-center" style={{ width: "25%" }}>
-                        <img style={{ width: "8%", marginLeft: "20px" }} src="../../assets/img/user/icon_goback.png" />
+                        <img style={{ width: "8%", marginLeft: "20px" }} src={require("../../../assets/img/user/icon_goback.png")} />
                     </div>
                     <div className="h100" className="w50 flex-center"
                         onClick={() => { this.showTitleTable() }}
@@ -114,9 +114,9 @@ export default class LotteryStatistics extends Component {
                             {this.state.currentPageTitle}
                             {this.state.isShowTitleTable ?
                                 (<img style={{ width: "12px", marginLeft: "10px", transform: "rotate(180deg)" }}
-                                    src="../../../assets/img/mark_six/icon_tab_unfold.png" />) :
+                                    src={require("../../../assets/img/mark_six/icon_tab_unfold.png")} />) :
                                 (<img style={{ width: "12px", marginLeft: "10px" }}
-                                    src="../../../assets/img/mark_six/icon_tab_unfold.png" />)}
+                                    src={require("../../../assets/img/mark_six/icon_tab_unfold.png")} />)}
                         </div>
                     </div>
                     <div className="h100" style={{ width: "25%" }}></div>

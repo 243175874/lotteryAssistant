@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { TabBar } from 'antd-mobile';
-import { connect } from 'react-redux'
-import { setSelectedTab } from '../../redux/action'
 import { withRouter } from 'react-router-dom';
 import Index from './index.jsx'
 import DiscoveringTreasure from './discoveringTreasure.jsx'
@@ -9,6 +7,8 @@ import Personal from './personal.jsx'
 import More from './more.jsx'
 import Promotion from './promotion.jsx'
 import Login from '../user/login.jsx'
+import { connect } from 'react-redux'
+import { setSelectedTab } from '../../redux/action'
 @connect(
     state => ({ selectedTab: state.selectedTab }),
     { setSelectedTab }
@@ -69,14 +69,14 @@ class Home extends Component {
                         icon={<div style={{
                             width: '22px',
                             height: '22px',
-                            background: 'url(../../../assets/img/home/icon_tab_homepage_n.png) center center /  21px 21px no-repeat'
+                            background: `url(${require('../../assets/img/home/icon_tab_homepage_n.png')}) center center /  21px 21px no-repeat`
                         }}
                         />
                         }
                         selectedIcon={<div style={{
                             width: '22px',
                             height: '22px',
-                            background: 'url(../../../assets/img/home/icon_tab_homepage_p.png) center center /  21px 21px no-repeat'
+                            background: `url(${require('../../assets/img/home/icon_tab_homepage_p.png')}) center center /  21px 21px no-repeat`
                         }}
                         />
                         }
@@ -91,7 +91,7 @@ class Home extends Component {
                             <div style={{
                                 width: '22px',
                                 height: '22px',
-                                background: 'url(../../../assets/img/home/icon_tab_treasure_n.png) center center /  21px 21px no-repeat'
+                                background:`url(${require('../../assets/img/home/icon_tab_treasure_n.png')}) center center /  21px 21px no-repeat`
                             }}
                             />
                         }
@@ -99,7 +99,7 @@ class Home extends Component {
                             <div style={{
                                 width: '22px',
                                 height: '22px',
-                                background: 'url(../../../assets/img/home/icon_tab_treasure_p.png) center center /  21px 21px no-repeat'
+                                background: `url(${require('../../assets/img/home/icon_tab_treasure_p.png')}) center center /  21px 21px no-repeat`
                             }}
                             />
                         }
@@ -118,7 +118,7 @@ class Home extends Component {
                             <div style={{
                                 width: '22px',
                                 height: '22px',
-                                background: 'url(../../../assets/img/home/icon_tab_promote.png) center center /  21px 21px no-repeat'
+                                background:  `url(${require('../../assets/img/home/icon_tab_promote.png')}) center center /  21px 21px no-repeat`
                             }}
                             />
                         }
@@ -126,7 +126,7 @@ class Home extends Component {
                             <div style={{
                                 width: '22px',
                                 height: '22px',
-                                background: 'url(../../../assets/img/home/icon_tab_promote_selected.png) center center /  21px 21px no-repeat'
+                                background: `url(${require('../../assets/img/home/icon_tab_promote_selected.png')}) center center /  21px 21px no-repeat`
                             }}
                             />
                         }
@@ -144,7 +144,7 @@ class Home extends Component {
                             <div style={{
                                 width: '22px',
                                 height: '22px',
-                                background: 'url(../../../assets/img/home/icon_tab_people_n.png) center center /  21px 21px no-repeat'
+                                background: `url(${require('../../assets/img/home/icon_tab_people_n.png')}) center center /  21px 21px no-repeat`
                             }}
                             />
                         }
@@ -152,7 +152,7 @@ class Home extends Component {
                             <div style={{
                                 width: '22px',
                                 height: '22px',
-                                background: 'url(../../../assets/img/home/icon_tab_people_p.png) center center /  21px 21px no-repeat'
+                                background: `url(${require('../../assets/img/home/icon_tab_people_p.png')}) center center /  21px 21px no-repeat`
                             }}
                             />
                         }
@@ -170,7 +170,7 @@ class Home extends Component {
                             <div style={{
                                 width: '22px',
                                 height: '22px',
-                                background: 'url(../../../assets/img/home/icon_tab_more_n.png) center center /  21px 21px no-repeat'
+                                background: `url(${require('../../assets/img/home/icon_tab_more_n.png')}) center center /  21px 21px no-repeat`
                             }}
                             />
                         }
@@ -178,7 +178,7 @@ class Home extends Component {
                             <div style={{
                                 width: '22px',
                                 height: '22px',
-                                background: 'url(../../../assets/img/home/icon_tab_more_p.png) center center /  21px 21px no-repeat'
+                                background: `url(${require('../../assets/img/home/icon_tab_more_p.png')}) center center /  21px 21px no-repeat`
                             }}
                             />
                         }

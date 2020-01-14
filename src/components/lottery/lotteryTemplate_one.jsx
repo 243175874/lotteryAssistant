@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import icon_win_more_n from "../../assets/img/lotteryResult/icon_win_more_n.png"
 export default class LotteryTemplate extends Component {
     constructor(props) {
         super(props);
@@ -27,7 +28,7 @@ export default class LotteryTemplate extends Component {
                 </header>
                 <main className="w100 h50 flex">
                     <div className="icon flex h100 align-item-center" style={{ width: '6%', justifyContent: 'flex-start' }}>
-                        <img className="w100" style={{ transform: ' rotate(180deg)' }} src="../../assets/img/lotteryResult/icon_win_more_n.png" />
+                        <img className="w100" style={{ transform: ' rotate(180deg)' }} src={icon_win_more_n} />
                     </div>
                     <div style={{ width: "88%" }} className="w100 flex-center colorWhite">
                         {haoma.map((item, index) => {
@@ -38,7 +39,7 @@ export default class LotteryTemplate extends Component {
                         })}
                     </div>
                     <div style={{ width: '6%', justifyContent: 'flex-end' }} className="flex align-item-center">
-                        <img className="w100" src="../../assets/img/lotteryResult/icon_win_more_n.png" />
+                        <img className="w100" src={icon_win_more_n} />
                     </div>
                 </main>
             </div >

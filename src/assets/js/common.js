@@ -19,7 +19,7 @@ class CommonJS {
      *  @return {promise}
      */
     requestUserInfo = async() => {
-        return await post(`/api/user/index`);
+        return await post(`/v1/api/user/info`);
     }
 
 

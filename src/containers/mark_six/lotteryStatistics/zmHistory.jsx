@@ -177,7 +177,7 @@ export default class zmHistory extends Component {
                 <div className="w100" style={{ height: "calc(100% - 35px)" }}>
                     <div className="w100 pr" style={{ height: "50%" }}>
                         <div className="pa flex" style={{ top: "10px", left: "20px", height: "15px" }}>
-                            <img style={{ width: "15px" }} src="../../../assets/img/mark_six/ico_count_3.png" />
+                            <img style={{ width: "15px" }} src={require("../../../assets/img/mark_six/ico_count_3.png")} />
                             <div style={{ marginLeft: "10px", fontSize: "13px" }}>正码历史热图（所选期数范围内出现的次数）</div>
                         </div>
                         <div className="wh100" id="hot"></div>
@@ -185,7 +185,7 @@ export default class zmHistory extends Component {
 
                     <div className="w100 pr" style={{ height: "50%" }}>
                         <div className="pa flex" style={{ top: "10px", left: "20px", height: "15px" }}>
-                            <img style={{ width: "15px" }} src="../../../assets/img/mark_six/ico_count_4.png" />
+                            <img style={{ width: "15px" }} src={require("../../../assets/img/mark_six/ico_count_4.png" )}/>
                             <div style={{ marginLeft: "10px", fontSize: "13px" }}>正码历史冷图（所选期数范围内遗漏的次数）</div>
                         </div>
                         <div className="wh100" id="cold"></div>

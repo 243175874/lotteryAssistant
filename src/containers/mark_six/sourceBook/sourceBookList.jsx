@@ -70,7 +70,7 @@ export default class SourceBookList extends Component {
                     </div>
                     <div className="w100">115期：特码大包围图30码围特→跟上本料是你最明智的选择！</div>
                     <div className="fr flex" style={{ width: "80px", height: "20px" }}>
-                        <div style={{ width: "16px", height: "16px" }}><img className="w100 h100" src="../../assets/img/common/icon_praise.png" /></div>
+                        <div style={{ width: "16px", height: "16px" }}><img className="w100 h100" src={require('../../../assets/img/common/icon_praise.png')} /></div>
                         <div className="flex-center" style={{ marginLeft: "10px", height: "18px", color: "#BDBDBD" }}>138049</div>
                     </div>
                 </div>

@@ -21,7 +21,6 @@ export default class History extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.getHistoryService(nextProps.id, this.props.currentPeriods);
-
     }
 
     componentWillMount() {
@@ -64,7 +63,7 @@ export default class History extends Component {
                 <div key={index} className="w100 flex" style={{ height: "30px", background: index % 2 !== 0 ? '#f5f5f9' : "white" }}>
                     <div className="h100 flex-center" style={{ width: "33%" }}>{item.number}&nbsp;{item.kj_hour}</div>
                     <div className="h100 flex" style={{ width: "33%" }}>
-                        {item.kj_data.map((element, i) => {
+                        {item.kj_data.splice(0, 3).map((element, i) => {
                             return (
                                 <div key={i} className="w33 h100 flex-center">
                                     <div className="flex-center" style={{ width: "52%", height: "70%", borderRadius: "50%", background: "red", color: "white" }}>{element}</div>

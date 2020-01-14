@@ -6,15 +6,15 @@ class DiscoveringTreasure extends Component {
         super(props);
         this.state = {
             data: [
-                { src: "../../assets/img/home/icon_chests_lovers.png", label: "恋人特码", pageRouter: "/loversCode" },
-                { src: "../../assets/img/home/icon_chests_horse.png", label: "生肖卡牌", pageRouter: "/animalsCard" },
-                { src: "../../assets/img/home/icon_chests_shake.png", label: "摇一摇", pageRouter: "/shake" },
-                { src: "../../assets/img/home/icon_chests_kits.png", label: "玄机锦囊", pageRouter: "/mysteriousBag" },
-                { src: "../../assets/img/home/icon_chests_lucky.png", label: "幸运摇奖", pageRouter: "/luckyLottery" },
-                { src: "../../assets/img/home/icon_chests_turntable.png", label: "波肖转盘", pageRouter: "/shengxiaoTurntable" },
-                { src: "../../assets/img/home/icon_chests_data.png", label: "搅珠日期", pageRouter: "/calendar" },
-                { src: "../../assets/img/home/icon_chests_measure.png", label: "天机测算", pageRouter: "/forecast" },
-                { src: "../../assets/img/home/icon_chests_code.png", label: "挑码助手", pageRouter: "/selectCodeAssistant" }
+                { src: require("../../assets/img/home/icon_chests_lovers.png"), label: "恋人特码", pageRouter: "/loversCode" },
+                { src: require("../../assets/img/home/icon_chests_horse.png"), label: "生肖卡牌", pageRouter: "/animalsCard" },
+                { src: require("../../assets/img/home/icon_chests_shake.png"), label: "摇一摇", pageRouter: "/shake" },
+                { src: require("../../assets/img/home/icon_chests_kits.png"), label: "玄机锦囊", pageRouter: "/mysteriousBag" },
+                { src: require("../../assets/img/home/icon_chests_lucky.png"), label: "幸运摇奖", pageRouter: "/luckyLottery" },
+                { src: require("../../assets/img/home/icon_chests_turntable.png"), label: "波肖转盘", pageRouter: "/shengxiaoTurntable" },
+                { src: require("../../assets/img/home/icon_chests_data.png"), label: "搅珠日期", pageRouter: "/calendar" },
+                { src: require("../../assets/img/home/icon_chests_measure.png"), label: "天机测算", pageRouter: "/forecast" },
+                { src: require("../../assets/img/home/icon_chests_code.png"), label: "挑码助手", pageRouter: "/selectCodeAssistant" }
             ]
         };
     }
@@ -29,11 +29,11 @@ class DiscoveringTreasure extends Component {
             </div>
         ));
     }
-    
+
     render() {
         return (
             <div className="clearfix">
-                <NavBar className="navbar_bg_level-one">工具宝箱</NavBar>
+                <NavBar className="navbar_bg_level-one">六合宝箱</NavBar>
                 {this.renderGrid()}
             </div>
         );

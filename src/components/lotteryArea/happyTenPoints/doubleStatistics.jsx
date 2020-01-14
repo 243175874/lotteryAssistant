@@ -51,9 +51,7 @@ export default class NumberStatistics extends Component {
             this.setState({ loading: false });
             if (data.code == 200) {
                 //处理数据
-                let list = Common.dealWithData(data.data);
-                console.log(list);
-                this.setState({ list });
+                this.setState({ list: data.data });
             } else {
                 this.setState({ list: [] });
             }
@@ -61,16 +59,17 @@ export default class NumberStatistics extends Component {
     }
 
     renderListView() {
+        let o = [item.data.ds[0], item.data.ds[1], item.data.dx[0], item.data.dx[1], item.data.lh[0], item.data.lh[1]]
         return this.state.list.map((item, index) => {
             return (
                 <div className="w100 flex" style={{ height: "34px", flexDirection: "row", background: index % 2 !== 0 ? '#f5f5f9' : "white" }} key={index}>
-                    <div className="flex-center" style={{ flex: "2" }}>{item.day}</div>
-                    <div className="flex-center" style={{ flex: "1" }}>{item.data[0].dan}</div>
-                    <div className="flex-center" style={{ flex: "1" }}>{item.data[0].shuang}</div>
-                    <div className="flex-center" style={{ flex: "1" }}>{item.data[0].da}</div>
-                    <div className="flex-center" style={{ flex: "1" }}>{item.data[0].xiao}</div>
-                    <div className="flex-center" style={{ flex: "1" }}>{item.data[0].long}</div>
-                    <div className="flex-center" style={{ flex: "1" }}>{item.data[0].hu}</div>
+                    <div className="flex-center" style={{ flex: "2" }}>{item.number}</div>
+                    <div className="flex-center" style={{ flex: "1" }}>{o.find(element => element.key == "单").value}</div>
+                    <div className="flex-center" style={{ flex: "1" }}>{o.find(element => element.key == "双").value}</div>
+                    <div className="flex-center" style={{ flex: "1" }}>{o.find(element => element.key == "大").value}</div>
+                    <div className="flex-center" style={{ flex: "1" }}>{o.find(element => element.key == "小").value}</div>
+                    <div className="flex-center" style={{ flex: "1" }}>{o.find(element => element.key == "龙").value}</div>
+                    <div className="flex-center" style={{ flex: "1" }}>{o.find(element => element.key == "虎").value}</div>
                 </div>
             )
         });

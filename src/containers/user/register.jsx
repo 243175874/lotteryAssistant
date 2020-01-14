@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { withRouter } from 'react-router-dom';
 import { post } from '../../fetch/post.js';
-import { api } from '../../fetch/api.js'
 import { get } from '../../fetch/get.js';
 import { connect } from 'react-redux'
 import { Toast, ActivityIndicator } from 'antd-mobile'
 import CommonJS from '../../assets/js/common'
 import '../../assets/css/login.less'
+
+import icon_registered_user from '../../assets/img/user/icon_registered_user.png'
+import icon_registered_password from '../../assets/img/user/icon_registered_password.png'
+import icon_registered_invitation from '../../assets/img/user/icon_registered_invitation.png'
 
 import { setSelectedTab } from '../../redux/action'
 @connect(
@@ -26,41 +29,41 @@ class Register extends Component {
         validateImg: '',//验证码图片
         invite_mobile: '', //邀请人手机号码
         mobile: '',//手机号
+        code_id: '',
         //setUserInfo: this.props.setUserInfo,//初始化props变量，如果父页面的变量指向被改变，则子组件不受影响
         infoList: [
             {
-                icon: '../../assets/img/user/icon_registered_user.png',
+                icon: icon_registered_user,
                 placeholder: '请输入用户名',
                 type: 'username',
                 inputType: 'text'
             }, {
-                icon: '../../assets/img/user/icon_registered_password.png',
+                icon: icon_registered_password,
                 placeholder: '请输入密码',
                 type: 'password',
                 inputType: 'password'
             }, {
-                icon: '../../assets/img/user/icon_registered_password.png',
+                icon: icon_registered_password,
                 placeholder: '请再次输入密码',
                 type: 'password2',
                 inputType: 'password'
             }, {
-                icon: '../../assets/img/user/icon_registered_invitation.png',
+                icon: icon_registered_invitation,
                 placeholder: '请输入邀请用户手机号码(非必填)',
                 type: 'invite_mobile',
                 inputType: 'number'
             }
             , {
-                icon: '../../assets/img/user/icon_registered_invitation.png',
+                icon: icon_registered_invitation,
                 placeholder: '请输入手机号码',
                 type: 'mobile',
-                inputType: 'number'
+                inputType: 'number' 
             }
         ]
     };
 
 
-
-    componentWillMount() {
+    componentDidMount() {
         this.getValidateImg();
     }
 
@@ -88,8 +91,10 @@ class Register extends Component {
     }
 
     getValidateImg() {
-        this.setState({
-            validateImg: api + '/v1/api/auth/captcha?date=' + new Date().toString()
+        post("/v1/api/auth/verify").then(data => {
+            if (data.code == 200) {
+                this.setState({ validateImg: data.data.url, code_id: data.data.id });
+            }
         });
     }
 
@@ -98,15 +103,18 @@ class Register extends Component {
     */
     registerAccount = async () => {
         let resData = await this.requestRegister();
+        this.getValidateImg();//刷新验证码
         this.setState({ loading: false });
+        this.getValidateImg();
         if (resData.code == 200) {
             Toast.info('注册并登陆成功', 3, null, false);
             localStorage.setItem('token', resData.data.token);
-            //设置用户信息
-            CommonJS.setUserInfo();
+
             this.props.setSelectedTab('index');
             //跳转回home页面(home页面会自动指向登录)
             this.props.history.push('/');
+            //设置用户信息
+            CommonJS.setUserInfo();
         }
     }
 
@@ -114,14 +122,17 @@ class Register extends Component {
     *  注册
     */
     requestRegister = async () => {
+        console.log(this.props.location.search.substr(1))
         this.setState({ loading: true });
         let params = {
+            referrer: this.props.location.search.substr(1),
             username: this.state.username,//用户名
             password: this.state.password,//密码
             password2: this.state.password2,//确认密码
             invite_mobile: this.state.invite_mobile,//邀请人手机号
             mobile: this.state.mobile,
-            sms_code: this.state.code
+            code: this.state.code,
+            code_id: this.state.code_id
         }
         return await post('/v1/api/auth/register', params)
     }
@@ -139,11 +150,14 @@ class Register extends Component {
         return (
             <div className="wh100 login">
                 <ActivityIndicator toast text="加载中..." animating={this.state.loading} />
-                <img className="w100" src="../../assets/img/user/bg_top.png" />
+                <img className="w100" src={require("../../assets/img/user/bg_top.png")} />
                 <div className="w100 clearfix flex flex-column align-item-center box">
                     <div onClick={this.goback.bind(this)} className="flex-center" style={{ width: '24px', height: '30px', position: 'fixed', top: '5%', left: '5%' }} >
                         <img className="w50" src="../../assets/img/user/icon_goback.png" />
                     </div>
+                    .
+
+                    we
 
                     <header className="clearfix flex-center">
                         <img src="../../assets/img/user/icon_hi.png" />
@@ -158,7 +172,7 @@ class Register extends Component {
                                 <img style={{ width: '16px' }} src="../../assets/img/user/verification_code.png" />
                             </div>
                             <div className="input h100">
-                                <input value={this.state.code} onChange={(e) => this.handleChange(e, 'code')} placeholder="请输入图形验证码" className="fl h100 w50" type="password" />
+                                <input value={this.state.code} onChange={(e) => this.handleChange(e, 'code')} placeholder="请输入图形验证码" className="fl h100 w50" type="text" />
                                 <img onClick={() => { this.getValidateImg() }} style={{ width: '40%', height: "60%", marginTop: "5%" }} className="fr" src={this.state.validateImg} />
                             </div>
                         </div>

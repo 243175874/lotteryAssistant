@@ -4,7 +4,14 @@ import Common from '../../../assets/js/common'
 import Header from '../../../components/lotteryArea/header'
 import History from '../../../components/lotteryArea/quicklyThree/history'
 import BeadAnalyse from '../../../components/lotteryArea/quicklyThree/beadAnalyse'
-const path = "../../assets/img/lottery/menu/";
+
+// 历史开奖
+import icon_lskj from '../../../assets/img/lottery/menu/icon_lskj.png'
+import icon_lskj_press from '../../../assets/img/lottery/menu/icon_lskj_press.png'
+// 路珠分析
+import icon_lzfx from '../../../assets/img/lottery/menu/icon_lzfx.png'
+import icon_lzfx_press from '../../../assets/img/lottery/menu/icon_lzfx_press.png'
+
 import { connect } from 'react-redux'
 import { setCurrentLotteryName } from '../../../redux/action'
 @connect(
@@ -17,8 +24,8 @@ export default class WelfareLottery extends Component {
         super(props);
         this.state = {
             menuList: [
-                { icon: `${path}icon_lskj.png`, icon_press: `${path}icon_lskj_press.png`, name: "历史开奖", type: "综合", place: "menu" },
-                { icon: `${path}icon_lzfx.png`, icon_press: `${path}icon_lzfx_press.png`, name: "路珠分析", type: "综合", place: "menu" },
+                { icon: icon_lskj, icon_press: icon_lskj_press, name: "历史开奖", type: "综合", place: "menu" },
+                { icon: icon_lzfx, icon_press: icon_lzfx_press, name: "路珠分析", type: "综合", place: "menu" },
             ]
         };
     }

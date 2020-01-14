@@ -110,14 +110,14 @@ export default class SixMasterHandList extends Component {
                         <div className="flex align-item-center" style={{ width: "calc(100% - 100px)" }}>{item.time} </div>
                         <div onClick={() => { this.click_zan(item.id) }} className="flex align-item-center" style={{ width: "50px" }}>
                             <div style={{ width: "18px", height: "18px" }}>
-                                <img style={{ display: this.state.commentzan.indexOf(item.id) !== -1 ? "none" : "block" }} className="w100 h100" src="../../../assets/img/common/icon_praise.png" />
-                                <img style={{ display: this.state.commentzan.indexOf(item.id) == -1 ? "none" : "block" }} className="w100 h100" src="../../../assets/img/common/icon_praise_p.png" />
+                                <img style={{ display: this.state.commentzan.indexOf(item.id) !== -1 ? "none" : "block" }} className="w100 h100" src={require('../../../assets/img/common/icon_praise.png')} />
+                                <img style={{ display: this.state.commentzan.indexOf(item.id) == -1 ? "none" : "block" }} className="w100 h100" src={require("../../../assets/img/common/icon_praise_p.png")} />
                             </div>
                             <div className="flex-center" style={{ width: "25px", height: "25px", color: this.state.commentzan.indexOf(item.id) !== -1 ? "#FF7344" : "#BDBDBD" }}>62</div>
                         </div>
                         <div onClick={() => { this.setState({ commentId: item.id }) }} className="flex align-item-center" style={{ width: "50px" }}>
                             <div style={{ width: "18px", height: "18px" }}>
-                                <img className="w100 h100" src="../../../assets/img/common/icon_comments.png" />
+                                <img className="w100 h100" src={require("../../../assets/img/common/icon_comments.png")} />
                             </div>
                             <div className="flex-center" style={{ width: "25px", height: "25px", color: "#BDBDBD" }}>{item.reply}</div>
                         </div>

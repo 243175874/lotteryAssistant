@@ -31,11 +31,11 @@ export default class LotteryTemplate extends Component {
                     <span className="dib" style={{ fontSize: "12px", fontWeight: "normal", color: "#676767", marginLeft: "5px" }}>下期开奖</span>
                     <span className="dib" style={{ fontSize: "12px", fontWeight: "normal", color: "#ff6600", marginLeft: "5px" }}>{this.props.data.next_kj.kj_time}</span>
                 </header>
-                <main className="w100 h50 flex">
-                    <div className="icon flex h100 align-item-center" style={{ width: '6%', justifyContent: 'flex-start' }}>
+                <main className="h50 flex">
+                    {/* <div className="icon flex h100 align-item-center" style={{ width: '6%', justifyContent: 'flex-start' }}>
                         <img className="w100" style={{ transform: ' rotate(180deg)' }} src={icon_win_more_n} />
-                    </div>
-                    <div style={{ width: "88%" }} className="w100 flex-center colorWhite">
+                    </div> */}
+                    <div className="w100 flex-center colorWhite">
                         <div className="flex-center"
                             style={{ width: "28px", height: "28px", borderRadius: "50%", marginLeft: "6px", background: this.props.data.kj.haoma_ys[0] }}>
                             {this.props.data.kj.haoma[0]}
@@ -71,9 +71,9 @@ export default class LotteryTemplate extends Component {
                             {Number(this.props.data.kj.haoma[0]) + Number(this.props.data.kj.haoma[1]) + Number(this.props.data.kj.haoma[2])}
                         </div>
                     </div>
-                    <div style={{ width: '6%', justifyContent: 'flex-end' }} className="flex align-item-center">
+                    {/* <div style={{ width: '6%', justifyContent: 'flex-end' }} className="flex align-item-center">
                         <img className="w100" src={icon_win_more_n} />
-                    </div>
+                    </div> */}
                 </main>
             </div >
         );

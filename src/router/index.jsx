@@ -4,64 +4,64 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 import store from '../redux/store.js'
 import { Provider } from 'react-redux'
-import Home from '../containers/home/home'
+import { asyncComponent } from 'react-async-component';
+const Home = asyncComponent({ name: "Home", resolve: () => import("../containers/home/home") });
 import Register from '../containers/user/register'
-import ForgetPassword from '../containers/user/forgetPassword'
-import PersonalCneter from '../containers/personal/personalCenter'
-import ModifyPassword from '../containers/personal/modifyPassword'
-import MyPosts from '../containers/personal/myPosts'
-import UpdatePhoto from '../containers/personal/updatePhoto'
-import Attention from '../containers/personal/attention'
-import About from '../containers/more/about'
-import Contact_us from '../containers/more/contact_us'
-import Introduce from '../containers/more/introduce'
-import About_us from '../containers/more/about_us'
-import Statement from '../containers/more/statement'
-import Suggest from '../containers/more/suggest'
-import Message from '../containers/personal/message'
-import OtherProduction from '../containers/home/otherProduction'
+const PersonalCneter = asyncComponent({ name: "PersonalCneter", resolve: () => import("../containers/personal/personalCenter") });
+const ModifyPassword = asyncComponent({ name: "ModifyPassword", resolve: () => import("../containers/personal/modifyPassword") });
+const MyPosts = asyncComponent({ name: "MyPosts", resolve: () => import("../containers/personal/myPosts") });
+const UpdatePhoto = asyncComponent({ name: "UpdatePhoto", resolve: () => import("../containers/personal/updatePhoto") });
+const Attention = asyncComponent({ name: "Attention", resolve: () => import("../containers/personal/attention") });
+const About = asyncComponent({ name: "About", resolve: () => import('../containers/more/about') });
+const Contact_us = asyncComponent({ name: "Contact_us", resolve: () => import('../containers/more/contact_us') });
+const Introduce = asyncComponent({ name: "Introduce", resolve: () => import('../containers/more/introduce') });
+const About_us = asyncComponent({ name: "About_us", resolve: () => import('../containers/more/about_us') });
+const Statement = asyncComponent({ name: "Statement", resolve: () => import('../containers/more/statement') });
+const Suggest = asyncComponent({ name: "Suggest", resolve: () => import('../containers/more/suggest') });
+const Message = asyncComponent({ name: "Message", resolve: () => import('../containers/personal/message') });
+const OtherProduction = asyncComponent({ name: "OtherProduction", resolve: () => import('../containers/home/otherProduction') });
 //六合专区
-import MarkSixLotteryVideo from '../containers/mark_six/markSixLotteryVideo/markSixLotteryVideo'
-import MarkSixLotteryHistory from '../containers/mark_six/markSixLotteryHistory/markSixLotteryHistory'
-import MarkSixLotteryRecord from '../containers/mark_six//markSixLotteryRecord/markSixLotteryRecord'
-import MarkSixlotteryDetail from '../containers/mark_six//markSixLotteryRecord/markSixlotteryDetail'
-import LotteryQueryAssistant from '../containers/mark_six/queryAssistant/lotteryQueryAssistant'
-import LotteryStatistics from '../containers/mark_six/lotteryStatistics/lotteryStatistics'
-import PicturesLibraryMenu from '../containers/mark_six/sixPicturesLibrary/picturesLibraryMenu'
-import PicturesLibrary from '../containers/mark_six/sixPicturesLibrary/picturesLibrary'
-import SixMasterHand from '../containers/mark_six/sixMasterHand/sixMasterHand'
-import SixMasterHandList from '../containers/mark_six/sixMasterHand/sixMasterHandList'
-import SixMasterHandDetail from '../containers/mark_six/sixMasterHand/sixMasterHandDetail'
-import SixMasterHandHistory from '../containers/mark_six/sixMasterHand/sixMasterHandHistory'
-import SourceBookMenu from '../containers/mark_six/sourceBook/sourceBookMenu'
-import SourceBookList from '../containers/mark_six/sourceBook/sourceBookList'
-import PeachMeetingMenu from '../containers/mark_six/peachMeeting/peachMeetingMenu'
-import PeachMeetingList from '../containers/mark_six/peachMeeting/peachMeetingList'
+const MarkSixLotteryVideo = asyncComponent({ name: "MarkSixLotteryVideo", resolve: () => import('../containers/mark_six/markSixLotteryVideo/markSixLotteryVideo') });
+const MarkSixLotteryHistory = asyncComponent({ name: "MarkSixLotteryHistory", resolve: () => import('../containers/mark_six/markSixLotteryHistory/markSixLotteryHistory') });
+const MarkSixLotteryRecord = asyncComponent({ name: "MarkSixLotteryRecord", resolve: () => import('../containers/mark_six//markSixLotteryRecord/markSixLotteryRecord') });
+const MarkSixlotteryDetail = asyncComponent({ name: "MarkSixlotteryDetail", resolve: () => import('../containers/mark_six//markSixLotteryRecord/markSixlotteryDetail') });
+const LotteryQueryAssistant = asyncComponent({ name: "LotteryQueryAssistant", resolve: () => import('../containers/mark_six/queryAssistant/lotteryQueryAssistant') });
+const LotteryStatistics = asyncComponent({ name: "LotteryStatistics", resolve: () => import('../containers/mark_six/lotteryStatistics/lotteryStatistics') });
+const PicturesLibraryMenu = asyncComponent({ name: "PicturesLibraryMenu", resolve: () => import('../containers/mark_six/sixPicturesLibrary/picturesLibraryMenu') });
+const PicturesLibrary = asyncComponent({ name: "PicturesLibrary", resolve: () => import('../containers/mark_six/sixPicturesLibrary/picturesLibrary') });
+const SixMasterHand = asyncComponent({ name: "SixMasterHand", resolve: () => import('../containers/mark_six/sixMasterHand/sixMasterHand') });
+const SixMasterHandList = asyncComponent({ name: "SixMasterHandList", resolve: () => import('../containers/mark_six/sixMasterHand/sixMasterHandList') });
+const SixMasterHandDetail = asyncComponent({ name: "SixMasterHandDetail", resolve: () => import('../containers/mark_six/sixMasterHand/sixMasterHandDetail') });
+const SixMasterHandHistory = asyncComponent({ name: "SixMasterHandHistory", resolve: () => import('../containers/mark_six/sixMasterHand/sixMasterHandHistory') });
+const SourceBookMenu = asyncComponent({ name: "SourceBookMenu", resolve: () => import('../containers/mark_six/sourceBook/sourceBookMenu') });
+const SourceBookList = asyncComponent({ name: "SourceBookList", resolve: () => import('../containers/mark_six/sourceBook/sourceBookList') });
+const PeachMeetingMenu = asyncComponent({ name: "PeachMeetingMenu", resolve: () => import('../containers/mark_six/peachMeeting/peachMeetingMenu') });
+const PeachMeetingList = asyncComponent({ name: "PeachMeetingList", resolve: () => import('../containers/mark_six/peachMeeting/peachMeetingList') });
 //被引入U3D的页面
-import TmHistory from '../containers/mark_six/lotteryStatistics/tmHistory'
-import ZmHistory from '../containers/mark_six/lotteryStatistics/zmHistory'
-import TmShengXiao from '../containers/mark_six/lotteryStatistics/tmShengXiao'
-import ZmShengXiao from '../containers/mark_six/lotteryStatistics/zmShengXiao'
-import TmWeiShu from '../containers/mark_six/lotteryStatistics/tmWeiShu'
-import ZmWeiShu from '../containers/mark_six/lotteryStatistics/zmWeiShu'
-import TmBoSe from '../containers/mark_six/lotteryStatistics/tmBoSe'
-import ZmBoSe from '../containers/mark_six/lotteryStatistics/zmBoSe'
-import NumberOfWaveband from '../containers/mark_six/lotteryStatistics/numberOfWaveband'
-import TmTwoSides from '../containers/mark_six/lotteryStatistics/tmTwoSides'
-import ZmSum from '../containers/mark_six/lotteryStatistics/zmSum'
+const TmHistory = asyncComponent({ name: "TmHistory", resolve: () => import('../containers/mark_six/lotteryStatistics/tmHistory') });
+const ZmHistory = asyncComponent({ name: "ZmHistory", resolve: () => import('../containers/mark_six/lotteryStatistics/zmHistory') });
+const TmShengXiao = asyncComponent({ name: "TmShengXiao", resolve: () => import('../containers/mark_six/lotteryStatistics/tmShengXiao') });
+const ZmShengXiao = asyncComponent({ name: "ZmShengXiao", resolve: () => import('../containers/mark_six/lotteryStatistics/zmShengXiao') });
+const TmWeiShu = asyncComponent({ name: "TmWeiShu", resolve: () => import('../containers/mark_six/lotteryStatistics/tmWeiShu') });
+const ZmWeiShu = asyncComponent({ name: "ZmWeiShu", resolve: () => import('../containers/mark_six/lotteryStatistics/zmWeiShu') });
+const TmBoSe = asyncComponent({ name: "TmBoSe", resolve: () => import('../containers/mark_six/lotteryStatistics/tmBoSe') });
+const ZmBoSe = asyncComponent({ name: "ZmBoSe", resolve: () => import('../containers/mark_six/lotteryStatistics/zmBoSe') });
+const NumberOfWaveband = asyncComponent({ name: "NumberOfWaveband", resolve: () => import('../containers/mark_six/lotteryStatistics/numberOfWaveband') });
+const TmTwoSides = asyncComponent({ name: "TmTwoSides", resolve: () => import('../containers/mark_six/lotteryStatistics/tmTwoSides') });
+const ZmSum = asyncComponent({ name: "ZmSum", resolve: () => import('../containers/mark_six/lotteryStatistics/zmSum') });
 //工具箱
-import LoversCode from '../containers/toolbox/loversCode'
-import AnimalsCard from '../containers/toolbox/animalsCard'
-import Shake from '../containers/toolbox/shake'
-import MysteriousBag from '../containers/toolbox/mysteriousBag'
-import LuckyLottery from '../containers/toolbox/luckyLottery'
-import ShengxiaoTurntable from '../containers/toolbox/shengxiaoTurntable'
-import Forecast from '../containers/toolbox/forecast'
-import SelectCodeAssistant from '../containers/toolbox/selectCodeAssistant'
+const LoversCode = asyncComponent({ name: "LoversCode", resolve: () => import('../containers/toolbox/loversCode') });
+const AnimalsCard = asyncComponent({ name: "AnimalsCard", resolve: () => import('../containers/toolbox/animalsCard') });
+const Shake = asyncComponent({ name: "Shake", resolve: () => import('../containers/toolbox/shake') });
+const MysteriousBag = asyncComponent({ name: "MysteriousBag", resolve: () => import('../containers/toolbox/mysteriousBag') });
+const LuckyLottery = asyncComponent({ name: "LuckyLottery", resolve: () => import('../containers/toolbox/luckyLottery') });
+const ShengxiaoTurntable = asyncComponent({ name: "ShengxiaoTurntable", resolve: () => import('../containers/toolbox/shengxiaoTurntable') });
+const Forecast = asyncComponent({ name: "Forecast", resolve: () => import('../containers/toolbox/forecast') });
+const SelectCodeAssistant = asyncComponent({ name: "SelectCodeAssistant", resolve: () => import('../containers/toolbox/selectCodeAssistant') });
 import Calendar from '../containers/toolbox/CalendarDate'
 
 //彩票专区
-import LotteryCenter from '../containers/lottery/lotteryCenter'
+const LotteryCenter = asyncComponent({ name: "LotteryCenter", resolve: () => import('../containers/lottery/lotteryCenter') });
 //路由守卫
 const Router = ({ component: Component, children, ...rest }) => (
     <Route
@@ -78,7 +78,7 @@ const Root = () => (
             <Switch>
                 <Router exact path="/" component={Home} ></Router>
                 <Router path="/register" component={Register} ></Router>
-                <Router path="/forgetPassword" component={ForgetPassword} ></Router>
+                {/* <Router path="/forgetPassword" component={ForgetPassword} ></Router> */}
                 <Router path="/personalCenter" component={PersonalCneter} ></Router>
                 <Router path="/modifyPassword" component={ModifyPassword} ></Router>
                 <Router path="/myPosts" component={MyPosts} ></Router>

@@ -17,7 +17,6 @@ import { setSelectedTab } from '../../redux/action'
     { setSelectedTab }
 )
 
-
 class Register extends Component {
 
     state = {
@@ -57,7 +56,7 @@ class Register extends Component {
                 icon: icon_registered_invitation,
                 placeholder: '请输入手机号码',
                 type: 'mobile',
-                inputType: 'number' 
+                inputType: 'number'
             }
         ]
     };
@@ -108,8 +107,9 @@ class Register extends Component {
         this.getValidateImg();
         if (resData.code == 200) {
             Toast.info('注册并登陆成功', 3, null, false);
-            localStorage.setItem('token', resData.data.token);
-
+            localStorage.setItem('cs_token', resData.data.cs_token);
+            localStorage.setItem('cp_uid', resData.data.cp_uid);
+            localStorage.setItem('session_key', resData.data.session_key);
             this.props.setSelectedTab('index');
             //跳转回home页面(home页面会自动指向登录)
             this.props.history.push('/');
@@ -153,14 +153,10 @@ class Register extends Component {
                 <img className="w100" src={require("../../assets/img/user/bg_top.png")} />
                 <div className="w100 clearfix flex flex-column align-item-center box">
                     <div onClick={this.goback.bind(this)} className="flex-center" style={{ width: '24px', height: '30px', position: 'fixed', top: '5%', left: '5%' }} >
-                        <img className="w50" src="../../assets/img/user/icon_goback.png" />
+                        <img className="w50" src={require("../../assets/img/user/icon_goback.png")} />
                     </div>
-                    .
-
-                    we
-
                     <header className="clearfix flex-center">
-                        <img src="../../assets/img/user/icon_hi.png" />
+                        <img src={require("../../assets/img/user/icon_hi.png")} />
                         <div className="text">
                             请输入信息注册账号
                         </div>
@@ -169,7 +165,7 @@ class Register extends Component {
                         {this.setRegisterDom()}
                         <div className="input-box w100 flex" >
                             <div className="icon h100 flex align-item-center">
-                                <img style={{ width: '16px' }} src="../../assets/img/user/verification_code.png" />
+                                <img style={{ width: '16px' }} src={require("../../assets/img/user/verification_code.png")} />
                             </div>
                             <div className="input h100">
                                 <input value={this.state.code} onChange={(e) => this.handleChange(e, 'code')} placeholder="请输入图形验证码" className="fl h100 w50" type="text" />

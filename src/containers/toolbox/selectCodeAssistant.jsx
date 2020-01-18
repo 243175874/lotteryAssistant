@@ -3,6 +3,7 @@ import { NavBar, Icon, Modal } from 'antd-mobile';
 import LotteryBall from '../../components/common/lotteryBall'
 import SelectAssistant from '../../assets/js/selectCodeAssistant'
 import CommonJS from '../../assets/js/common'
+import { post } from '../../fetch/post.js';
 const oddOrEven = ["单", "双"];
 const bigOrSmall = ["大", "小"];
 const bigAndSmallAndOddAndEven = ["大单", "大双", "小单", "小双"];
@@ -24,6 +25,26 @@ export default class SelectCodeAssistant extends Component {
         };
         this.selectList = new Set();
     }
+
+
+    componentDidMount() {
+        this.getData();
+    }
+
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return;
+        }
+    }
+
+    //获取尾数服务器数据
+    getData() {
+        post("/v1/api/app/lhc_conf").then(data => {
+            console.log(data);
+        });
+    }
+
+
 
     returnButtonListView(list, width) {
         return list.map((item, index) => (

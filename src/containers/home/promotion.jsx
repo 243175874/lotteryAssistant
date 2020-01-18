@@ -1,18 +1,16 @@
 import React, { Component } from "react";
-import { NavBar, Icon, ListView, PullToRefresh } from 'antd-mobile';
+import { NavBar, Icon, ListView, PullToRefresh, Toast } from 'antd-mobile';
 import { post } from '../../fetch/post.js';
 import Common from '../../assets/js/common'
-import { Toast } from 'antd-mobile'
-
 class Promotion extends Component {
     constructor(props) {
         super(props);
         const dataSource = new ListView.DataSource({
             rowHasChanged: (row1, row2) => row1 !== row2,
         });
-
+        this.page = 1;
         this.state = {
-            page: 1,
+
             list: [],
             memberTypeList: ["会员总计", "一级会员", "二级会员", "积分明细"],
             memberTypeSelected: "",
@@ -22,11 +20,9 @@ class Promotion extends Component {
             isShowDialog: false,
             isSHowQrCodeImg: false,
             data: {
-                user: {
-                    uid: "",//user id
-                    grades: "", //vIP
-                    grade_need_point: "", //距离下级差的积分
-                },
+                uid: "",//user id
+                grades: "", //vIP
+                grade_need_point: "", //距离下级差的积分
                 point_level: "",//积分
                 qrcode_url: "", //推广二维码
                 invite_url: "", //邀请链接
@@ -67,9 +63,9 @@ class Promotion extends Component {
     //请求会员总列表
     getMemberTotalList() {
         this.setState({ isLoading: true });
-        post('/v1/api/user/inviter_all', { "page": this.state.page, "limit": 4 }).then(data => {
+        post('/v1/api/user/inviter_all', { "page": this.page, "limit": 4 }).then(data => {
             if (data.code == 200) {
-                if (this.state.page == 1) {
+                if (this.page == 1) {
                     this.setState({ list: data.data.list });
                 } else {
                     let datas = this.state.list.concat(data.data.list);
@@ -83,9 +79,9 @@ class Promotion extends Component {
     //一级会员列表
     getMemberLevelOneList() {
         this.setState({ isLoading: true });
-        post('/v1/api/user/inviter_first', { "page": this.state.page, "limit": 4 }).then(data => {
+        post('/v1/api/user/inviter_first', { "page": this.page, "limit": 4 }).then(data => {
             if (data.code == 200) {
-                if (this.state.page == 1) {
+                if (this.page == 1) {
                     this.setState({ list: data.data.list });
                 } else {
                     let datas = this.state.list.concat(data.data.list);
@@ -99,9 +95,9 @@ class Promotion extends Component {
     //二级会员列表
     getMemberLevelTwoList() {
         this.setState({ isLoading: true });
-        post('/v1/api/user/inviter_two', { "page": this.state.page, "limit": 4 }).then(data => {
+        post('/v1/api/user/inviter_two', { "page": this.page, "limit": 4 }).then(data => {
             if (data.code == 200) {
-                if (this.state.page == 1) {
+                if (this.page == 1) {
                     this.setState({ list: data.data.list });
                 } else {
                     let datas = this.state.list.concat(data.data.list);
@@ -116,9 +112,9 @@ class Promotion extends Component {
     //积分记录明细
     getMyPointList() {
         this.setState({ isLoading: true });
-        post('/v1/api/user/getmypoint', { "page": this.state.page, "limit": 4 }).then(data => {
+        post('/v1/api/user/getmypoint', { "page": this.page, "limit": 4 }).then(data => {
             if (data.code == 200) {
-                if (this.state.page == 1) {
+                if (this.page == 1) {
                     this.setState({ list: data.data.list });
                 } else {
                     let datas = this.state.list.concat(data.data.list);
@@ -131,13 +127,27 @@ class Promotion extends Component {
 
     //上拉加载更多
     onEndReached = (event) => {
-        // load new data
-        // hasMore: from backend data, indicates whether it is the last page, here is false
-        if (this.state.isLoading && !this.state.hasMore) {
+
+        if (this.state.isLoading) {
             return;
         }
+
+
         this.page++;
-        this.getMemberTotalList();
+        if (this.state.memberTypeSelected == "会员总计") {
+            //获取会员总计
+            this.getMemberTotalList();
+        } else if (this.state.memberTypeSelected == "一级会员") {
+            //获取一级会员
+            this.getMemberLevelOneList();
+        } else if (this.state.memberTypeSelected == "二级会员") {
+            //获取二级会员
+            this.getMemberLevelTwoList();
+        } else if (this.state.memberTypeSelected == "积分明细") {
+            //获取积分明细
+            this.getMyPointList();
+        }
+
     }
 
     //渲染会员列表模板（一级会员，二级会员，会员总计）
@@ -145,7 +155,7 @@ class Promotion extends Component {
         return (
             <div className="w100 flex" style={{ height: "80px", background: "#ffffff", border: "1px solid #f7f7f7" }}>
                 <div style={{ width: "80px", height: "79px", padding: "10px", background: "white" }}>
-                    <img className="w100" src={item.userhead_url} />
+                    <img className="w100" src={item.userhead} />
                 </div>
                 <div style={{ width: "calc(100% - 190px)", padding: "10px" }}>
                     <div className="w100 flex align-item-center" style={{ height: "calc(50% - 10px)" }}>{item.username}</div>
@@ -208,7 +218,7 @@ class Promotion extends Component {
         } else if (this.state.memberTypeSelected == "二级会员") {
             return (<p>二级会员总计{this.state.data.recommond_level2}人，本月推荐{this.state.data.recommond_month_level2}人</p>)
         } else if (this.state.memberTypeSelected == "积分明细") {
-            return (<p>推广一级会员奖励{this.state.data.point_level1}分，二级会员奖励{this.state.data.point_level2}分</p>)
+            return (<p>推广一级会员奖励{this.state.data.onereg}分，二级会员奖励{this.state.data.tworeg}分</p>)
         } else {
             return (<div></div>)
         }
@@ -388,7 +398,7 @@ class Promotion extends Component {
                                 backgroundSize: "100% 100%"
                             }}>
                                 <div className="h100  flex-center" style={{ width: "18px", marginLeft: "8%" }}>
-                                    <img className="w100" src={require("../../assets/img/promotion/icon_integral.png")}/>
+                                    <img className="w100" src={require("../../assets/img/promotion/icon_integral.png")} />
                                 </div>
                                 <div onClick={() => { this.setState({ isShowDialog: true }) }} className="colorWhite flex-center" style={{ fontSize: "10px", marginLeft: "5px" }}>如何赚积分</div>
                             </div>
@@ -396,7 +406,7 @@ class Promotion extends Component {
                     </div>
                     <div className="w100 flex" style={{ height: "50%" }}>
                         <div style={{ height: "80%", marginTop: "5%", width: "30%" }}>
-                            <div className="w100 h50 flex-center">{this.state.data.user.uid}</div>
+                            <div className="w100 h50 flex-center">{this.state.data.uid}</div>
                             <div className="w100 h50 flex-center" style={{ color: "#ADADAD", fontSize: "10px" }}>推荐ID</div>
                         </div>
                         <div className="w33 h100">
@@ -405,8 +415,8 @@ class Promotion extends Component {
                             <div className="w100 flex-center" style={{ height: "22%", color: "#ADADAD", fontSize: "10px" }}>推荐积分</div>
                         </div>
                         <div className="w33 h100" style={{ height: "80%", marginTop: "5%" }}>
-                            <div className="w100 h33 flex-center">VIP{this.state.data.user.grades}</div>
-                            <div className="w100 h33 flex-center" style={{ color: "#ADADAD", fontSize: "10px" }}>距离下级还差{this.state.data.user.grade_need_point}分</div>
+                            <div className="w100 h33 flex-center">{this.state.data.grade_name}</div>
+                            <div className="w100 h33 flex-center" style={{ color: "#ADADAD", fontSize: "10px" }}>距离下级还差{this.state.data.grade_need_point}分</div>
                             <div className="w100 h33 flex-center" style={{ color: "#ADADAD", fontSize: "10px" }}>推荐等级</div>
                         </div>
                     </div>

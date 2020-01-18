@@ -1,19 +1,20 @@
 import React, { Component } from "react";
-import FunctionMenu from '../../../components/lotteryArea/functionMenu'
-import Header from '../../../components/lotteryArea/header'
 import Common from '../../../assets/js/common'
-import Recommend from '../../../components/lotteryArea/recommend'
-import History from '../../../components/lotteryArea/beiJingRacing/history'
-import BeadAnalyse from '../../../components/lotteryArea/beiJingRacing/beadAnalyse'
-import HotAndCold from '../../../components/lotteryArea/beiJingRacing/hotAndCold'
-import BigAndSmallOmit from '../../../components/lotteryArea/bigAndSmallOmit'
-import OddAndEvenOmit from '../../../components/lotteryArea/oddAndEvenOmit'
-import DoubleLongDragon from '../../../components/lotteryArea/beiJingRacing/doubleLongDragon'
-import GyStatistics from '../../../components/lotteryArea/beiJingRacing/gyStatistics'
-import BigAndSmallHistory from '../../../components/lotteryArea/bigAndSmallHistory'
-import OddAndEvenHistory from '../../../components/lotteryArea/oddAndEvenHistory'
-import DragonAndTigerHistory from '../../../components/lotteryArea/dragonAndTigerHistory'
-import Trend from '../../../components/lotteryArea/beiJingRacing/trend'
+import { asyncComponent } from 'react-async-component';
+const FunctionMenu = asyncComponent({ name: "FunctionMenu", resolve: () => import('../../../components/lotteryArea/functionMenu') });
+const Header = asyncComponent({ name: "Header", resolve: () => import('../../../components/lotteryArea/header') });
+const Recommend = asyncComponent({ name: "Recommend", resolve: () => import('../../../components/lotteryArea/recommend') });
+const History = asyncComponent({ name: "History", resolve: () => import('../../../components/lotteryArea/beiJingRacing/history') });
+const BeadAnalyse = asyncComponent({ name: "BeadAnalyse", resolve: () => import('../../../components/lotteryArea/beiJingRacing/beadAnalyse') });
+const HotAndCold = asyncComponent({ name: "HotAndCold", resolve: () => import('../../../components/lotteryArea/beiJingRacing/hotAndCold') });
+const BigAndSmallOmit = asyncComponent({ name: "BigAndSmallOmit", resolve: () => import('../../../components/lotteryArea/bigAndSmallOmit') });
+const OddAndEvenOmit = asyncComponent({ name: "OddAndEvenOmit", resolve: () => import('../../../components/lotteryArea/oddAndEvenOmit') });
+const DoubleLongDragon = asyncComponent({ name: "DoubleLongDragon", resolve: () => import('../../../components/lotteryArea/beiJingRacing/doubleLongDragon') });
+const GyStatistics = asyncComponent({ name: "GyStatistics", resolve: () => import('../../../components/lotteryArea/beiJingRacing/gyStatistics') });
+const BigAndSmallHistory = asyncComponent({ name: "BigAndSmallHistory", resolve: () => import('../../../components/lotteryArea/bigAndSmallHistory') });
+const OddAndEvenHistory = asyncComponent({ name: "OddAndEvenHistory", resolve: () => import('../../../components/lotteryArea/oddAndEvenHistory') });
+const DragonAndTigerHistory = asyncComponent({ name: "DragonAndTigerHistory", resolve: () => import('../../../components/lotteryArea/dragonAndTigerHistory') });
+const Trend = asyncComponent({ name: "Trend", resolve: () => import('../../../components/lotteryArea/beiJingRacing/trend') });
 
 // 免费参考
 import icon_mftj from '../../../assets/img/lottery/menu/icon_mftj.png'

@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import FunctionMenu from '../../../components/lotteryArea/functionMenu'
-import Header from '../../../components/lotteryArea/header'
 import Common from '../../../assets/js/common'
-import Recommend from '../../../components/lotteryArea/recommend'
-import History from '../../../components/lotteryArea/elevenFive/history'
-import BeadAnalyse from '../../../components/lotteryArea/elevenFive/beadAnalyse'
-import HotAndCold from '../../../components/lotteryArea/elevenFive/hotAndCold'
-import MissingStatistics from '../../../components/lotteryArea/missingStatistics'
-import Trend from '../../../components/lotteryArea/trend'
-const path = "../../assets/img/lottery/menu/";
+import { asyncComponent } from 'react-async-component';
+const FunctionMenu = asyncComponent({ name: "FunctionMenu", resolve: () => import('../../../components/lotteryArea/functionMenu') });
+const Header = asyncComponent({ name: "Header", resolve: () => import('../../../components/lotteryArea/header') });
+const Recommend = asyncComponent({ name: "Recommend", resolve: () => import('../../../components/lotteryArea/recommend') });
+const History = asyncComponent({ name: "History", resolve: () => import('../../../components/lotteryArea/elevenFive/history') });
+const BeadAnalyse = asyncComponent({ name: "BeadAnalyse", resolve: () => import('../../../components/lotteryArea/elevenFive/beadAnalyse') });
+const HotAndCold = asyncComponent({ name: "HotAndCold", resolve: () => import('../../../components/lotteryArea/elevenFive/hotAndCold') });
+const MissingStatistics = asyncComponent({ name: "MissingStatistics", resolve: () => import('../../../components/lotteryArea/missingStatistics') });
+const Trend = asyncComponent({ name: "Trend", resolve: () => import('../../../components/lotteryArea/trend') });
 
 // 免费参考
 import icon_mftj from '../../../assets/img/lottery/menu/icon_mftj.png'

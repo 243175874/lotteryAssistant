@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { NavBar, Icon, ActivityIndicator } from 'antd-mobile';
-import Introduction from '../../components/common/introduction'
+import { asyncComponent } from 'react-async-component';
+const Introduction = asyncComponent({ name: "Introduction", resolve: () => import('../../components/common/introduction') });
 import { post } from '../../fetch/post.js';
 import CommonJS from '../../assets/js/common'
 import img_card_zodiac_n from "../../assets/img/toolbox/img_card_zodiac_n.png"

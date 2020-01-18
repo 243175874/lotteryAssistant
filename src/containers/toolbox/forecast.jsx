@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { NavBar, Icon, ActivityIndicator } from 'antd-mobile';
 import { post } from '../../fetch/post.js';
-import Introduction from '../../components/common/introduction'
+import { asyncComponent } from 'react-async-component';
+const Introduction = asyncComponent({ name: "Introduction", resolve: () => import('../../components/common/introduction') });
 import CommonJS from '../../assets/js/common'
 const Animals = ["鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗", "猪"];
 export default class Forecast extends Component {
@@ -17,7 +18,7 @@ export default class Forecast extends Component {
     }
 
 
-    componentWillMount() {
+    componentDidMount() {
         this.getAnimalData();
         this.getNumberData();
     }

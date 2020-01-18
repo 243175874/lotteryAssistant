@@ -3,7 +3,8 @@ import React, { Component } from "react";
 import { NavBar, Icon, DatePicker, Toast, ActivityIndicator } from 'antd-mobile';
 import { post } from '../../fetch/post.js';
 import LotteryBall from '../../components/common/lotteryBall'
-import Introduction from '../../components/common/introduction'
+import { asyncComponent } from 'react-async-component';
+const Introduction = asyncComponent({ name: "Introduction", resolve: () => import('../../components/common/introduction') });
 import CommonJS from '../../assets/js/common'
 
 const DatePickerContent = ({ extra, onClick, children }) => (

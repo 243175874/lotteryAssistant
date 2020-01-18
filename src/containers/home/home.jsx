@@ -34,7 +34,7 @@ class Home extends Component {
         } else if (selectedTab == selected && selected == 'discoveringTreasure') {
             return <DiscoveringTreasure></DiscoveringTreasure>
         } else if (selectedTab == selected && selected == 'personal') {
-            if (localStorage.getItem("token") !== null) {
+            if (localStorage.getItem("cs_token") !== null) {
                 return <Personal></Personal>
             } else {
                 return <Login></Login>
@@ -42,13 +42,13 @@ class Home extends Component {
         } else if (selectedTab == selected && selected == 'more') {
             return <More></More>
         } else if (selectedTab == selected && selected == 'promotion') {
-            if (localStorage.getItem("token") !== null) {
+            if (localStorage.getItem("cs_token") !== null) {
                 return <Promotion></Promotion>
             } else {
                 return <Login></Login>
             }
         } else {
-            return <div>1</div>
+            return <div></div>
         }
     }
 

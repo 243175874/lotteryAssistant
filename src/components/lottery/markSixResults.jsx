@@ -23,15 +23,15 @@ export default class MarkSixResults extends Component {
                     <span className="dib" style={{ fontSize: "12px", fontWeight: "normal", color: "#ff6600", marginLeft: "5px" }}>{this.props.kj_time}</span>
                 </header>
                 <main className="w100 h50 flex">
-                    <div className="icon flex h100 align-item-center" style={{ width: '15%', justifyContent: 'flex-start' }}>
+                    {/* <div className="icon flex h100 align-item-center" style={{ width: '15%', justifyContent: 'flex-start' }}>
                         <img style={{ width: '40%', transform: ' rotate(180deg)' }} src={icon_win_more_n} />
-                    </div>
-                    <div className="w70">
+                    </div> */}
+                    <div style={{ width: "85%", margin: "0 auto" }}>
                         <MarkSix haoma={this.props.haoma} haoma_sx={this.props.haoma_sx}></MarkSix>
                     </div>
-                    <div style={{ width: '15%', justifyContent: 'flex-end' }} className="flex align-item-center">
+                    {/* <div style={{ width: '15%', justifyContent: 'flex-end' }} className="flex align-item-center">
                         <img style={{ width: '40%' }} src={icon_win_more_n} />
-                    </div>
+                    </div> */}
                 </main>
             </div >
         );

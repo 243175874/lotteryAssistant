@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { NavBar, Icon } from 'antd-mobile';
 import { post } from '../../fetch/post.js';
-import Introduction from '../../components/common/introduction'
+import { asyncComponent } from 'react-async-component';
+const Introduction = asyncComponent({ name: "Introduction", resolve: () => import('../../components/common/introduction') });
 import Animal from '../../components/common/animal'
 import CommonJS from '../../assets/js/common'
 import icon_rat_turntable_n from "../../assets/img/toolbox/icon_rat_turntable_n.png"

@@ -296,7 +296,7 @@ export default class SixMarkStatistics extends Component {
                             style={{ height: "25px", fontSize: "12px", color: "#666666", letterSpacing: "1px" }}>
                             特码出现期数最多的号码
                         </div>
-                        <div className="clearfix flex w100" style={{ paddingBottom: "5px" }}>
+                        <div className="clearfix flex w100" style={{ paddingBottom: "5px", height: "30px" }}>
                             {this.renderBallList(this.state.kj_tm, "特码出现期数最多的号码", "")}
                         </div>
                     </div>
@@ -306,7 +306,7 @@ export default class SixMarkStatistics extends Component {
                             style={{ height: "25px", fontSize: "12px", color: "#666666", letterSpacing: "1px" }}>
                             特码当前遗漏期数最多的号码
                         </div>
-                        <div className="clearfix flex w100" style={{ paddingBottom: "5px" }}>
+                        <div className="clearfix flex w100" style={{ paddingBottom: "5px", height: "30px" }}>
                             {this.renderBallList(this.state.kj_tm_omit, "特码当前遗漏期数最多的号码", "未")}
                         </div>
                     </div>
@@ -320,7 +320,7 @@ export default class SixMarkStatistics extends Component {
                             style={{ height: "25px", fontSize: "12px", color: "#666666", letterSpacing: "1px" }}>
                             正码出现期数最多的号码
                         </div>
-                        <div className="clearfix flex w100" style={{ paddingBottom: "5px" }}>
+                        <div className="clearfix flex w100" style={{ paddingBottom: "5px", height: "30px" }}>
                             {this.renderBallList(this.state.kj_zm, "正码出现期数最多的号码", "")}
                         </div>
                     </div>
@@ -330,7 +330,7 @@ export default class SixMarkStatistics extends Component {
                             style={{ height: "25px", fontSize: "12px", color: "#666666", letterSpacing: "1px" }}>
                             正码当前遗漏期数最多的号码
                         </div>
-                        <div className="clearfix flex w100" style={{ paddingBottom: "5px" }}>
+                        <div className="clearfix flex w100" style={{ paddingBottom: "5px", height: "30px" }}>
                             {this.renderBallList(this.state.kj_zm_omit, "正码当前遗漏期数最多的号码", "未")}
                         </div>
                     </div>

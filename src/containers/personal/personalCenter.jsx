@@ -19,7 +19,9 @@ class PersonalCenter extends Component {
 
     loginOut = async () => {
         await post('/api/login/logout');
-        localStorage.removeItem("token");
+        localStorage.removeItem("cs_token");
+        localStorage.removeItem("cp_uid");
+        localStorage.removeItem("session_key");
         localStorage.removeItem("userInfo");
         Toast.info('退出登录成功', 3, null, false);
         this.props.history.push('/');

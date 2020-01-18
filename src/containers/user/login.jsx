@@ -59,7 +59,9 @@ class Login extends Component {
         this.getValidateImg();//刷新验证码
         this.setState({ loading: false });
         if (resData.code == 200) {
-            localStorage.setItem('token', resData.data.token);
+            localStorage.setItem('cs_token', resData.data.cs_token);
+            localStorage.setItem('cp_uid', resData.data.cp_uid);
+            localStorage.setItem('session_key', resData.data.session_key);
             //设置返回到首页
             this.props.setSelectedTab('index');
             //设置用户信息

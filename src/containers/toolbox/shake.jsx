@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { NavBar, Icon, Toast, ActivityIndicator } from 'antd-mobile';
 import { post } from '../../fetch/post.js';
+import { asyncComponent } from 'react-async-component';
+const Introduction = asyncComponent({ name: "Introduction", resolve: () => import('../../components/common/introduction') });
 import LotteryBall from '../../components/common/lotteryBall'
-import Introduction from '../../components/common/introduction'
 import CommonJS from '../../assets/js/common'
 export default class Shake extends Component {
     constructor(props) {

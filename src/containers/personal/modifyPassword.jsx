@@ -29,7 +29,7 @@ class ModifyPassword extends Component {
         post(`/api/user/setpasswd`, this.state).then(data => {
             if (data.code == 200) {
                 Toast.info('修改成功', 3, null, false);
-                localStorage.removeItem("token");
+                localStorage.removeItem("cs_token");
                 localStorage.removeItem("userInfo");
                 this.props.history.push('/');
             }

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { NavBar, Icon, ActivityIndicator } from 'antd-mobile';
-import Introduction from '../../components/common/introduction'
+import { asyncComponent } from 'react-async-component';
+const Introduction = asyncComponent({ name: "Introduction", resolve: () => import('../../components/common/introduction') });
 import { post } from '../../fetch/post.js';
 import { Calendar, Tag, Select, Radio, Col, Row } from 'antd';
 import 'antd/dist/antd.css';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
-import { Item } from "rc-menu";
 moment.locale('zh-cn');
 
 export default class CalendarDate extends Component {
@@ -22,7 +22,6 @@ export default class CalendarDate extends Component {
     componentDidMount() {
         this.getDate();
     }
-
 
     componentWillUnmount() {
         this.setState = (state, callback) => {

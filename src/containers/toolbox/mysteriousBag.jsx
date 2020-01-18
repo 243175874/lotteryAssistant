@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { NavBar, Icon } from 'antd-mobile';
 import { post } from '../../fetch/post.js';
-import Introduction from '../../components/common/introduction'
-import MysteriousHistory from './mysteriousHistory'
+import { asyncComponent } from 'react-async-component';
+const Introduction = asyncComponent({ name: "Introduction", resolve: () => import('../../components/common/introduction') });
+const MysteriousHistory = asyncComponent({ name: "MysteriousHistory", resolve: () => import('./mysteriousHistory') });
+
 export default class MysteriousBag extends Component {
     constructor(props) {
         super(props);

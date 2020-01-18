@@ -1,19 +1,20 @@
 import React, { Component } from "react";
-import FunctionMenu from '../../../components/lotteryArea/functionMenu'
-import Header from '../../../components/lotteryArea/header'
 import Common from '../../../assets/js/common'
-import Recommend from '../../../components/lotteryArea/recommend'
-import History from '../../../components/lotteryArea/happyTenPoints/history'
-import NumberStatistics from '../../../components/lotteryArea/happyTenPoints/numberStatistics'
-import BeadAnalyse from '../../../components/lotteryArea/happyTenPoints/beadAnalyse'
-import MissingStatistics from '../../../components/lotteryArea/missingStatistics'
-import BigAndSmallOmit from '../../../components/lotteryArea/bigAndSmallOmit'
-import OddAndEvenOmit from '../../../components/lotteryArea/oddAndEvenOmit'
-import DoubleLongDragon from '../../../components/lotteryArea/happyTenPoints/doubleLongDragon'
-import BigAndSmallHistory from '../../../components/lotteryArea/bigAndSmallHistory'
-import OddAndEvenHistory from '../../../components/lotteryArea/oddAndEvenHistory'
-import DoubleStatistics from '../../../components/lotteryArea/oftenLottery/doubleStatistics'
-import Trend from '../../../components/lotteryArea/trend'
+import { asyncComponent } from 'react-async-component';
+const FunctionMenu = asyncComponent({ name: "FunctionMenu", resolve: () => import('../../../components/lotteryArea/functionMenu') });
+const Header = asyncComponent({ name: "Header", resolve: () => import('../../../components/lotteryArea/header') });
+const Recommend = asyncComponent({ name: "Recommend", resolve: () => import('../../../components/lotteryArea/recommend') });
+const History = asyncComponent({ name: "History", resolve: () => import('../../../components/lotteryArea/happyTenPoints/history') });
+const NumberStatistics = asyncComponent({ name: "NumberStatistics", resolve: () => import('../../../components/lotteryArea/happyTenPoints/numberStatistics') });
+const BeadAnalyse = asyncComponent({ name: "BeadAnalyse", resolve: () => import('../../../components/lotteryArea/happyTenPoints/beadAnalyse') });
+const MissingStatistics = asyncComponent({ name: "MissingStatistics", resolve: () => import('../../../components/lotteryArea/missingStatistics') });
+const BigAndSmallOmit = asyncComponent({ name: "BigAndSmallOmit", resolve: () => import('../../../components/lotteryArea/bigAndSmallOmit') });
+const OddAndEvenOmit = asyncComponent({ name: "OddAndEvenOmit", resolve: () => import('../../../components/lotteryArea/oddAndEvenOmit') });
+const DoubleLongDragon = asyncComponent({ name: "DoubleLongDragon", resolve: () => import('../../../components/lotteryArea/happyTenPoints/doubleLongDragon') });
+const BigAndSmallHistory = asyncComponent({ name: "BigAndSmallHistory", resolve: () => import('../../../components/lotteryArea/bigAndSmallHistory') });
+const OddAndEvenHistory = asyncComponent({ name: "OddAndEvenHistory", resolve: () => import('../../../components/lotteryArea/oddAndEvenHistory') });
+const DoubleStatistics = asyncComponent({ name: "DoubleStatistics", resolve: () => import('../../../components/lotteryArea/oftenLottery/doubleStatistics') });
+const Trend = asyncComponent({ name: "Trend", resolve: () => import('../../../components/lotteryArea/trend') });
 
 // 免费参考
 import icon_mftj from '../../../assets/img/lottery/menu/icon_mftj.png'

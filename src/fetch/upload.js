@@ -1,6 +1,4 @@
 // post.js
-import 'whatwg-fetch'
-import 'es6-promise'
 import { api } from './api.js'
 import { Toast } from 'antd-mobile'
 
@@ -16,7 +14,7 @@ export function upload(url, form) {
             method: 'POST',
             //credentials: 'same-origin', // include, same-origin, *omit
             headers: {
-                'token': localStorage.getItem("token") || '',
+                'token': localStorage.getItem("cs_token") || '',
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/x-www-form-urlencoded',
             },

@@ -1,21 +1,23 @@
 import React, { Component } from "react";
-import SixMarkStatistics from './sixMarkStatistics'
-import TmHistory from './tmHistory'
-import ZmHistory from './zmHistory'
-import TmShengXiao from './tmShengXiao'
-import ZmShengXiao from './zmShengXiao'
-import TmBoSe from './tmBoSe'
-import ZmBoSe from './zmBoSe'
-import TmWeiShu from './tmWeiShu'
-import ZmWeiShu from './zmWeiShu'
-import NumberOfWaveband from './numberOfWaveband'
-import TmTwoSides from './tmTwoSides'
-import ZmSum from './zmSum'
-import AttributeReference from './attributeReference'
-import LastNumberBigAndSmall from './lastNumberBigAndSmall'
-import PoultryAndWildAnimals from './poultryAndWildAnimals'
-import ContinuousNumber from './continuousNumber'
-import ContinuousShengXiao from './continuousShengXiao'
+import { asyncComponent } from 'react-async-component';
+const SixMarkStatistics = asyncComponent({ name: "SixMarkStatistics", resolve: () => import('./sixMarkStatistics') });
+const TmHistory = asyncComponent({ name: "TmHistory", resolve: () => import('./tmHistory') });
+const ZmHistory = asyncComponent({ name: "ZmHistory", resolve: () => import('./zmHistory') });
+const TmShengXiao = asyncComponent({ name: "TmShengXiao", resolve: () => import('./tmShengXiao') });
+const ZmShengXiao = asyncComponent({ name: "ZmShengXiao", resolve: () => import('./zmShengXiao') });
+const TmBoSe = asyncComponent({ name: "TmBoSe", resolve: () => import('./tmBoSe') });
+const ZmBoSe = asyncComponent({ name: "ZmBoSe", resolve: () => import('./zmBoSe') });
+const TmWeiShu = asyncComponent({ name: "TmWeiShu", resolve: () => import('./tmWeiShu') });
+const ZmWeiShu = asyncComponent({ name: "ZmWeiShu", resolve: () => import('./zmWeiShu') });
+const NumberOfWaveband = asyncComponent({ name: "NumberOfWaveband", resolve: () => import('./numberOfWaveband') });
+const TmTwoSides = asyncComponent({ name: "TmTwoSides", resolve: () => import('./tmTwoSides') });
+const ZmSum = asyncComponent({ name: "ZmSum", resolve: () => import('./zmSum') });
+const AttributeReference = asyncComponent({ name: "AttributeReference", resolve: () => import('./attributeReference') });
+const LastNumberBigAndSmall = asyncComponent({ name: "LastNumberBigAndSmall", resolve: () => import('./lastNumberBigAndSmall') });
+const PoultryAndWildAnimals = asyncComponent({ name: "PoultryAndWildAnimals", resolve: () => import('./poultryAndWildAnimals') });
+const ContinuousNumber = asyncComponent({ name: "ContinuousNumber", resolve: () => import('./continuousNumber') });
+const ContinuousShengXiao = asyncComponent({ name: "ContinuousShengXiao", resolve: () => import('./continuousShengXiao') });
+
 
 export default class LotteryStatistics extends Component {
     constructor(props) {

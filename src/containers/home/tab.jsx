@@ -34,7 +34,7 @@ class Tab extends Component {
                 lottertArea: str
             });
         }, 600);
-        
+
         let marginLeft = this.refs.grid.style.marginLeft;
         marginLeft = Number(marginLeft.substr(0, marginLeft.length - 1));
         //console.log(marginLeft);
@@ -72,25 +72,25 @@ class Tab extends Component {
         } else if (id == 30) {
             this.props.history.push('/lotteryStatistics');
         } else if (name == "六合图库") {
-            if (localStorage.getItem("token") !== null) {
+            if (localStorage.getItem("cs_token") !== null) {
                 this.props.history.push('/picturesLibraryMenu');
             } else {
                 this.props.setSelectedTab('personal');
             }
         } else if (name == "六合高手") {
-            if (localStorage.getItem("token") !== null) {
+            if (localStorage.getItem("cs_token") !== null) {
                 this.props.history.push('/sixMasterHand');
             } else {
                 this.props.setSelectedTab('personal');
             }
         } else if (name == "资料大全") {
-            if (localStorage.getItem("token") !== null) {
+            if (localStorage.getItem("cs_token") !== null) {
                 this.props.history.push('/sourceBookMenu');
             } else {
                 this.props.setSelectedTab('personal');
             }
         } else if (name == "蟠桃大会") {
-            if (localStorage.getItem("token") !== null) {
+            if (localStorage.getItem("cs_token") !== null) {
                 this.props.history.push('/peachMeetingMenu');
             } else {
                 this.props.setSelectedTab('personal');
@@ -111,7 +111,7 @@ class Tab extends Component {
 
     lotteryAreaView() {
         return this.props.cp_menu.map((item, index) => (
-            <Lottery lotteryData={item} key={index} click={this.enterLotteryPage.bind(this, item.name)}></Lottery>
+            <Lottery lotteryData={item} key={index} click={this.enterLotteryPage.bind(this, item.id)}></Lottery>
         ));
     }
 
@@ -138,10 +138,10 @@ class Tab extends Component {
                 </header>
                 <div className="w100 clearfix flex-center">
                     <div className="flex-center" style={{ width: '27%', height: '10px' }}>
-                        <img style={{ width: '20%', height: '5px', display: this.state.tabSelected == '六合专区' ? 'block' : 'none' }} src={require("../../assets/img/home/header-unline.png")}/>
+                        <img style={{ width: '20%', height: '5px', display: this.state.tabSelected == '六合专区' ? 'block' : 'none' }} src={require("../../assets/img/home/header-unline.png")} />
                     </div>
                     <div className="flex-center" style={{ width: '27%', height: '10px' }}>
-                        <img style={{ width: '20%', height: '5px', display: this.state.tabSelected != '六合专区' ? 'block' : 'none' }}src={require("../../assets/img/home/header-unline.png")} />
+                        <img style={{ width: '20%', height: '5px', display: this.state.tabSelected != '六合专区' ? 'block' : 'none' }} src={require("../../assets/img/home/header-unline.png")} />
                     </div>
                 </div>
                 <main className="clearfix w100" style={{ overflow: this.state.tabSelected == '六合专区' ? 'hidden' : 'inherit' }}>

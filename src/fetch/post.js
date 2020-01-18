@@ -21,7 +21,7 @@ export function post(url, paramsObj = {}) {
             method: 'POST',
             //credentials: 'same-origin', // include, same-origin, *omit
             headers: {
-                'token': localStorage.getItem("token") || '',
+                'token': localStorage.getItem("cs_token") || '',
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
@@ -32,7 +32,7 @@ export function post(url, paramsObj = {}) {
             if (response.code != 200) {
                 Toast.info(response.msg, 2, null, false);
                 if (response.code == 1002) {
-                    localStorage.removeItem("token");
+                    localStorage.removeItem("cs_token");
                     localStorage.removeItem("userInfo");
                     browserHistory.push('/');
                 }

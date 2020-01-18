@@ -7,7 +7,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 //压缩js代码插件
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 //打包css文件插件
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+// const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 //压缩css插件
 var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 module.exports = {
@@ -35,11 +36,11 @@ module.exports = {
             chunks: 'all',
             cacheGroups: {
                 vendor: {
-                    test: /[\\/]node_modules[\\/]/,
+                    test: /[\\/]node_modules[\\/](echarts|antd|antd-mobile|react|react-dom|react-router|redux|react-redux)[\\/]/,
                     name: 'vendors',
-                    chunks: 'all'
-                }
-            }
+                    chunks: 'all',
+                },
+            },
         },
         //压缩js代码
         minimizer: [new UglifyJsPlugin({
@@ -66,45 +67,52 @@ module.exports = {
         //创建删除文件插件，删除dist文件
         new CleanWebpackPlugin(),
         //创建打包css文件插件对象
-        new ExtractTextPlugin("css/styles.css"),
+        new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: 'css/[name].css',
+            chunkFilename: 'css/[id].css',
+        }),
         //压缩css文件对象
         new OptimizeCssAssetsPlugin()
     ],
     module: { //这个节点用于配置所有第三方模块的加载器
         rules: [ //匹配规则.
             {
-                test: /\.css$/, //配置处理css文件的第三方loader规则
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: ['css-loader'],
-                    publicPath: '../'
-                })
+                test: /\.css$/i, //配置处理css文件的第三方loader规则
+                use: [{
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            // 这里可以指定一个 publicPath
+                            // 默认使用 webpackOptions.output中的publicPath
+                            publicPath: '../'
+                        },
+                    },
+                    'css-loader',
+                ],
             },
             {
                 test: /\.less$/, //配置处理sass文件的第三方loader规则
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: ['css-loader', 'less-loader'],
-                    publicPath: '../'
-                }),
+                use: [{
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            // 这里可以指定一个 publicPath
+                            // 默认使用 webpackOptions.output中的publicPath
+                            publicPath: '../'
+                        },
+                    },
+                    'css-loader', 'less-loader'
+                ],
             },
-            {
-                test: /\.scss$/, //配置处理sass文件的第三方loader规则
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: ['css-loader', 'sass-loader'],
-                    publicPath: '../'
-                }),
-            },
-            //{ test: /\.(jpg|png|gif|bmp|jpeg)$/, use: ['url-loader?limit=8192&name=img/[hash:8]-[name].[ext]'] },
-            {
-                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-                loader: 'url-loader',
-                options: {
-                    limit: false,
-                    name: "img/[hash:8]-[name].[ext]"
-                }
-            },
+            { test: /\.(jpg|png|gif|bmp|jpeg)$/, use: ['url-loader?limit=8192&name=img/[hash:8]-[name].[ext]'] },
+            // {
+            //     test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+            //     loader: 'url-loader',
+            //     options: {
+            //         limit: false,
+            //         name: "img/[hash:8]-[name].[ext]"
+            //     }
+            // },
             //处理图片路径的loader规则
             //limit给定的值，是限制图片转为base64编码，限制值单位是byte,如果我们引用的图片，大于或等于给定的limit值，则图片不会被转为
             //base64格式的字符串，如果图片小于给定的值，则会被转为base64的字符串

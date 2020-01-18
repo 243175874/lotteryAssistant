@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import FunctionMenu from '../../../components/lotteryArea/functionMenu'
 import Common from '../../../assets/js/common'
-import Header from '../../../components/lotteryArea/header'
-import History from '../../../components/lotteryArea/quicklyThree/history'
-import BeadAnalyse from '../../../components/lotteryArea/quicklyThree/beadAnalyse'
-import NumberStatistics from '../../../components/lotteryArea/quicklyThree/numberStatistics'
+import { asyncComponent } from 'react-async-component';
+const FunctionMenu = asyncComponent({ name: "FunctionMenu", resolve: () => import('../../../components/lotteryArea/functionMenu') });
+const Header = asyncComponent({ name: "Header", resolve: () => import('../../../components/lotteryArea/header') });
+const History = asyncComponent({ name: "History", resolve: () => import('../../../components/lotteryArea/quicklyThree/history') });
+const BeadAnalyse = asyncComponent({ name: "BeadAnalyse", resolve: () => import('../../../components/lotteryArea/quicklyThree/beadAnalyse') });
+const NumberStatistics = asyncComponent({ name: "NumberStatistics", resolve: () => import('../../../components/lotteryArea/quicklyThree/numberStatistics') });
 
 // 历史开奖
 import icon_lskj from '../../../assets/img/lottery/menu/icon_lskj.png'

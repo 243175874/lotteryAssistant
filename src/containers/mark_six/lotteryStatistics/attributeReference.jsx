@@ -243,10 +243,10 @@ export default class AttributeReference extends Component {
             return (
                 <div className="wh100 boxBeforeContent">
                     <div className="w100 bgWhite flex align-item-center" style={{ height: "50px", marginTop: "10px", color: "#DB3D3D", fontWeight: "600" }}>
-                        <span style={{ color: "black", margin: "0 20px" }}>{this.state.data.jy[0].title}</span>{this.state.data.jy[0].numbers.replace('、')}
+                        <span style={{ color: "black", margin: "0 20px" }}>{this.state.data.jy[0].title}</span>{this.state.data.jy[0].numbers.toString()}
                     </div>
                     <div className="w100 bgWhite flex align-item-center" style={{ height: "50px", marginTop: "10px", color: "#DB3D3D", fontWeight: "600" }}>
-                        <span style={{ color: "black", margin: "0 20px" }}>{this.state.data.jy[1].title}</span>{this.state.data.jy[1].numbers.replace('、')}
+                        <span style={{ color: "black", margin: "0 20px" }}>{this.state.data.jy[1].title}</span>{this.state.data.jy[1].numbers.toString()}
                     </div>
                 </div>
             )

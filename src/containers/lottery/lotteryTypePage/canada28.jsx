@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import FunctionMenu from '../../../components/lotteryArea/functionMenu'
-import Header from '../../../components/lotteryArea/header'
 import Common from '../../../assets/js/common'
-import Recommend from '../../../components/lotteryArea/recommend'
-import History from '../../../components/lotteryArea/canada28/history'
-import BeadAnalyse from '../../../components/lotteryArea/canada28/beadAnalyse'
-import Trend from '../../../components/lotteryArea/canada28/trend'
-
+import { asyncComponent } from 'react-async-component';
+const FunctionMenu = asyncComponent({ name: "FunctionMenu", resolve: () => import('../../../components/lotteryArea/functionMenu') });
+const Header = asyncComponent({ name: "Header", resolve: () => import('../../../components/lotteryArea/header') });
+const Recommend = asyncComponent({ name: "Recommend", resolve: () => import('../../../components/lotteryArea/recommend') });
+const History = asyncComponent({ name: "History", resolve: () => import('../../../components/lotteryArea/canada28/history') });
+const BeadAnalyse = asyncComponent({ name: "BeadAnalyse", resolve: () => import('../../../components/lotteryArea/canada28/beadAnalyse') });
+const Trend = asyncComponent({ name: "Trend", resolve: () => import('../../../components/lotteryArea/canada28/trend') });
 
 // 免费参考
 import icon_mftj from '../../../assets/img/lottery/menu/icon_mftj.png'

@@ -1,22 +1,23 @@
 import React, { Component } from "react";
 import { post } from '../../fetch/post.js'
 import Common from '../../assets/js/common'
+import { asyncComponent } from 'react-async-component';
 //北京赛车
-import BeiJingRacing from './lotteryTypePage/beiJingRacing'
+const BeiJingRacing = asyncComponent({ name: "BeiJingRacing", resolve: () => import('./lotteryTypePage/beiJingRacing') });
 //重庆时时彩
-import ChongQingOftenLottery from './lotteryTypePage/chongQingOftenLottery'
+const ChongQingOftenLottery = asyncComponent({ name: "ChongQingOftenLottery", resolve: () => import('./lotteryTypePage/chongQingOftenLottery') });
 //新疆时时彩,天津时时彩
-import OftenLottery from './lotteryTypePage/oftenLottery'
+const OftenLottery = asyncComponent({ name: "OftenLottery", resolve: () => import('./lotteryTypePage/oftenLottery') });
 //江苏快3，广西快3，安徽快3，北京快3，湖北快3，河北快3
-import QuicklyThree from './lotteryTypePage/quicklyThree'
+const QuicklyThree = asyncComponent({ name: "QuicklyThree", resolve: () => import('./lotteryTypePage/quicklyThree') });
 //湖南快乐十分，幸运农场，广东快乐十分，天津快乐十分
-import HappyTenPoints from './lotteryTypePage/happyTenPoints'
+const HappyTenPoints = asyncComponent({ name: "HappyTenPoints", resolve: () => import('./lotteryTypePage/happyTenPoints') });
 //江西11选5,广东11选5，11运夺金
-import ElevenFive from './lotteryTypePage/elevenFive'
+const ElevenFive = asyncComponent({ name: "ElevenFive", resolve: () => import('./lotteryTypePage/elevenFive') });
 //福彩3D,排列3D
-import WelfareLottery from './lotteryTypePage/welfareLottery'
+const WelfareLottery = asyncComponent({ name: "WelfareLottery", resolve: () => import('./lotteryTypePage/welfareLottery') });
 //加拿大28,PC蛋蛋
-import Canada28 from './lotteryTypePage/canada28'
+const Canada28 = asyncComponent({ name: "Canada28", resolve: () => import('./lotteryTypePage/canada28') });
 
 import { connect } from 'react-redux'
 import { setCurrentLotteryName, setCurrentLotteryId, setCurrentLotteryType } from '../../redux/action'
@@ -46,29 +47,13 @@ export default class LotteryIndex extends Component {
     }
 
     //选中当前彩种绑定数据
-    selectTitle(name, id) {
+    selectTitle(name, id, type) {
         //存入redux
         this.props.setCurrentLotteryName(name);
         this.props.setCurrentLotteryId(id);
-        //根据彩种名称寻找彩种类型
-        let type = this.getLotteryTypeByName(name);
         //把彩种类型存入redux
         this.props.setCurrentLotteryType(type);
         this.setState({ isShowTitleTable: false });
-    }
-
-    //根据彩种名称寻找彩种类型
-    getLotteryTypeByName(name) {
-        let list = JSON.parse(sessionStorage.getItem("lotteryMenuList"));
-        let type = "";
-        for (let index = 0; index < list.length; index++) {
-            for (let j = 0; j < list[index].son.length; j++) {
-                if (list[index].son[j].name == name) {
-                    type = list[index].name;
-                }
-            }
-        }
-        return type;
     }
 
     //显示或者关闭彩种列表
@@ -77,10 +62,11 @@ export default class LotteryIndex extends Component {
     }
 
     renderTitleTableView() {
+        console.log(this.state.titleList);
         return this.state.titleList.map((item, index) => {
             return (
                 <div className="fl flex-center"
-                    onClick={() => { this.selectTitle(item.name, item.id) }}
+                    onClick={() => { this.selectTitle(item.name, item.id, item.type) }}
                     style={{
                         width: "28%", height: "30px", marginLeft: "5%", marginTop: "10px", fontSize: "13px",
                         background: item.name == this.props.currentLotteryName ?
@@ -98,21 +84,22 @@ export default class LotteryIndex extends Component {
     renderContentView() {
         let lotteryName = this.props.currentLotteryName;
         let lotteryType = this.props.currentLotteryType;
+        console.log(lotteryType);
         if (lotteryName == "重庆时时彩") {
             return (<ChongQingOftenLottery name={lotteryName}></ChongQingOftenLottery>)
-        } else if (lotteryType == "PK拾类") {
+        } else if (lotteryType == 1) {
             return (<BeiJingRacing name={lotteryName}></BeiJingRacing>)
-        } else if (lotteryType == "时时彩") {
+        } else if (lotteryType == 3) {
             return (<OftenLottery name={lotteryName}></OftenLottery>)
-        } else if (lotteryType == "快三类型") {
+        } else if (lotteryType == 4) {
             return (<QuicklyThree name={lotteryName}></QuicklyThree>)
-        } else if (lotteryType == "十分彩") {
+        } else if (lotteryType == 9) {
             return (<HappyTenPoints name={lotteryName}></HappyTenPoints>)
-        } else if (lotteryType == "11选5") {
+        } else if (lotteryType == 7) {
             return (<ElevenFive name={lotteryName}></ElevenFive>)
-        } else if (lotteryType == "福彩") {
+        } else if (lotteryType == 0) {
             return (<WelfareLottery name={lotteryName}></WelfareLottery>)
-        } else if (lotteryType == "28类") {
+        } else if (lotteryType == 2) {
             return (<Canada28 name={lotteryName}></Canada28>)
         } else {
             return (<div></div>)

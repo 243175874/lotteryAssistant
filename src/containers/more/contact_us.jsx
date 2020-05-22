@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import icon_qq from '../../assets/img/more/icon_qq.png'
 import icon_wetchat from '../../assets/img/more/icon_wetchat.png'
 import icon_link from '../../assets/img/more/icon_link.png'
+import common from "../../assets/js/common"
 class Contact extends Component {
     constructor(props) {
         super(props);
@@ -15,6 +16,9 @@ class Contact extends Component {
             ]
         };
     }
+    componentDidMount(){
+        this.getContactInfo();
+    }
 
     renderItem() {
         return this.state.data.map((item, index) => (
@@ -23,11 +27,21 @@ class Contact extends Component {
                 style={{ minHeight: '55px' }}
                 thumb={item.src}
                 arrow="horizontal"
-            >{item.label}</List.Item>
+                // extra={item.value}
+            ><span>{item.label}</span><span style={{marginLeft:'10px'}}>{item.value}</span></List.Item>
         ));
     }
+    async getContactInfo() {
+        let data = await common.getConfigService();
+        if (data.code == 200) {
+            let arr = this.state.data;
+            arr[0].value = data.data.share_qq;
+            arr[1].value = data.data.share_wchat;
+            arr[2].value = data.data.share_customer;
+            this.setState({ data:arr });
 
-
+        }
+    }
     render() {
         return (
             <div className="wh100 bgWhite">

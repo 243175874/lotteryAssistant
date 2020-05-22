@@ -18,15 +18,15 @@ class SixMasterHand extends Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.getMenuList();
     }
 
     //获取六合高手菜单数据
     getMenuList() {
-        post('/api/index/lhgs_list.html').then(data => {
+        post('/v1/api/article/category?id=218').then(data => {
             if (data.code == 200) {
-                this.setState({ menuList: data.data.data });//关闭loading
+                this.setState({ menuList: data.data });//关闭loading
             }
             this.setState({ loading: false });//关闭loading
         });
@@ -42,7 +42,7 @@ class SixMasterHand extends Component {
 
     go(item) {
         this.props.setSixTitle(item.name);
-        this.props.setSixTypeId(item.id);
+        this.props.setSixTypeId(item.extend_id);
         this.props.history.push(`/sixMasterHandList`)
     }
 

@@ -91,7 +91,7 @@ class Home extends Component {
                             <div style={{
                                 width: '22px',
                                 height: '22px',
-                                background:`url(${require('../../assets/img/home/icon_tab_treasure_n.png')}) center center /  21px 21px no-repeat`
+                                background: `url(${require('../../assets/img/home/icon_tab_treasure_n.png')}) center center /  21px 21px no-repeat`
                             }}
                             />
                         }
@@ -118,7 +118,7 @@ class Home extends Component {
                             <div style={{
                                 width: '22px',
                                 height: '22px',
-                                background:  `url(${require('../../assets/img/home/icon_tab_promote.png')}) center center /  21px 21px no-repeat`
+                                background: `url(${require('../../assets/img/home/icon_tab_promote.png')}) center center /  21px 21px no-repeat`
                             }}
                             />
                         }

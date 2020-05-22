@@ -16,7 +16,7 @@ const OddAndEvenHistory = asyncComponent({ name: "OddAndEvenHistory", resolve: (
 const DoubleStatistics = asyncComponent({ name: "DoubleStatistics", resolve: () => import('../../../components/lotteryArea/oftenLottery/doubleStatistics') });
 const Trend = asyncComponent({ name: "Trend", resolve: () => import('../../../components/lotteryArea/trend') });
 
-// 免费参考
+// 参考计划
 import icon_mftj from '../../../assets/img/lottery/menu/icon_mftj.png'
 import icon_mftj_press from '../../../assets/img/lottery/menu/icon_mftj_press.png'
 // 历史开奖
@@ -66,7 +66,7 @@ export default class HappyTenPoints extends Component {
         super(props);
         this.state = {
             menuList: [
-                { icon: icon_mftj, icon_press: icon_mftj_press, name: "免费参考", type: "预测", place: "menu" },
+                { icon: icon_mftj, icon_press: icon_mftj_press, name: "参考计划", type: "预测", place: "menu" },
                 { icon: icon_lskj, icon_press: icon_lskj_press, name: "历史开奖", type: "综合", place: "menu" },
                 { icon: icon_lzfx, icon_press: icon_lzfx_press, name: "路珠分析", type: "综合", place: "menu" },
                 { icon: icon_hbzs, icon_press: icon_hbzs_press, name: "横板走势", type: "综合", place: "menu" },
@@ -83,7 +83,7 @@ export default class HappyTenPoints extends Component {
         };
     }
 
-    renderContentView() {
+    renderContentView(currentLotteryId) {
         //大小遗漏，单双遗漏 菜单选项卡
         const menuList = [{ key: "第一球", value: 0 }, { key: "第二球", value: 1 }, { key: "第三球", value: 2 }, { key: "第四球", value: 3 }, { key: "第五球", value: 4 },
         { key: "第六球", value: 5 }, { key: "第七球", value: 6 }, { key: "第八球", value: 7 }];
@@ -91,8 +91,7 @@ export default class HappyTenPoints extends Component {
         //大小，单双，两面历史  表格 title
         const titleList = ["第一球", "第二球", "第三球", "第四球", "第五球", "第六球", "第七球", "第八球"];
 
-        let currentLotteryId = this.props.currentLotteryId;
-        if (this.props.currentLotteryPageIndex == "免费参考") {
+        if (this.props.currentLotteryPageIndex == "参考计划") {
             const numberTitle = ["第一球", "第二球", "第三球", "第四球", "第五球", "第六球", "第七球", "第八球"];
             return (<Recommend id={currentLotteryId} numberTitle={numberTitle}></Recommend>)
         } else if (this.props.currentLotteryPageIndex == "历史开奖") {
@@ -126,12 +125,28 @@ export default class HappyTenPoints extends Component {
     }
 
     render() {
+        let currentLotteryId = this.props.currentLotteryId;
+        if(this.props.currentLotteryId == "" ){
+            currentLotteryId = localStorage.getItem("currentLotteryId");
+        }else{
+            localStorage.setItem("currentLotteryId",this.props.currentLotteryId);
+        }
+
+
+        let currentLotteryName = this.props.currentLotteryName;
+     
+        if(this.props.currentLotteryName == ""){
+            currentLotteryName = localStorage.getItem("currentLotteryName");
+        }else{
+            localStorage.setItem("currentLotteryName",this.props.currentLotteryName);
+        }
+
         return (
             <div className="wh100">
                 <div className="w100" style={{ height: "calc(100% - 55px)" }}>
-                    <Header id={this.props.currentLotteryId} name={this.props.currentLotteryName}></Header>
+                    <Header id={currentLotteryId} name={currentLotteryName}></Header>
                     <div className="w100" style={{ height: "calc(100% - 40px)" }}>
-                        {this.renderContentView()}
+                        {this.renderContentView(currentLotteryId)}
                     </div>
                 </div>
 

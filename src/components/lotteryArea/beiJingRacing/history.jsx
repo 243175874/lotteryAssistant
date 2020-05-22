@@ -26,14 +26,10 @@ export default class History extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.getHistoryService(nextProps.id, this.props.currentPeriods);
-
-    }
-
-    componentWillMount() {
-        this.getHistoryService(this.props.id, this.props.currentPeriods);
     }
 
     componentDidMount() {
+        this.getHistoryService(this.props.id, this.props.currentPeriods);
         //根据改变的期数，加载相应的数据
         this.emitter = emitter.on("emitChangeNumber", this.listenerCallback);
     }

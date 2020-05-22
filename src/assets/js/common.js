@@ -22,6 +22,12 @@ class CommonJS {
         return await post(`/v1/api/user/info`);
     }
 
+    /**
+     * 获取配置信息
+     */
+    async getConfigService() {
+        return await post('/v1/api/app/config');
+    }
 
     //获取随机数
     getRandom(start, end) {

@@ -7,7 +7,7 @@ export default class Notice extends Component {
             noticeStr: ""
         };
     }
-    componentWillMount() {
+    componentDidMount() {
         this.bindNoticeInfo();
     }
     componentWillReceiveProps(nextProps) {

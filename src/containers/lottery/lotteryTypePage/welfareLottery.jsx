@@ -31,8 +31,7 @@ export default class WelfareLottery extends Component {
         };
     }
 
-    renderContentView() {
-        let currentLotteryId = this.props.currentLotteryId;
+    renderContentView(currentLotteryId) {
         if (this.props.currentLotteryPageIndex == "历史开奖") {
             return (<History id={currentLotteryId}></History>)
         } else if (this.props.currentLotteryPageIndex == "路珠分析") {
@@ -43,12 +42,28 @@ export default class WelfareLottery extends Component {
     }
 
     render() {
+        let currentLotteryId = this.props.currentLotteryId;
+        if(this.props.currentLotteryId == "" ){
+            currentLotteryId = localStorage.getItem("currentLotteryId");
+        }else{
+            localStorage.setItem("currentLotteryId",this.props.currentLotteryId);
+        }
+
+
+        let currentLotteryName = this.props.currentLotteryName;
+     
+        if(this.props.currentLotteryName == ""){
+            currentLotteryName = localStorage.getItem("currentLotteryName");
+        }else{
+            localStorage.setItem("currentLotteryName",this.props.currentLotteryName);
+        }
+        
         return (
             <div className="wh100">
                 <div className="w100" style={{ height: "calc(100% - 55px)" }}>
-                    <Header id={this.props.currentLotteryId} name={this.props.currentLotteryName}></Header>
+                    <Header id={currentLotteryId} name={currentLotteryName}></Header>
                     <div className="w100" style={{ height: "calc(100% - 40px)" }}>
-                        {this.renderContentView()}
+                        {this.renderContentView(currentLotteryId)}
                     </div>
                 </div>
 

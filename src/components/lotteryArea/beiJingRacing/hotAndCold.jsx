@@ -47,7 +47,7 @@ export default class HotAndCold extends Component {
 
     //获取历史开奖数据
     getHistoryService(id, number) {
-        console.log(id);
+        //console.log(id);
         this.setState({ loading: true });
         LotteryAPI.getHistoryService(id, number).then(data => {
             if (data.code == 200) {

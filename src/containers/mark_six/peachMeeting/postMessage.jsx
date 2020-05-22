@@ -18,13 +18,28 @@ export default class PostMessage extends Component {
         };
     }
 
-    getSendMessage(tid, title, content) {
+
+
+    //发送帖子
+    getSendMessage(cate, title, content) {
         this.setState({ loading: true });
-        post('/api/forum/add', { tid, title, content }).then(data => {
+        //console.log({ cate, title, content });
+        post('/v1/api/article/add-article', { cate, title, content }).then(data => {
             this.setState({ loading: false });//关闭loading
-            if (data == null) {
+            if (data.code == 200) {
                 this.props.setIsShowSendMessagePage(false);
                 this.setState({ title: "", content: "" });
+            }
+        });
+    }
+
+    //读取上期内容
+    getLastMessage() {
+        this.setState({ loading: true });
+        post('/v1/api/article/article-next-pre').then(data => {
+            this.setState({ loading: false });//关闭loading
+            if (data.code == 200) {
+                this.setState({ title: data.data.title, content: data.data.content });
             }
         });
     }
@@ -51,6 +66,14 @@ export default class PostMessage extends Component {
                 <div className="w100 clearfix flex flex-column align-item-center">
                     <input value={this.state.title} onChange={(e) => this.handleChange(e, 'title')} style={{ width: "90%", height: "35px", borderBottom: "1px solid #FE623F", marginTop: "10px" }} placeholder="请输入标题（32字以内）" maxLength="32" />
                     <textarea value={this.state.content} onChange={(e) => this.handleChange(e, 'content')} maxLength="1000" placeholder="请输入帖子内容（1000字以内）" style={{ width: "90%", height: "120px", marginTop: "20px", border: "0" }} ></textarea>
+                    <div className="flex-center"
+                        onClick={() => { this.getLastMessage(this.props.sixTypeId, this.state.title, this.state.content) }}
+                        style={{
+                            width: "75%", height: "39px", background: `url(${require('../../../assets/img/mark_six/bg_content.png')})`,
+                            backgroundSize: "100% 100%", marginTop: "20px", color: "#FF7344"
+                        }}>
+                        读取上期发帖内容
+                    </div>
                     <div className="flex-center"
                         onClick={() => { this.getSendMessage(this.props.sixTypeId, this.state.title, this.state.content) }}
                         style={{

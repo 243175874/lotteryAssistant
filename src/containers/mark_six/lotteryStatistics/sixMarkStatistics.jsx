@@ -13,7 +13,7 @@ const green = ['05', '06', '11', '16', '17', '21', '22', '27', '28', '32', '33',
 const number = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
     "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40",
     "41", "42", "43", "44", "45", "46", "47", "48", "49"];
-const color = ["红波", "蓝波", "绿波"];
+const color = ["红", "蓝", "绿"];
 const shuxiang = ["鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗", "猪"];
 const weishu = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 //六合统计
@@ -234,12 +234,12 @@ export default class SixMarkStatistics extends Component {
         return data.map((item, index) => {
             let div = null;
             let messageType = title.substring(0, 2);
-            if (item.attribute == "红波") {
-                div = <div key={index} onClick={() => { this.ActionAlert(title, `${messageType}:${item.attribute}${str}出现了${item.amount}次`) }} className="w33 flex-center" style={{ color: "red" }}>{item.attribute}</div>;
-            } else if (item.attribute == "蓝波") {
-                div = <div key={index} onClick={() => { this.ActionAlert(title, `${messageType}:${item.attribute}${str}出现了${item.amount}次`) }} className="w33 flex-center" style={{ color: "blue" }}>{item.attribute}</div>;
+            if (item.attribute == "红") {
+                div = <div key={index} onClick={() => { this.ActionAlert(title, `${messageType}:${item.attribute}${str}出现了${item.amount}次`) }} className="w33 flex-center" style={{ color: "red" }}>{item.attribute}波</div>;
+            } else if (item.attribute == "蓝") {
+                div = <div key={index} onClick={() => { this.ActionAlert(title, `${messageType}:${item.attribute}${str}出现了${item.amount}次`) }} className="w33 flex-center" style={{ color: "blue" }}>{item.attribute}波</div>;
             } else {
-                div = <div key={index} onClick={() => { this.ActionAlert(title, `${messageType}:${item.attribute}${str}出现了${item.amount}次`) }} className="w33 flex-center" style={{ color: "green" }}>{item.attribute}</div>;
+                div = <div key={index} onClick={() => { this.ActionAlert(title, `${messageType}:${item.attribute}${str}出现了${item.amount}次`) }} className="w33 flex-center" style={{ color: "green" }}>{item.attribute}波</div>;
             }
             return div;
         });

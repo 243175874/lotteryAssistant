@@ -8,7 +8,6 @@ class Suggest extends Component {
         super(props);
         this.state = {
             loading: false,
-            files: [],  //上传的文件信息
             content: "",//意见内容
             email: "",//邮件
             other: "" //其他
@@ -16,41 +15,20 @@ class Suggest extends Component {
         //this.handleChange = this.handleChange.bind(this);
     }
 
-    onChange = (files, type, index) => {
-        console.log(files, type, index);
-        this.setState({
-            files,
-        });
-    }
+
 
     setSuggest() {
-        const { files, content, email, other } = this.state;
-        let pic = "";
-        if (files.length > 0) {
-            pic = files[0].file.name;
-        }
+        const { content, email, other } = this.state;
+
         if (content == "") {
             Toast.info('请输入遇到的问题！', 2, null, false);
             return;
         }
         this.setState({ loading: true });
-        post('/api/feedback/add', { pic, content, email, other }).then(data => {
+        post('/v1/api/user/feedback_submit', { content, email, other }).then(data => {
             this.setState({ loading: false });
-            if (files.length > 0) {
-                this.uploadFile();
-            }
-            Toast.info('反馈成功', 2, null, false);
-        });
-    }
-
-    uploadFile() {
-        var form = new FormData();
-        form.append("uploadFile", this.state.files[0].url); //uploadFile为后台给的参数名
-        console.log(this.state.files[0].url);
-        upload('/api/upload/upimage', form).then(data => {
-            console.log(data);
-            // this.setState({ loading: false });
-            Toast.info(data.msg, 3, null, false);
+            Toast.info('反馈成功', 4, null, false);
+            this.props.history.push('/');
         });
     }
 

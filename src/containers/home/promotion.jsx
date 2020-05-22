@@ -10,7 +10,6 @@ class Promotion extends Component {
         });
         this.page = 1;
         this.state = {
-
             list: [],
             memberTypeList: ["会员总计", "一级会员", "二级会员", "积分明细"],
             memberTypeSelected: "",
@@ -202,8 +201,7 @@ class Promotion extends Component {
                     </div>
                 </div>
                 <div className="flex align-item-center" style={{ width: '100px', padding: "10px", justifyContent: "flex-end" }}>
-                    <p style={{ display: item.score < 0 ? "none" : "inline" }}>+{item.score}</p>
-                    <p style={{ display: item.score > 0 ? "none" : "inline" }}>-{item.score}</p>
+                    <p>{item.score}</p>
                 </div>
             </div >
         )

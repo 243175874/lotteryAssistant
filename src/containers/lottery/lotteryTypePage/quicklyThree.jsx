@@ -6,7 +6,11 @@ const Header = asyncComponent({ name: "Header", resolve: () => import('../../../
 const History = asyncComponent({ name: "History", resolve: () => import('../../../components/lotteryArea/quicklyThree/history') });
 const BeadAnalyse = asyncComponent({ name: "BeadAnalyse", resolve: () => import('../../../components/lotteryArea/quicklyThree/beadAnalyse') });
 const NumberStatistics = asyncComponent({ name: "NumberStatistics", resolve: () => import('../../../components/lotteryArea/quicklyThree/numberStatistics') });
+const Recommend = asyncComponent({ name: "Recommend", resolve: () => import('../../../components/lotteryArea/canada28/recommend') });
 
+// 参考计划
+import icon_mftj from '../../../assets/img/lottery/menu/icon_mftj.png'
+import icon_mftj_press from '../../../assets/img/lottery/menu/icon_mftj_press.png'
 // 历史开奖
 import icon_lskj from '../../../assets/img/lottery/menu/icon_lskj.png'
 import icon_lskj_press from '../../../assets/img/lottery/menu/icon_lskj_press.png'
@@ -29,6 +33,7 @@ export default class QuicklyThree extends Component {
         super(props);
         this.state = {
             menuList: [
+                { icon: icon_mftj, icon_press: icon_mftj_press, name: "参考计划", type: "预测", place: "menu" },
                 { icon: icon_lskj, icon_press: icon_lskj_press, name: "历史开奖", type: "综合", place: "menu" },
                 { icon: icon_lzfx, icon_press: icon_lzfx_press, name: "路珠分析", type: "综合", place: "menu" },
                 { icon: icon_hmtj, icon_press: icon_hmtj_press, name: "号码统计", type: "历史", place: "menu" },
@@ -37,9 +42,11 @@ export default class QuicklyThree extends Component {
     }
 
 
-    renderContentView() {
-        let currentLotteryId = this.props.currentLotteryId;
-        if (this.props.currentLotteryPageIndex == "历史开奖") {
+    renderContentView(currentLotteryId) {
+        if (this.props.currentLotteryPageIndex == "参考计划") {
+            const numberTitle = ["第一球", "第二球", "第三球"];
+            return (<Recommend id={currentLotteryId} numberTitle={numberTitle}></Recommend>)
+        } else if (this.props.currentLotteryPageIndex == "历史开奖") {
             return (<History id={currentLotteryId}></History>)
         } else if (this.props.currentLotteryPageIndex == "路珠分析") {
             return (<BeadAnalyse id={currentLotteryId}></BeadAnalyse>)
@@ -51,12 +58,28 @@ export default class QuicklyThree extends Component {
     }
 
     render() {
+        let currentLotteryId = this.props.currentLotteryId;
+        if (this.props.currentLotteryId == "") {
+            currentLotteryId = localStorage.getItem("currentLotteryId");
+        } else {
+            localStorage.setItem("currentLotteryId", this.props.currentLotteryId);
+        }
+
+
+        let currentLotteryName = this.props.currentLotteryName;
+
+        if (this.props.currentLotteryName == "") {
+            currentLotteryName = localStorage.getItem("currentLotteryName");
+        } else {
+            localStorage.setItem("currentLotteryName", this.props.currentLotteryName);
+        }
+
         return (
             <div className="wh100">
                 <div className="w100" style={{ height: "calc(100% - 55px)" }}>
-                    <Header id={this.props.currentLotteryId} name={this.props.currentLotteryName}></Header>
+                    <Header id={currentLotteryId} name={currentLotteryName}></Header>
                     <div className="w100" style={{ height: "calc(100% - 40px)" }}>
-                        {this.renderContentView()}
+                        {this.renderContentView(currentLotteryId)}
                     </div>
                 </div>
 

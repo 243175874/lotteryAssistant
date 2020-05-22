@@ -20,12 +20,13 @@ export default class PicturesLibraryMenu extends Component {
 
     componentWillMount() {
         this.getMenuList();
+        window["page"] = "资料大全";
     }
 
     getMenuList() {
-        post('/api/index/zldq_list.html').then(data => {
+        post('/v1/api/article/category?id=219').then(data => {
             if (data.code == 200) {
-                this.setState({ menuList: data.data.data, menuListOriginal: data.data.data });
+                this.setState({ menuList: data.data, menuListOriginal: data.data });
             }
             this.setState({ loading: false });//关闭loading
         });
@@ -35,7 +36,8 @@ export default class PicturesLibraryMenu extends Component {
         return this.state.menuList.map((item, index) => (
             <div key={index} className="fl flex-center" style={{
                 width: "28%", height: "30px", marginLeft: "3.3%", marginTop: "10px",
-                border: "1px solid #EACDA3", borderRadius: "5px"
+                border: "1px solid #EACDA3", borderRadius: "5px",
+                marginBottom: index == this.state.menuList.length - 1 ? "20px" : "0"
             }}
                 onClick={() => { this.go(item) }}>
                 {item.name}
@@ -44,29 +46,18 @@ export default class PicturesLibraryMenu extends Component {
     }
 
     search() {
-        let list = [];
-        if (this.state.keyword == "") {
-            this.setState({ menuList: this.state.menuListOriginal });
-            return;
-        }
-
-        list = this.state.menuList.filter((item) => {
-            return item.name.indexOf(this.state.keyword) != -1;
-        });
-
-        this.setState({ menuList: list });
-    }
-
-
-    search2(keyword) {
-        if (keyword == "") {
-            this.setState({ menuList: this.state.menuListOriginal });
+        if (this.state.keyword !== "") {
+            var path = {
+                pathname: '/sourceBookListSearch',
+                query:  {keyword: this.state.keyword },
+            }
+            this.props.history.push(path);
         }
     }
 
     go(item) {
         this.props.setSixTitle(item.name);
-        this.props.setSixTypeId(item.id);
+        this.props.setSixTypeId(item.extend_id);
         this.props.history.push(`/sourceBookList`)
     }
 
@@ -81,9 +72,12 @@ export default class PicturesLibraryMenu extends Component {
                         <Icon key="0" onClick={() => this.props.history.goBack()} type="left" />
                     ]}
                 >资料大全</NavBar>
-                <div className="w100 clearfix">
-                    <SearchBar onSubmit={() => { this.search() }} onChange={(value) => { this.setState({ keyword: value }); this.search2(value) }} value={this.state.keyword} placeholder="搜索" maxLength={12} />
-                    {this.renderMenuListView()}
+                <div className="w100" style={{ height: "91%" }}>
+                    <SearchBar onSubmit={() => { this.search() }} onChange={(value) => { this.setState({ keyword: value });  }} value={this.state.keyword} placeholder="搜索" maxLength={12} />
+
+                    <div className="w100" style={{ height: "calc(100% - 44px)", overflow: "auto" }}>
+                        {this.renderMenuListView()}
+                    </div>
                 </div>
             </div>
         );

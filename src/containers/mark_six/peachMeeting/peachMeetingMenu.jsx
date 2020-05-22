@@ -18,33 +18,24 @@ export default class PeachMeetingMenu extends Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.getMenuList();
+        window["page"] = "蟠桃大会";
     }
 
     search() {
-        let list = [];
-        if (this.state.keyword == "") {
-            this.setState({ menuList: this.state.menuListOriginal });
-            return;
-        }
-
-        list = this.state.menuList.filter((item) => {
-            return item.name.indexOf(this.state.keyword) != -1;
-        });
-
-        this.setState({ menuList: list });
-    }
-
-
-    search2(keyword) {
-        if (keyword == "") {
-            this.setState({ menuList: this.state.menuListOriginal });
+        if (this.state.keyword !== "") {
+            var path = {
+                pathname: '/peachMeetingListSearch',
+                query:  {keyword: this.state.keyword },
+            }
+            this.props.history.push(path);
         }
     }
+
     //获取蟠桃大会菜单数据
     getMenuList() {
-        post('/api/index/ptdh_all.html').then(data => {
+        post('/v1/api/article/category?id=331').then(data => {
             if (data.code == 200) {
                 this.setState({ menuList: data.data, menuListOriginal: data.data });
             }
@@ -53,15 +44,20 @@ export default class PeachMeetingMenu extends Component {
     }
 
     renderMenuListView() {
-        return this.state.menuList.map((item, index) => (
-            <img style={{ width: "40%", marginLeft: "6.5%", marginTop: "10px" }} key={index} src={item.pic}
-                onClick={() => { this.go(item) }} />
-        ));
+        return this.state.menuList.map((item, index) => {
+            if (item.pic != "") {
+                return (
+                    <img style={{ width: "40%", marginLeft: "6.5%", marginTop: "10px" }} key={index} src={item.pic}
+                        onClick={() => { this.go(item) }} />
+                );
+            }
+
+        });
     }
 
     go(item) {
         this.props.setSixTitle(item.name);
-        this.props.setSixTypeId(item.id);
+        this.props.setSixTypeId(item.extend_id);
         this.props.history.push(`/peachMeetingList`)
     }
 
@@ -76,7 +72,7 @@ export default class PeachMeetingMenu extends Component {
                     ]}
                 >蟠桃大会</NavBar>
                 <div className="w100" style={{ height: "calc(91% - 64px)" }}>
-                    <SearchBar placeholder="搜索" onSubmit={() => { this.search() }} onChange={(value) => { this.setState({ keyword: value }); this.search2(value) }} value={this.state.keyword} maxLength={12} />
+                    <SearchBar placeholder="搜索" onSubmit={() => { this.search() }} onChange={(value) => { this.setState({ keyword: value }); }} value={this.state.keyword} maxLength={12} />
                     <div className="wh100" style={{ overflow: "auto", paddingBottom: "20px" }}>
                         {this.renderMenuListView()}
                     </div>

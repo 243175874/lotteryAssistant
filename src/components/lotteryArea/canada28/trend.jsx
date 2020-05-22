@@ -5,7 +5,15 @@ import { ActivityIndicator, Toast } from 'antd-mobile';
 import Common from '../../../assets/js/common'
 import { connect } from 'react-redux'
 import { setCurrentPeriods } from '../../../redux/action'
-import * as echarts from 'echarts'
+// 引入 echarts 主模块。
+import * as echarts from 'echarts/lib/echarts';
+// 引入折线图。
+import 'echarts/lib/chart/line';
+// 引入提示框组件、标题组件、工具箱组件。
+import 'echarts/lib/component/tooltip';
+import 'echarts/lib/component/title';
+import 'echarts/lib/component/toolbox';
+import 'echarts/lib/component/dataZoom';
 @connect(
     state => ({ currentPeriods: state.currentPeriods }),
     { setCurrentPeriods }
@@ -49,7 +57,7 @@ export default class History extends Component {
     sumChart(data) {
         let xAxis = this.getNumber(data);
         let list = this.getSumList(data);
-        console.log(list);
+        //console.log(list);
         let end = 24 / (this.props.currentPeriods / 50);
         // 基于准备好的dom，初始化echarts实例
         this.createChart(echarts.init(document.getElementById('charts')), xAxis, list, end);

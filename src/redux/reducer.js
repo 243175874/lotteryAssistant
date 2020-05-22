@@ -8,7 +8,15 @@ import {
     SetSixTitle,
     SetSixTypeId,
     SetSixUserId,
-    SetIsShowSendMessagePage
+    SetArticleId,
+    SetIsShowSendMessagePage,
+    SetBannerList,
+    SetLotteryList,
+    SetNoticeList,
+    SetCpMenu,
+    SetAppMenu,
+    SetTabSelected,
+    SetIsShowDetailHead
 } from './actionType'
 import { combineReducers } from 'redux'
 //当前菜单索引
@@ -52,7 +60,7 @@ const currentLotteryType = (state = '', action) => {
 }
 
 //当前采种功能页面
-const currentLotteryPageIndex = (state = '历史开奖', action) => {
+const currentLotteryPageIndex = (state = '参考计划', action) => {
     switch (action.type) {
         case SetCurrentLotteryPageIndex:
             return action.value;
@@ -102,10 +110,91 @@ const sixUserId = (state = '', action) => {
     }
 }
 
+//文章id
+const articleId = (state = '', action) => {
+    switch (action.type) {
+        case SetArticleId:
+            return action.value;
+        default:
+            return state
+    }
+}
+
 //六合高手用户id
 const isShowSendMessagePage = (state = false, action) => {
     switch (action.type) {
         case SetIsShowSendMessagePage:
+            return action.value;
+        default:
+            return state
+    }
+}
+
+
+//banner列表
+const bannerList = (state = [], action) => {
+    switch (action.type) {
+        case SetBannerList:
+            return action.value;
+        default:
+            return state
+    }
+}
+
+//彩票开奖列表
+const lotteryList = (state = [], action) => {
+    switch (action.type) {
+        case SetLotteryList:
+            return action.value;
+        default:
+            return state
+    }
+}
+
+//公告信息列表
+const noticeList = (state = [], action) => {
+    switch (action.type) {
+        case SetNoticeList:
+            return action.value;
+        default:
+            return state
+    }
+}
+
+//彩票专区
+const cpMenu = (state = [], action) => {
+    switch (action.type) {
+        case SetCpMenu:
+            return action.value;
+        default:
+            return state
+    }
+}
+
+//六合专区
+const appMenu = (state = [], action) => {
+    switch (action.type) {
+        case SetAppMenu:
+            return action.value;
+        default:
+            return state
+    }
+}
+
+//六合专区
+const tabSelected = (state = '彩票专区', action) => {
+    switch (action.type) {
+        case SetTabSelected:
+            return action.value;
+        default:
+            return state
+    }
+}
+
+//是否显示详情页头部信息
+const isShowDetailHead = (state = false, action) => {
+    switch (action.type) {
+        case SetIsShowDetailHead:
             return action.value;
         default:
             return state
@@ -123,5 +212,13 @@ export const finalReducer = combineReducers({
     sixTitle,
     sixTypeId,
     sixUserId,
+    articleId,
     isShowSendMessagePage,
+    bannerList,
+    lotteryList,
+    noticeList,
+    cpMenu,
+    appMenu,
+    tabSelected,
+    isShowDetailHead
 })

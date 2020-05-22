@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavBar, Icon, Modal } from 'antd-mobile';
+import { NavBar, Icon, Modal, ActivityIndicator } from 'antd-mobile';
 import LotteryBall from '../../components/common/lotteryBall'
 import SelectAssistant from '../../assets/js/selectCodeAssistant'
 import CommonJS from '../../assets/js/common'
@@ -18,12 +18,14 @@ export default class SelectCodeAssistant extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: false,
             selectList: [],
             numberList: [],
             numberStr: "",
             modal: false,
         };
         this.selectList = new Set();
+        this.Assistant = null;
     }
 
 
@@ -37,14 +39,17 @@ export default class SelectCodeAssistant extends Component {
         }
     }
 
-    //获取尾数服务器数据
+    //获取服务器数据
     getData() {
+        this.setState({ loading: true });
         post("/v1/api/app/lhc_conf").then(data => {
-            console.log(data);
+            if (data.code == 200) {
+                //实例化挑码助手对象
+                this.Assistant = new SelectAssistant(data.data);
+            }
+            this.setState({ loading: false });
         });
     }
-
-
 
     returnButtonListView(list, width) {
         return list.map((item, index) => (
@@ -106,9 +111,8 @@ export default class SelectCodeAssistant extends Component {
 
         let list = Array.from(this.selectList);
         this.setState({ selectList: list });
-        //实例化挑码助手对象，调用方法
-        let Assistant = new SelectAssistant();
-        let numberArr = Assistant.getNumberList(list);
+        //调用方法
+        let numberArr = this.Assistant.getNumberList(list);
         this.setState({ numberList: numberArr, numberStr: numberArr.toString() });
     }
     copy(id) {
@@ -119,6 +123,7 @@ export default class SelectCodeAssistant extends Component {
     render() {
         return (
             <div className="wh100 bgwhite">
+                <ActivityIndicator toast text="加载中..." animating={this.state.loading} />
                 <NavBar
                     className="navbar_bg"
                     leftContent={[
@@ -149,7 +154,7 @@ export default class SelectCodeAssistant extends Component {
                 <div className="w100 clearfix flex" style={{ color: "#C5312D", fontSize: "12px", boxSizing: "border-box" }}>
                     <div className="flex-center" onClick={() => { this.clear() }} style={{ width: "22%", height: "30px", border: "1px solid #C5312D", borderRadius: "3px", marginLeft: "6%" }}>清空</div>
                     <div className="flex-center" onClick={() => { this.copy("numberStr") }} style={{ width: "22%", height: "30px", border: "1px solid #C5312D", borderRadius: "3px", marginLeft: "10%" }}>复制结果</div>
-                    <div className="flex-center" style={{ width: "22%", height: "30px", border: "1px solid #C5312D", borderRadius: "3px", marginLeft: "10%" }}>分享结果</div>
+                    {/* <div className="flex-center" style={{ width: "22%", height: "30px", border: "1px solid #C5312D", borderRadius: "3px", marginLeft: "10%" }}>分享结果</div> */}
                 </div>
 
                 <div className="w100 clearfix flex" style={{ marginTop: "10px", background: "#f6f6f6", boxSizing: "border-box" }}>

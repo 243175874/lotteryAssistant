@@ -144,14 +144,14 @@ export default class BeadAnalyse extends Component {
 
     //统计波色
     returnColor(kj) {
-        console.log(kj);
+        //console.log(kj);
         let sum = Number(kj[0]) + Number(kj[1]) + Number(kj[2]);
         let redNumber = [3, 6, 9, 12, 15, 18, 21, 24];
         let greenNumber = [1, 4, 7, 10, 16, 19, 22, 25];
         let blueNumber = [2, 5, 8, 10, 11, 17, 20, 23, 26];
         let greyNumber = [13];
         if (redNumber.indexOf(sum) !== -1) {
-            console.log(sum)
+            //console.log(sum)
             return "红"
         } else if (greenNumber.indexOf(sum) !== -1) {
             return "绿"

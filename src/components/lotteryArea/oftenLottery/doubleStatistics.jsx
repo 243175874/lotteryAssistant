@@ -51,7 +51,7 @@ export default class NumberStatistics extends Component {
         post('/v1/api/arrondi/history_lm', { id }).then(data => {
             this.setState({ loading: false });
             if (data.code == 200) {
-                console.log(data.data);
+                //console.log(data.data);
                 //处理数据
                 this.setState({ list: data.data });
             } else {

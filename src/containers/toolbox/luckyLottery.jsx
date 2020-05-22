@@ -38,11 +38,17 @@ export default class LuckyLottery extends Component {
     //获取7个随机得号码
     getRandomList() {
         let list = [];
-        for (let i = 0; i < 7; i++) {
-            list.push(CommonJS.getRandom(1, 49));
+
+        while (list.length < 7) {
+            let randomNumber = CommonJS.getRandom(1, 49);
+            if (list.indexOf(randomNumber) == -1) {
+                list.push(randomNumber);
+            }
         }
+
         setTimeout(() => {
             this.setState({ lotteryList: list });
+            this.setState({ start: false }); //还原动画插件
         }, 3000);
 
     }
@@ -62,7 +68,7 @@ export default class LuckyLottery extends Component {
                     width: "240px", height: "240px", margin: "0 auto", marginTop: "40px"
                 }}>
                     <div className="pa"
-                        onClick={() => { this.setState({ start: true }); this.getRandomList() }}
+                        onClick={() => { this.setState({ start: true, lotteryList: [] }); this.getRandomList() }}
                         style={{
                             width: "50px", height: "50px", top: "50%", left: "50%", zIndex: "10", marginLeft: "-25px", marginTop: "-25px",
                             background: `url(${require('../../assets/img/toolbox/img_lucky_darw_btn.png')})`, backgroundSize: "100% 100%"

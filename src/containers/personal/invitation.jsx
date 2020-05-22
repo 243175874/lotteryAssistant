@@ -32,7 +32,7 @@ class MyPosts extends Component {
     //获取我的帖子
     getMyPosts() {
         post('/api/api/get_my_item').then(data => {
-            console.log(data);
+            //console.log(data);
         });
     }
 

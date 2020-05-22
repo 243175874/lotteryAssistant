@@ -16,7 +16,7 @@ export default class Recommend extends Component {
     }
 
     componentWillMount() {
-        //获取免费参考数据
+        //获取参考计划数据
         this.getRecommend(this.props.id);
     }
 
@@ -36,10 +36,10 @@ export default class Recommend extends Component {
         this.emitter.removeListener("emitChangeNumber", this.listenerCallback)
     }
 
-    //获取免费参考数据
+    //获取参考计划数据
     getRecommend(id) {
         LotteryAPI.getRecommendService(id).then(data => {
-            console.log(data);
+            //console.log(data);
             if (data.code == 200) {
                 this.setState({ list: data.data.history_yc });
             } else {
@@ -76,7 +76,7 @@ export default class Recommend extends Component {
                             kj_data.length > 0 ?
                                 <span style={{ fontSize: "13px" }}>
                                     <span style={{ display: isHasCode > -1 ? "inline-block" : "none", marginLeft: "10px", color: "#FF3344" }}>（中）</span>
-                                    <span style={{ display: isHasCode == -1 ? "inline-block" : "none", marginLeft: "10px" }}>（不中）</span>
+                                    <span style={{ display: isHasCode == -1 ? "inline-block" : "none", marginLeft: "10px" }}>（挂）</span>
                                 </span>
                                 : ""
                         }
@@ -102,6 +102,7 @@ export default class Recommend extends Component {
 
     renderListView() {
         return this.state.list.map((item, index) => {
+            //console.log(item);
             return (
                 <div key={index} className="w100 clearfix" style={{ fontSize: "12px", color: "black" }}>
                     <div className="w100 flex align-item-center" style={{ height: "30px", fontSize: "12px", background: "#E6E6E6" }}>

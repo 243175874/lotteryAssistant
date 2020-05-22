@@ -56,9 +56,9 @@ class Personl extends Component {
                     <img className="pa" style={{ right: "5%", width: '3%' }} src={require("../../assets/img/home/user_icon_left.png")} />
                 </header>
                 <main className="w100 clearfix bgWhite" style={{ marginTop: '2%' }}>
-                    {/* <List>
+                    <List>
                         {this.renderItem()}
-                    </List> */}
+                    </List>
                 </main>
             </div>
         );

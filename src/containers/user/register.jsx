@@ -122,7 +122,7 @@ class Register extends Component {
     *  注册
     */
     requestRegister = async () => {
-        console.log(this.props.location.search.substr(1))
+        //console.log(this.props.location.search.substr(1))
         this.setState({ loading: true });
         let params = {
             referrer: this.props.location.search.substr(1),

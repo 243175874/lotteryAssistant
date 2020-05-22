@@ -3,10 +3,10 @@ import React, { Component } from "react";
 import { post } from '../../../fetch/post.js';
 import { NavBar, Icon, ActivityIndicator, SearchBar, ListView, PullToRefresh } from 'antd-mobile';
 import { connect } from 'react-redux'
-import { setSixUserId } from '../../../redux/action'
+import { setSixUserId, setArticleId, setSixTitle, setSixTypeId } from '../../../redux/action'
 @connect(
-    state => ({ sixMasterHandTitle: state.sixTitle, sixMasterHandTid: state.sixTypeId }),
-    { setSixUserId }
+    state => ({ sixTitle: state.sixTitle, sixMasterHandTid: state.sixTypeId }),
+    { setSixUserId, setArticleId, setSixTitle, setSixTypeId }
 )
 
 export default class SixMasterHandList extends Component {
@@ -18,6 +18,7 @@ export default class SixMasterHandList extends Component {
         this.state = {
             list: [],
             id: 0,
+            keyword: "",
             loading: false,
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
@@ -25,15 +26,31 @@ export default class SixMasterHandList extends Component {
         };
     }
 
-    componentWillMount() {
-        this.setState({ id: this.props.sixMasterHandTid });
-        this.getList(this.props.sixMasterHandTid, this.page);
+    componentDidMount() {
+        let id = this.props.sixMasterHandTid;
+        if (this.props.sixMasterHandTid == "") {
+            id = localStorage.getItem("sixMasterHandTid");
+                      this.props.setSixTypeId(id);
+        } else {
+            localStorage.setItem("sixMasterHandTid", this.props.sixMasterHandTid);
+        }
+
+        let title = this.props.sixTitle;
+        if (this.props.sixTitle == "") {
+            title = localStorage.getItem("sixTitle");
+            this.props.setSixTitle(title);
+        } else {
+            localStorage.setItem("sixTitle", this.props.sixTitle);
+        }
+
+        this.setState({ id: id });
+        this.getList(id, this.page);
     }
 
-    //获取六合图库数据列表
+    //获取六合高手数据列表
     getList(id, page) {
         this.setState({ loading: true });
-        post('/api/index/lhgs_list_detail', { tid: id, page }).then(data => {
+        post(`/v1/api/article/gs-user?cate=${id}&keyword=${this.state.keyword}`, { page }).then(data => {
             if (data.code == 200) {
                 if (data.data.data.length > 0) {
                     this.isHasMore = false;
@@ -80,28 +97,28 @@ export default class SixMasterHandList extends Component {
     }
 
     renderRow(item, index) {
-        let win = Number(item.period_win) / Number(item.period_wins);
+        //console.log(item);
         return (
             <div key={index} className="w100 bgWhite flex" style={{ height: "125px", padding: "10px 10px 0 10px" }}
-                onClick={() => { this.props.setSixUserId(item.id); this.props.history.push({ pathname: '/sixMasterHandDetail' }) }}>
+                onClick={() => { this.props.setSixUserId(item.uid); this.props.history.push({ pathname: '/sixMasterHandDetail' }) }}>
                 <div className="flex-center" style={{ width: "10%", height: "50%" }}>
                     {this.renderNumber(index)}
                 </div>
                 <div style={{ width: "90%" }}>
                     <div className="w100 h50 flex">
                         <div className="flex-center" style={{ width: "60px" }}>
-                            <img src={item.userhead} style={{ width: "45px", height: "45px", borderRadius: "50%" }} />
+                            <img src={item.avatar} style={{ width: "45px", height: "45px", borderRadius: "50%" }} />
                         </div>
                         <div style={{ width: "120px" }}>
-                            <div className="w100 flex align-item-center" style={{ height: "60%", fontSize: "15px" }}>{item.username}</div>
-                            <div className="w100 flex align-item-center" style={{ height: "40%", fontSize: "12px" }}>粉丝：<span style={{ color: "#FE623F" }}>{item.fansnumber}</span></div>
+                            <div className="w100 flex align-item-center" style={{ height: "60%", fontSize: "15px" }}>{item.name}</div>
+                            <div className="w100 flex align-item-center" style={{ height: "40%", fontSize: "12px" }}>粉丝：<span style={{ color: "#FE623F" }}>{item.extendfans}</span></div>
                         </div>
                         <div style={{ width: "80px" }}>
-                            <div className="w100 flex align-item-center" style={{ height: "60%", fontSize: "15px", color: "#FE623F" }}>{item.period_wins}中{item.period_win}</div>
-                            <div className="w100 flex align-item-center" style={{ height: "40%", fontSize: "12px", color: "#653D55" }}>最大连中{item.period}期</div>
+                            <div className="w100 flex align-item-center" style={{ height: "60%", fontSize: "15px", color: "#FE623F" }}>{item.period}中{item.period_win}</div>
+                            <div className="w100 flex align-item-center" style={{ height: "40%", fontSize: "12px", color: "#653D55" }}>最大连中{item.period_wins}期</div>
                         </div>
                         <div style={{ width: "calc(100% - 260px)" }}>
-                            <div className="w100 flex align-item-center" style={{ height: "60%", fontSize: "15px", color: "#FE623F", justifyContent: "flex-end" }}>{win.toFixed(2)}%</div>
+                            <div className="w100 flex align-item-center" style={{ height: "60%", fontSize: "15px", color: "#FE623F", justifyContent: "flex-end" }}>{item.ord.toFixed(2)}%</div>
                             <div className="w100 flex align-item-center" style={{ height: "40%", fontSize: "12px", color: "#653D55", justifyContent: "flex-end" }}>胜率</div>
                         </div>
                     </div>
@@ -144,9 +161,9 @@ export default class SixMasterHandList extends Component {
                     rightContent={[
                         <div style={{ padding: '10px', paddingRight: '0' }} onClick={() => this.props.history.push('/')} key="1">回到首页</div>
                     ]}
-                >{this.props.sixMasterHandTitle}</NavBar>
+                >{this.props.sixTitle}</NavBar>
                 <div className="w100 clearfix">
-                    <SearchBar placeholder="搜索" maxLength={12} onSubmit={() => { this.search() }} />
+                    <SearchBar placeholder="搜索" onSubmit={() => { this.search() }} onChange={(value) => { this.setState({ keyword: value }); }} value={this.state.keyword} maxLength={12} />
                 </div>
 
                 <div className="w100" style={{ height: "calc(91% - 44px)" }}>

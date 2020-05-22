@@ -2,7 +2,14 @@ import React, { Component } from "react";
 import { Toast, ActivityIndicator } from 'antd-mobile'
 import { post } from '../../../fetch/post.js';
 import Prompt from '../../../components/dialog/prompt'
-import * as echarts from 'echarts';
+// 引入 echarts 主模块。
+import * as echarts from 'echarts/lib/echarts';
+// 引入折线图。
+import 'echarts/lib/chart/line';
+// 引入提示框组件、标题组件、工具箱组件。
+import 'echarts/lib/component/tooltip';
+import 'echarts/lib/component/title';
+import 'echarts/lib/component/toolbox';
 
 const number = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
     "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40",
@@ -141,7 +148,7 @@ export default class TmHistory extends Component {
             })
             list.push({ "attribute": item, "amount": amount });
         })
-        console.log(list);
+        //console.log(list);
         return list.sort((a, b) => b.amount - a.amount);
     }
 

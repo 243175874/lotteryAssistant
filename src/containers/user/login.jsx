@@ -56,6 +56,7 @@ class Login extends Component {
     */
     loginIn = async () => {
         let resData = await this.registerLogin();
+        //console.log(resData);
         this.getValidateImg();//刷新验证码
         this.setState({ loading: false });
         if (resData.code == 200) {

@@ -21,7 +21,7 @@ export default class LastNumberBigAndSmall extends Component {
     getLotteryRecordList(year) {
         post('/v1/api/lottery/search', { year }).then(data => {
             if (data.code == 200) {
-                console.log(data);
+                //console.log(data);
                 this.setState({ recordList: this.initRecordList(data.data) });
             }
             this.setState({ loading: false });//关闭loading
@@ -51,7 +51,7 @@ export default class LastNumberBigAndSmall extends Component {
 
     //渲染记录列表
     renderRecordListView() {
-        console.log(this.state.recordList);
+        //console.log(this.state.recordList);
         return this.state.recordList.map((item, index, array) => {
             //console.log(item);
             return (

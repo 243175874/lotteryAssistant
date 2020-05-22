@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavBar, Icon, Accordion, List, DatePicker } from 'antd-mobile';
+import { NavBar, Icon, Accordion, DatePicker } from 'antd-mobile';
 import { post } from '../../fetch/post.js';
 
 const DatePickerContent = ({ extra, onClick, children }) => (

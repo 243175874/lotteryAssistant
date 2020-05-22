@@ -13,7 +13,7 @@ class LotteryAPI {
     }
 
     /**
-     *  获取免费参考信息
+     *  获取参考计划信息
      */
     getRecommendService(id) {
         return new Promise(resolve => {

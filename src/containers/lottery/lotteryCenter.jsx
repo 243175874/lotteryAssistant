@@ -61,17 +61,16 @@ export default class LotteryIndex extends Component {
         this.setState({ isShowTitleTable: !this.state.isShowTitleTable });
     }
 
-    renderTitleTableView() {
-        console.log(this.state.titleList);
+    renderTitleTableView(currentLotteryName) {
         return this.state.titleList.map((item, index) => {
             return (
                 <div className="fl flex-center"
                     onClick={() => { this.selectTitle(item.name, item.id, item.type) }}
                     style={{
                         width: "28%", height: "30px", marginLeft: "5%", marginTop: "10px", fontSize: "13px",
-                        background: item.name == this.props.currentLotteryName ?
+                        background: item.name == currentLotteryName ?
                             `url(${require('../../assets/img/mark_six/bg_orange_statistical.png')})` : "#F5F5F5",
-                        backgroundSize: item.name == this.props.currentLotteryName ? "100% 100%" : "0",
+                        backgroundSize: item.name == currentLotteryName ? "100% 100%" : "0",
                     }}
                     key={index}>
                     {item.name}
@@ -81,32 +80,47 @@ export default class LotteryIndex extends Component {
     }
 
     //渲染当前彩种页面
-    renderContentView() {
-        let lotteryName = this.props.currentLotteryName;
-        let lotteryType = this.props.currentLotteryType;
-        console.log(lotteryType);
+    renderContentView(lotteryName,lotteryType) {
+
         if (lotteryName == "重庆时时彩") {
-            return (<ChongQingOftenLottery name={lotteryName}></ChongQingOftenLottery>)
+            return (<ChongQingOftenLottery></ChongQingOftenLottery>)
         } else if (lotteryType == 1) {
-            return (<BeiJingRacing name={lotteryName}></BeiJingRacing>)
+            return (<BeiJingRacing></BeiJingRacing>)
         } else if (lotteryType == 3) {
-            return (<OftenLottery name={lotteryName}></OftenLottery>)
+            return (<OftenLottery></OftenLottery>)
         } else if (lotteryType == 4) {
-            return (<QuicklyThree name={lotteryName}></QuicklyThree>)
+            return (<QuicklyThree></QuicklyThree>)
         } else if (lotteryType == 9) {
-            return (<HappyTenPoints name={lotteryName}></HappyTenPoints>)
+            return (<HappyTenPoints></HappyTenPoints>)
         } else if (lotteryType == 7) {
-            return (<ElevenFive name={lotteryName}></ElevenFive>)
+            return (<ElevenFive></ElevenFive>)
         } else if (lotteryType == 0) {
-            return (<WelfareLottery name={lotteryName}></WelfareLottery>)
+            return (<WelfareLottery></WelfareLottery>)
         } else if (lotteryType == 2) {
-            return (<Canada28 name={lotteryName}></Canada28>)
+            return (<Canada28></Canada28>)
         } else {
             return (<div></div>)
         }
     }
 
     render() {
+
+        let currentLotteryName = this.props.currentLotteryName;
+     
+        if(this.props.currentLotteryName == ""){
+            currentLotteryName = localStorage.getItem("currentLotteryName");
+        }else{
+            localStorage.setItem("currentLotteryName",this.props.currentLotteryName);
+        }
+
+        let currentLotteryType = this.props.currentLotteryType;
+        if(this.props.currentLotteryType == "" ){
+            currentLotteryType = localStorage.getItem("currentLotteryType");
+        }else{
+            localStorage.setItem("currentLotteryType",this.props.currentLotteryType);
+        }
+        
+
         const dialogBgStyle = {
             display: this.state.isShowTitleTable ? "block" : "none",
             position: "fixed", top: "9%", left: "0", zIndex: "100", background: 'rgba(0, 0, 0, 0.3)'
@@ -121,7 +135,7 @@ export default class LotteryIndex extends Component {
                         onClick={() => { this.showTitleTable() }}
                         style={{ color: "white" }}>
                         <div>
-                            {this.props.currentLotteryName}
+                            {currentLotteryName}
                             {this.state.isShowTitleTable ?
                                 (<img style={{ width: "12px", marginLeft: "10px", transform: "rotate(180deg)" }}
                                     src={require("../../assets/img/mark_six/icon_tab_unfold.png")} />) :
@@ -134,12 +148,12 @@ export default class LotteryIndex extends Component {
 
                 <div className="wh100" onClick={() => { this.showTitleTable() }} style={dialogBgStyle}>
                     <div className="w100 clearfix bgWhite" style={{ position: "fixed", top: "9%", left: "0", paddingBottom: "10px", zIndex: "100" }}>
-                        {this.renderTitleTableView()}
+                        {this.renderTitleTableView(currentLotteryName)}
                     </div>
                 </div>
 
                 <div className="w100" style={{ height: "91%" }}>
-                    {this.renderContentView()}
+                    {this.renderContentView(currentLotteryName,currentLotteryType)}
                 </div>
             </div>
         );

@@ -68,7 +68,7 @@ export default class AnimalsCard extends Component {
 
     //向服务器存储生肖卡牌数据
     saveCardList(content) {
-        console.log(content);
+        //console.log(content);
         post("/v1/api/hunt/save_rand", { type: 2, content }).then(data => {
             if (data.code == 200) {
             }

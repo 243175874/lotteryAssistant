@@ -10,7 +10,7 @@ const HotAndCold = asyncComponent({ name: "HotAndCold", resolve: () => import('.
 const MissingStatistics = asyncComponent({ name: "MissingStatistics", resolve: () => import('../../../components/lotteryArea/missingStatistics') });
 const Trend = asyncComponent({ name: "Trend", resolve: () => import('../../../components/lotteryArea/trend') });
 
-// 免费参考
+// 参考计划
 import icon_mftj from '../../../assets/img/lottery/menu/icon_mftj.png'
 import icon_mftj_press from '../../../assets/img/lottery/menu/icon_mftj_press.png'
 // 历史开奖
@@ -41,7 +41,7 @@ export default class ElevenFive extends Component {
         super(props);
         this.state = {
             menuList: [
-                { icon: icon_mftj, icon_press: icon_mftj_press, name: "免费参考", type: "预测", place: "menu" },
+                { icon: icon_mftj, icon_press: icon_mftj_press, name: "参考计划", type: "预测", place: "menu" },
                 { icon: icon_lskj, icon_press: icon_lskj_press, name: "历史开奖", type: "综合", place: "menu" },
                 { icon: icon_lzfx, icon_press: icon_lzfx_press, name: "路珠分析", type: "综合", place: "menu" },
                 { icon: icon_lrfx, icon_press: icon_lrfx_press, name: "冷热分析", type: "综合", place: "menu" },
@@ -53,9 +53,8 @@ export default class ElevenFive extends Component {
         };
     }
 
-    renderContentView() {
-        let currentLotteryId = this.props.currentLotteryId;
-        if (this.props.currentLotteryPageIndex == "免费参考") {
+    renderContentView(currentLotteryId) {
+        if (this.props.currentLotteryPageIndex == "参考计划") {
             const numberTitle = ["第一球", "第二球", "第三球", "第四球", "第五球"];
             return (<Recommend id={currentLotteryId} numberTitle={numberTitle}></Recommend>)
         } else if (this.props.currentLotteryPageIndex == "历史开奖") {
@@ -77,12 +76,27 @@ export default class ElevenFive extends Component {
     }
 
     render() {
+        let currentLotteryId = this.props.currentLotteryId;
+        if(this.props.currentLotteryId == "" ){
+            currentLotteryId = localStorage.getItem("currentLotteryId");
+        }else{
+            localStorage.setItem("currentLotteryId",this.props.currentLotteryId);
+        }
+
+
+        let currentLotteryName = this.props.currentLotteryName;
+     
+        if(this.props.currentLotteryName == ""){
+            currentLotteryName = localStorage.getItem("currentLotteryName");
+        }else{
+            localStorage.setItem("currentLotteryName",this.props.currentLotteryName);
+        }
         return (
             <div className="wh100">
                 <div className="w100" style={{ height: "calc(100% - 55px)" }}>
-                    <Header id={this.props.currentLotteryId} name={this.props.currentLotteryName}></Header>
+                    <Header id={currentLotteryId} name={currentLotteryName}></Header>
                     <div className="w100" style={{ height: "calc(100% - 40px)" }}>
-                        {this.renderContentView()}
+                        {this.renderContentView(currentLotteryId)}
                     </div>
                 </div>
 

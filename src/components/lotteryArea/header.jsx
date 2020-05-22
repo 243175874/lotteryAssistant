@@ -16,14 +16,14 @@ export default class Header extends Component {
         this.countdownInterval = null;
         this.state = {
             loading: true,
-            currentLotteryIcon: "",
+            currentLotteryIcon: require('../../assets/img/common/lottery-icon.png'),
             num: 50, //查询期数
             number: "", //当前开奖期数
             countdown: 0,
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         //获取倒计时
         this.getCount(this.props.id);
         this.countdownInterval = setInterval(() => {
@@ -107,7 +107,7 @@ export default class Header extends Component {
             <div className="w100 flex" style={{ height: "40px" }}>
                 <ActivityIndicator toast text="加载中..." animating={this.state.loading} />
                 <div className="h100 flex-center" style={{ width: "60px" }}>
-                    <img style={{ width: "36px" }} src={this.state.currentLotteryIcon} onError={(e) => { e.target.onerror = null; e.target.src = "http://500w1.oss-cn-hongkong.aliyuncs.com/style/66.png?x-oss-process=style/100w" }} />
+                    <img style={{ width: "36px" }} src={this.state.currentLotteryIcon} onError={(e) => { e.target.onerror = null; e.target.src = "../../assets/img/common/lottery-icon.png" }} />
                 </div>
                 <div className="h100" style={{ width: "calc(100% - 140px)", padding: "4px 0" }}>
                     <div className="wh100  flex align-item-center" style={{ borderLeft: "1px solid #DFDFDF" }}>

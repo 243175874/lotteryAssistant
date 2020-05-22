@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { post } from '../../../fetch/post.js';
-import { ActivityIndicator } from 'antd-mobile';
+import { ActivityIndicator, Toast } from 'antd-mobile';
 export default class VoteListDialog extends Component {
     constructor(props) {
         super(props);
@@ -21,13 +21,13 @@ export default class VoteListDialog extends Component {
 
     getVote() {
         this.setState({ loading: true });
-        post('/api/vote/vote.html', { id: this.state.selected }).then(data => {
+        post('/v1/api/article/add-comment-give', { id: this.state.selected }).then(data => {
             console.log(data);
             this.setState({ loading: false }); //关闭loading
             //如果已登录，则继续执行。
-            if (data.code == null) {
-                this.props.callback();
+            if (data.code == 200) {
                 this.close();
+                Toast.info('投票成功！', 2, null, false);
             }
         });
     }
@@ -35,12 +35,12 @@ export default class VoteListDialog extends Component {
     renderVoteListView() {
         return this.props.voteList.map((item, index) => {
             return (
-                <div onClick={() => { this.select(item.id) }} key={index} className="flex-center fl" style={{
-                    width: "28%", height: "28px", border: item.id != this.state.selected ? "1px solid #999" : "1px solid #FE623F",
+                <div onClick={() => { this.select(item.key) }} key={index} className="flex-center fl" style={{
+                    width: "28%", height: "28px", border: item.key != this.state.selected ? "1px solid #999" : "1px solid #FE623F",
                     color: item.id == this.state.selected ? "white" : "black",
-                    borderRadius: "2px", marginLeft: "3%", marginTop: "10px", background: item.id == this.state.selected ? "#FE623F" : "none"
+                    borderRadius: "2px", marginLeft: "3%", marginTop: "10px", background: item.key == this.state.selected ? "#FE623F" : "none"
                 }}>
-                    {item.title}({item.num})票
+                    {item.label}({item.value})票
                 </div>
             )
         })

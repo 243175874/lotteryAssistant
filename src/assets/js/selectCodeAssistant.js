@@ -24,6 +24,10 @@ const typeList = [{ value: "单", type: "oddOrEven" }, { value: "双", type: "od
     { value: "3头", type: "firstNumber" }, { value: "4头", type: "firstNumber" },
 ];
 export default class SelectCodeAssistant {
+    constructor(data) {
+        this.data = data;
+    }
+
     //单双
     getOddOrEven(type) {
         let oddList = [];
@@ -96,15 +100,15 @@ export default class SelectCodeAssistant {
     //五行
     getFive(type) {
         if (type == "金") {
-            return ["05", "06", "19", "20", "27", "28", "35", "36", "49"]
+            return this.data.wx.find(item => item.title == "金").val;
         } else if (type == "木") {
-            return ["01", "02", "09", "10", "17", "18", "31", "32", "39", "40", "47", "48"]
+            return this.data.wx.find(item => item.title == "木").val;
         } else if (type == "水") {
-            return ["07", "08", "15", "16", "23", "24", "37", "38", "45", "46"]
+            return this.data.wx.find(item => item.title == "水").val;
         } else if (type == "火") {
-            return ["03", "04", "11", "12", "25", "26", "33", "34", "41", "42"]
+            return this.data.wx.find(item => item.title == "火").val;
         } else if (type == "土") {
-            return ["13", "14", "21", "22", "29", "30", "43", "44"]
+            return this.data.wx.find(item => item.title == "土").val;
         }
     }
 
@@ -122,9 +126,9 @@ export default class SelectCodeAssistant {
     //家野
     getAnimalType(type) {
         if (type == "家禽") {
-            return ["01", "02", "03", "05", "06", "11", "13", "14", "15", "17", "18", "23", "25", "26", "27", "29", "30", "35", "37", "38", "39", "41", "42", "47", "49"];
+            return this.data.jy.find(item => item.title == "家").val;
         } else {
-            return ["04", "07", "08", "09", "10", "12", "16", "19", "20", "21", "22", "24", "28", "31", "32", "33", "34", "36", "40", "43", "44", "45", "46", "48"];
+            return this.data.jy.find(item => item.title == "野").val;
         }
     }
 
@@ -171,29 +175,29 @@ export default class SelectCodeAssistant {
     getAnimal(type) {
         let list = []
         if (type == "鼠") {
-            list = ["12", "24", "36", "48"];
+            list = this.data.sx.find(item => item.title == "鼠").val;
         } else if (type == "牛") {
-            list = ["11", "23", "35", "47"];
+            list = this.data.sx.find(item => item.title == "牛").val;
         } else if (type == "虎") {
-            list = ["10", "22", "34", "46"];
+            list = this.data.sx.find(item => item.title == "虎").val;
         } else if (type == "兔") {
-            list = ["09", "21", "33", "45"];
+            list = this.data.sx.find(item => item.title == "兔").val;
         } else if (type == "龙") {
-            list = ["08", "20", "32", "44"];
+            list = this.data.sx.find(item => item.title == "龙").val;
         } else if (type == "蛇") {
-            list = ["07", "19", "31", "43"];
+            list = this.data.sx.find(item => item.title == "蛇").val;
         } else if (type == "马") {
-            list = ["06", "18", "30", "42"];
+            list = this.data.sx.find(item => item.title == "马").val;
         } else if (type == "羊") {
-            list = ["05", "17", "29", "41"];
+            list = this.data.sx.find(item => item.title == "羊").val;
         } else if (type == "猴") {
-            list = ["04", "16", "28", "40"];
+            list = this.data.sx.find(item => item.title == "猴").val;
         } else if (type == "鸡") {
-            list = ["03", "15", "27", "39"];
+            list = this.data.sx.find(item => item.title == "鸡").val;
         } else if (type == "狗") {
-            list = ["02", "14", "26", "38"];
+            list = this.data.sx.find(item => item.title == "狗").val;
         } else if (type == "猪") {
-            list = ["01", "13", "25", "37", "49"];
+            list = this.data.sx.find(item => item.title == "猪").val;
         }
         return list;
     }

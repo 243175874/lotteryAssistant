@@ -2,7 +2,14 @@ import React, { Component } from "react";
 import { Toast, ActivityIndicator } from 'antd-mobile'
 import { post } from '../../../fetch/post.js';
 import Prompt from '../../../components/dialog/prompt'
-import * as echarts from 'echarts';
+// 引入 echarts 主模块。
+import * as echarts from 'echarts/lib/echarts';
+// 引入折线图。
+import 'echarts/lib/chart/pie';
+// 引入提示框组件、标题组件、工具箱组件。
+import 'echarts/lib/component/tooltip';
+import 'echarts/lib/component/title';
+import 'echarts/lib/component/toolbox';
 
 const weishu = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 export default class TmWeiShu extends Component {

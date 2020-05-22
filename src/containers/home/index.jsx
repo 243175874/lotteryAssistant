@@ -15,22 +15,23 @@ if (isIPhone) {
         onTouchStart: e => e.preventDefault(),
     };
 }
+
 import { connect } from 'react-redux'
-import { setSelectedTab } from '../../redux/action'
+import { setSelectedTab, setBannerList, setLotteryList, setNoticeList, setAppMenu, setCpMenu } from '../../redux/action'
 @connect(
-    state => ({ selectedTab: state.selectedTab }),
-    { setSelectedTab }
+    state => ({
+        selectedTab: state.selectedTab, bannerList: state.bannerList, noticeList: state.noticeList,
+        lotteryList: state.lotteryList, appMenu: state.appMenu, cpMenu: state.cpMenu
+    }),
+    { setSelectedTab, setBannerList, setLotteryList, setNoticeList, setAppMenu, setCpMenu }
 )
 class Index extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            bannerList: [],
-            lotteryList: [],
-            noticeList: [],
-            cp_menu: [],
-            app_menu: [],
             slideIndex: 0,
+            web_url: '',//彩票链接
+            is_open_cp: '',//是否开启切换彩票按钮
         };
     }
 
@@ -72,7 +73,11 @@ class Index extends Component {
         post('/v1/api/lottery/index').then(data => {
             if (data.code == 200) {
                 let d = data.data;
-                this.setState({ app_menu: d.app_menu, cp_menu: d.cp_menu, noticeList: d.gg, bannerList: d.ad_list });
+                this.setState({ web_url: d.site_config.web_url, is_open_cp: d.site_config.is_open_cp });
+                this.props.setBannerList(d.ad_list);
+                this.props.setNoticeList(d.gg)
+                this.props.setAppMenu(d.app_menu);
+                this.props.setCpMenu(d.cp_menu);
                 //把请求出的彩种数据拿出来放入sessionStorage
                 sessionStorage.setItem("lotteryMenuList", JSON.stringify(d.cp_menu));
                 //把所有彩种拿出放入sessionStorage
@@ -93,9 +98,7 @@ class Index extends Component {
     getRunLotteryList() {
         post('/v1/api/lottery/banner').then(data => {
             if (data.code == 200) {
-                this.setState({
-                    lotteryList: data.data
-                });
+                this.props.setLotteryList(data.data);
             }
         });
     }
@@ -121,9 +124,9 @@ class Index extends Component {
         let session_key = localStorage.getItem('session_key');
         if (cp_uid != null && session_key != null) {
             //存储cookie
-            window.location.href = `http://woaizhongcai.com/#/home?cp_uid=${cp_uid}&session_key=${session_key}`;
+            window.location.href = `${this.state.web_url}/#/home?cp_uid=${cp_uid}&session_key=${session_key}`;
         } else {
-            window.location.href = `http://woaizhongcai.com/#/home`;
+            window.location.href = this.state.web_url;
         }
     }
 
@@ -140,7 +143,7 @@ class Index extends Component {
                         dots={false}
                         selectedIndex={this.state.slideIndex}
                     >
-                        {this.state.lotteryList.map((val, index) => (
+                        {this.props.lotteryList.map((val, index) => (
                             <div key={index} className="w100" style={{ height: '100px' }}>
                                 <LotteryIndex data={val}></LotteryIndex>
                             </div>
@@ -166,10 +169,10 @@ class Index extends Component {
                         <div style={{ padding: '10px', paddingRight: '0' }} key="1" onClick={() => { this.props.setSelectedTab('promotion') }}>推广</div>
                     ]}
                 >彩助手</NavBar>
-                <Banner bannerList={this.state.bannerList}></Banner>
-                <Notice list={this.state.noticeList}></Notice>
+                <Banner bannerList={this.props.bannerList}></Banner>
+                <Notice list={this.props.noticeList}></Notice>
                 {this.LotteryResultsView()}
-                <Tab cp_menu={this.state.cp_menu} app_menu={this.state.app_menu}></Tab>
+                <Tab cp_menu={this.props.cpMenu} app_menu={this.props.appMenu}></Tab>
                 <div onClick={() => { this.go_lottery() }} style={{ width: "57px", height: "50px", position: "fixed", bottom: "70px", right: "20px" }}>
                     <img className="w100 h100" src={require("../../assets/img/common/tab_lottery.png")} />
                 </div>

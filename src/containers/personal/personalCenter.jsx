@@ -13,7 +13,7 @@ class PersonalCenter extends Component {
     *  设置用户详细信息
     */
     setUserDetailsInfo = () => {
-        console.log(JSON.parse(localStorage.getItem("userInfo")));
+        //console.log(JSON.parse(localStorage.getItem("userInfo")));
         this.setState({ userInfo: JSON.parse(localStorage.getItem("userInfo")) })
     }
 

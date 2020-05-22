@@ -5,7 +5,7 @@ const path = "../../assets/img/lottery/menu/";
 import icon_all from "../../assets/img/lottery/menu/icon_all.png";
 import icon_all_press from "../../assets/img/lottery/menu/icon_all_press.png";
 
-// 免费参考
+// 参考计划
 import icon_mftj from '../../assets/img/lottery/menu/icon_mftj.png'
 import icon_mftj_press from '../../assets/img/lottery/menu/icon_mftj_press.png'
 // 历史开奖
@@ -53,7 +53,7 @@ export default class FunctionMenu extends Component {
         super(props);
         this.state = {
             menuList: [
-                { icon: icon_mftj, icon_press: icon_mftj_press, name: "免费参考", type: "预测", place: "menu" },
+                { icon: icon_mftj, icon_press: icon_mftj_press, name: "参考计划", type: "预测", place: "menu" },
                 { icon: icon_lskj, icon_press: icon_lskj_press, name: "历史开奖", type: "综合", place: "menu" },
                 { icon: icon_lzfx, icon_press: icon_lzfx_press, name: "路珠分析", type: "综合", place: "menu" },
                 { icon: icon_lrfx, icon_press: icon_lrfx_press, name: "冷热分析", type: "综合", place: "menu" },
@@ -65,19 +65,19 @@ export default class FunctionMenu extends Component {
                 { icon: icon_dxls, icon_press: icon_dxls_press, name: "大小历史", type: "历史", place: "list" },
                 { icon: icon_dsls, icon_press: icon_dsls_press, name: "单双历史", type: "历史", place: "list" },
                 { icon: icon_lhls, icon_press: icon_lhls_press, name: "龙虎历史", type: "历史", place: "list" }],
-            selected: "免费参考", //选中当前菜单
+            selected: "参考计划", //选中当前菜单
             isOpenFunction: false, //是否显示按钮列表弹出框
             isEditButton: false, //是否是编辑按钮状态
         };
     }
 
     componentWillMount() {
-        console.log(this.props.currentLotteryPageIndex);
-        if (localStorage.getItem(this.props.currentLotteryName) == null) {
-            localStorage.setItem(this.props.currentLotteryName, JSON.stringify(this.props.menuList));
+        //console.log(this.props.currentLotteryPageIndex);
+        if (localStorage.getItem(this.props.name) == null) {
+            localStorage.setItem(this.props.name, JSON.stringify(this.props.menuList));
         }
-        let menuList = JSON.parse(localStorage.getItem(this.props.currentLotteryName));
-        console.log(menuList);
+        let menuList = JSON.parse(localStorage.getItem(this.props.name));
+        //console.log(menuList);
 
         if (menuList != null) {
             this.setState({ menuList });
@@ -98,7 +98,7 @@ export default class FunctionMenu extends Component {
         //改变菜单列表的位置状态   place = menu 在下方菜单栏    place = list, 在按钮列表
         let menuList = [...this.state.menuList];
         menuList[index].place = "list";
-        localStorage.setItem(this.props.currentLotteryName, JSON.stringify(menuList));
+        localStorage.setItem(this.props.name, JSON.stringify(menuList));
         this.setState({ menuList });
     }
 
@@ -114,7 +114,7 @@ export default class FunctionMenu extends Component {
         //改变菜单列表的位置状态   place = menu 在下方菜单栏    place = list, 在按钮列表
         let menuList = [...this.state.menuList];
         menuList[index].place = "menu";
-        localStorage.setItem(this.props.currentLotteryName, JSON.stringify(menuList));
+        localStorage.setItem(this.props.name, JSON.stringify(menuList));
         this.setState({ menuList });
     }
 

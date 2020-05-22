@@ -29,7 +29,6 @@ export default class Banner extends Component {
             (
                 <a
                     key={index}
-                    href="javascript:;"
                     style={{
                         display: 'block',
                         position: 'relative',

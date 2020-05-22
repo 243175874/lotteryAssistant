@@ -3,7 +3,6 @@ import { browserHistory } from 'react-router'
 import { api } from './api.js'
 import { Toast } from 'antd-mobile'
 
-
 /**
  *  设置form-data请求数据格式
  */
@@ -21,7 +20,7 @@ export function post(url, paramsObj = {}) {
             method: 'POST',
             //credentials: 'same-origin', // include, same-origin, *omit
             headers: {
-                'token': localStorage.getItem("cs_token") || '',
+                'token': localStorage.getItem("cs_token"),
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
@@ -34,7 +33,7 @@ export function post(url, paramsObj = {}) {
                 if (response.code == 1002) {
                     localStorage.removeItem("cs_token");
                     localStorage.removeItem("userInfo");
-                    browserHistory.push('/');
+                    Toast.info('请先登录！', 2, null, false);
                 }
             }
             resolve(response);

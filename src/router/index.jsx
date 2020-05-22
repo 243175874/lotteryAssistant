@@ -35,8 +35,14 @@ const SixMasterHandDetail = asyncComponent({ name: "SixMasterHandDetail", resolv
 const SixMasterHandHistory = asyncComponent({ name: "SixMasterHandHistory", resolve: () => import('../containers/mark_six/sixMasterHand/sixMasterHandHistory') });
 const SourceBookMenu = asyncComponent({ name: "SourceBookMenu", resolve: () => import('../containers/mark_six/sourceBook/sourceBookMenu') });
 const SourceBookList = asyncComponent({ name: "SourceBookList", resolve: () => import('../containers/mark_six/sourceBook/sourceBookList') });
+const SourceBookListSearch = asyncComponent({ name: "SourceBookListSearch", resolve: () => import('../containers/mark_six/sourceBook/sourceBookListSearch') });
+const SourceBookDetail = asyncComponent({ name: "SourceBookDetail", resolve: () => import('../containers/mark_six/sourceBook/sourceBookDetail') });
 const PeachMeetingMenu = asyncComponent({ name: "PeachMeetingMenu", resolve: () => import('../containers/mark_six/peachMeeting/peachMeetingMenu') });
 const PeachMeetingList = asyncComponent({ name: "PeachMeetingList", resolve: () => import('../containers/mark_six/peachMeeting/peachMeetingList') });
+const PeachMeetingListSearch = asyncComponent({ name: "PeachMeetingListSearch", resolve: () => import('../containers/mark_six/peachMeeting/peachMeetingListSearch') });
+
+
+
 //被引入U3D的页面
 const TmHistory = asyncComponent({ name: "TmHistory", resolve: () => import('../containers/mark_six/lotteryStatistics/tmHistory') });
 const ZmHistory = asyncComponent({ name: "ZmHistory", resolve: () => import('../containers/mark_six/lotteryStatistics/zmHistory') });
@@ -49,6 +55,10 @@ const ZmBoSe = asyncComponent({ name: "ZmBoSe", resolve: () => import('../contai
 const NumberOfWaveband = asyncComponent({ name: "NumberOfWaveband", resolve: () => import('../containers/mark_six/lotteryStatistics/numberOfWaveband') });
 const TmTwoSides = asyncComponent({ name: "TmTwoSides", resolve: () => import('../containers/mark_six/lotteryStatistics/tmTwoSides') });
 const ZmSum = asyncComponent({ name: "ZmSum", resolve: () => import('../containers/mark_six/lotteryStatistics/zmSum') });
+const GoSourceBookDetail = asyncComponent({ name: "GoSourceBookDetail", resolve: () => import('../containers/mark_six/sourceBook/goSourceBookDetail') });
+const GoPicturesLibrary = asyncComponent({ name: "GoPicturesLibrary", resolve: () => import('../containers/mark_six/sixPicturesLibrary/goPicturesLibrary') });
+const GoSixMasterHandDetail = asyncComponent({ name: "GoSixMasterHandDetail", resolve: () => import('../containers/mark_six/sixMasterHand/goSixMasterHandDetail') });
+
 //工具箱
 const LoversCode = asyncComponent({ name: "LoversCode", resolve: () => import('../containers/toolbox/loversCode') });
 const AnimalsCard = asyncComponent({ name: "AnimalsCard", resolve: () => import('../containers/toolbox/animalsCard') });
@@ -108,8 +118,12 @@ const Root = () => (
                 <Router path="/sixMasterHandHistory" component={SixMasterHandHistory} ></Router>
                 <Router path="/sourceBookMenu" component={SourceBookMenu} ></Router>
                 <Router path="/sourceBookList" component={SourceBookList} ></Router>
+                <Router path="/sourceBookListSearch" component={SourceBookListSearch} ></Router>
+                <Router path="/sourceBookDetail" component={SourceBookDetail} ></Router>
                 <Router path="/peachMeetingMenu" component={PeachMeetingMenu} ></Router>
                 <Router path="/peachMeetingList" component={PeachMeetingList} ></Router>
+                <Router path="/peachMeetingListSearch" component={PeachMeetingListSearch} ></Router>
+                
                 {/* 被引入U3D的页面 */}
                 <Router path="/tmHistory" component={TmHistory} ></Router>
                 <Router path="/zmHistory" component={ZmHistory} ></Router>
@@ -122,6 +136,11 @@ const Root = () => (
                 <Router path="/numberOfWaveband" component={NumberOfWaveband} ></Router>
                 <Router path="/tmTwoSides" component={TmTwoSides} ></Router>
                 <Router path="/zmSum" component={ZmSum} ></Router>
+                <Router path="/goSourceBookDetail" component={GoSourceBookDetail} ></Router>
+                <Router path="/goPicturesLibrary" component={GoPicturesLibrary} ></Router>
+                <Router path="/goSixMasterHandDetail" component={GoSixMasterHandDetail} ></Router>
+          
+                
                 {/* 工具箱 */}
                 <Router path="/loversCode" component={LoversCode} ></Router>
                 <Router path="/animalsCard" component={AnimalsCard} ></Router>

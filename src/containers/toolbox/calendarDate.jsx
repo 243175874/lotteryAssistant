@@ -3,7 +3,12 @@ import { NavBar, Icon, ActivityIndicator } from 'antd-mobile';
 import { asyncComponent } from 'react-async-component';
 const Introduction = asyncComponent({ name: "Introduction", resolve: () => import('../../components/common/introduction') });
 import { post } from '../../fetch/post.js';
-import { Calendar, Tag, Select, Radio, Col, Row } from 'antd';
+import Calendar from 'antd/es/calendar'; // 加载 JS
+import Tag from 'antd/es/tag';
+import Select from 'antd/es/select';
+import Radio from 'antd/es/radio';
+import Col from 'antd/es/col';
+import Row from 'antd/es/row';
 import 'antd/dist/antd.css';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
